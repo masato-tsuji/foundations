@@ -196,3 +196,4 @@ isOdd("4");   // => "Oh, it's not number..."
 
 
 
+
