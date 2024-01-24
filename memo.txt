@@ -1,0 +1,19 @@
+
+
+# リモートリポジトリと連携
+git remote add origin https://github.com/masato-tsuji/foundations.git
+
+# 
+git branch -M main  
+
+
+# Githubへ転送
+git push -u origin main
+
+
+# Githubから強制Pull
+git pull --allow-unrelated-histories  origin main
+
+
+
+
