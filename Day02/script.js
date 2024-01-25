@@ -129,5 +129,80 @@ function cube(number) {
 
 console.log(cube(2));
 
+console.log("---------- chukyu1 ----------");
+function simpleHelloA() {
+  console.log("hello");
+}
+
+function simpleHelloB() {
+  return "hello";
+}
+
+const a = simpleHelloA();
+const b = simpleHelloB();
+console.log(a, b);
+
+
+console.log("---------- chukyu2 ----------");
+//下の関数を 3 回呼び出し、それぞれの返り値を適切な変数に代入して、
+//最後の console.log の 3行でコメントと同じ表示が出るようにしてください。
+function createGreeting(phrase, friend) {
+  return phrase + ", " + friend + "!";
+}
+
+// ここにコードを書いてください。
+let morningGreeting = createGreeting("Good moring", "Mike");
+let dayGreeting = createGreeting("Hello", "Bob");
+let eveningGreeting = createGreeting("Good evening", "Alex");
+
+console.log(morningGreeting); // "Good morning, Mike!" を表示
+console.log(dayGreeting); // "Hello, Bob!" を表示
+console.log(eveningGreeting); // "Good evening, Alex!" を表示
+
+console.log("---------- chukyu3 ----------");
+//orz...
+
+
+console.log("---------- oyo1 ----------");
+//HTMLのSCRIPTタグで２つのJSファイルが読み込まれ互いにアクセスできる状態になっている。
+//タグの最初に読み込まれたファイルが実行されてから次のファイルが実行されている。
+
+
+console.log("---------- oyo2 ----------");
+//下記に guessMyNumber と randomNumber というコードがあります。これらのコードを読んで、
+//コンソールで関数のテストを行いましょう。guess は推測するという意味です。
+function guessMyNumber1(n) {
+  if (n > 6) {
+    return "0 から 6 の間の数字を入力してください。";
+  } else if (n === randomNumber(6)) {
+    return "当たりです！";
+  }
+  return "残念！はずれです。";
+}
+
+function randomNumber1(n) {
+  return Math.floor(Math.random() * (n + 1));
+}
+
+console.log(guessMyNumber1(7));
+
+
+console.log("---------- oyo3,4 ----------");
+function guessMyNumber(n) {
+  const upperBound = 8;
+  const rNumber = randomNumber(upperBound);
+  if (n > upperBound) {
+    return "0 から " + upperBound + " の間の数字を入力してください。";
+  } else if (n === rNumber) {
+    return "当たりです！";
+  }
+  return "残念！正解は " + rNumber + " でした。";
+}
+
+function randomNumber(n) {
+  return Math.floor(Math.random() * (n + 1));
+}
+
+console.log(guessMyNumber(9));
 
 
