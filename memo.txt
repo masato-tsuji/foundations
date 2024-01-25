@@ -15,5 +15,27 @@ git push -u origin main
 git pull --allow-unrelated-histories  origin main
 
 
+//---------------------------------------------
+arr = [[1, 2], [3, 4], [5, 6]]
 
+res = arr.reduce( (newArr,elem) => {
+  return  newArr.concat(elem)
+}, [] )
 
+console.log(res)   //[1, 2, 3, 4, 5, 6]
+
+//returnなし
+res = arr.reduce( (newArr,elem) => 
+   newArr.concat(elem)
+, [] )
+
+//---------------------------------------------
+//3次元
+arr = [[[1,2]],[[3,4],[5,6]]]
+
+res = arr.reduce( (newArr,elem) => 
+            newArr.concat(elem), [] 
+            ).reduce( (newArr2, elem2) => 
+            newArr2.concat(elem2), [] )
+
+console.log(res) //[1, 2, 3, 4, 5, 6]

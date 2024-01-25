@@ -11,6 +11,11 @@
 //https://qiita.com/shizen-shin/items/7552b36d24db3f2d0b94
 
 
+let flatten = arr => arr.reduce((newArr,elem) => {
+  return  newArr.concat(elem)
+}, [] )
+
+
 console.log(
     flatten([
       [1, 2, 3],
