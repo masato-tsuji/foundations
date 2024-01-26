@@ -1,29 +1,145 @@
 'use strict'
 // 1行目に記載している 'use strict' は削除しないでください
+//※テンプレートリテラルを使ってみる
+// > ← 大なり（グレーター）
+// < ← 小なり（レサーザン　lesser then）
+//調べるのはMDNおすすめ　Mozira... 公式
+
+console.log("---------- warming up1 ----------");
+function greeting(name) {
+  return "Hello, " + name + "!";
+}
+
+// テスト
+console.log(greeting("Kana")); // => "Hello, Kana!"
+console.log(greeting("Kimiko")); // => "Hello, Kimiko!"
 
 
-//---------------------------------------------
+console.log("---------- warming up2 ----------");
+function average2(num1, num2) {
+  return (num1 + num2) / 2;
+}
+
+console.log(average2(2, 4));  // => 3
+
+
+console.log("---------- kiso1 ----------");
+//以下の式がどんな値になるか、まず頭で考えてみましょう。
+//考えたら Google Chrome のコンソールに 1 行ずつ入力し、導き出される値を確かめてください。
+"true" == true;
+// 上の例では使っていますが、基本的に等価演算子 ( == ) は使わず、
+//必ず厳密等価演算子 ( === ) を使うようにしましょう。
+"true" === true;
+3 >= 3;
+3 !== 4;
+
+
+
+console.log("---------- kiso2 ----------");
+//以下のコードを script.js にコピーして、それぞれの式の結果が 
+//boolean 型の値になるようにしましょう。コードの ??? 部分に適切な
+//比較演算子を入れてください。index.html を Google Chrome で開き、
+//コンソールに出力された結果を確認してください。
+
 /*
-ナイトメア
+console.log(1100 ??? 99) // => true を表示
+console.log(1 ??? 21) // => false を表示
+console.log(62 !== ???) // => true を表示
+console.log("5" ??? 5) // => false を表示
+console.log("6" ??? "six") // => true を表示
 */
 
+console.log("---------- kiso3 ----------");
+//script.js に以下のコードをコピーして、「算術演算子」を「 1 つだけ」変えましょう。
+//そのとき、以下の式の結果が true になるようにしてください。
+//式が算術演算子を評価する順番を確認しておきましょう！
+
+console.log(2 + 3 * 10 > 50);
+
+
+console.log("---------- kiso4 ----------");
+//以下の関数を script.js にコピーして、式が true と評価されるように 
+//??? の部分に、異なる 2 つの引数を渡してみましょう。アドバイス：=== は
+//値とデータ型両方の一致を評価し、== は値の一致のみを評価します。
+
+function isEqual(valueOne, valueTwo) {
+  return valueOne == valueTwo;
+}
+
+//console.log(isEqual(???, ???));
+
+
+console.log("---------- kiso5 ----------");
+//以下の関数を script.js に追加してください。valueOne が valueTwo より
+//大きいとき true、小さいときには false を返すように関数の中身を書いてください。
+
+function isGreaterThan(valueOne, valueTwo) {}
+
+//テストケースをいくつか書いてみましょう！ また、false が表示されるように 
+//2 つの異なる引数を渡して isGreaterThan を呼び出してみましょう。
+
+
+console.log("---------- kiso6 ----------");
+//日本では 20 歳以上になるとお酒を飲めるようになります。script.js に 
+//数値 型の引数を 1 つ取り、与えられた年齢がお酒を飲める年齢かどうかを 
+//boolean 型の値で返す isOfAge という関数を宣言しましょう。
+
+
+
+
+console.log("---------- chukyu1 ----------");
+//先ほど作成した関数 isOfAge が「boolean 型の値を返す動きに加えて、
+//飲酒可能年齢なのかどうかを表す文字列をコンソールに表示する関数」になるよう修正しましょう。
+
+
+
+console.log("---------- chukyu2 ----------");
+//引数に数字 n をとる isEven という名前の関数を作成しましょう。
+//引数が偶数であれば true を、そうでなければ false を返してください。
+
+
+
+console.log("---------- chukyu3 ----------");
+//2 つの引数 username と password をとる validCredentials 
+//という名前の関数を作成しましょう。両方の引数が十分な長さであれば 
+//true を、そうでなければ false を返してください。「十分な長さ」は自由に決めてください。
+
+
+throw new Error('処理を中断');
+
+console.log("---------- oyo1 ----------");
+console.log(Number.isInteger(5 / 2));
+
+
+console.log("---------- oyo2 ----------");
+
+
+console.log("---------- oyo3 ----------");
+//残余引数
+function getGreatestValue(...args) {
+  console.log(args);
+}
+
+console.log(getGreatestValue(10, 15)); // 15 を表示
+console.log(getGreatestValue(15, 10)); // 15 を表示
+console.log(getGreatestValue(1, 2, 3, 4, 5)); // 5 を表示
+console.log(getGreatestValue(1, 10, 3, 4, 5)); // 10 を表示
+
+
+console.log("---------- Nightmare ----------");
 //reduce　=> 配列を１つずつ取り出す　 concat => 配列の末尾に追加
 //https://qiita.com/shizen-shin/items/7552b36d24db3f2d0b94
 
-
-let flatten = arr => arr.reduce((newArr,elem) => {
+const flatten = arr => arr.reduce((newArr,elem) => {
   return  newArr.concat(elem)
-}, [] )
-
+}, [] );
 
 console.log(
-    flatten([
-      [1, 2, 3],
-      [4, 5, 6],
-    ])
-  ); // [1, 2, 3, 4, 5, 6]
+  flatten([
+    [1, 2, 3],
+    [4, 5, 6],
+  ])
+); // [1, 2, 3, 4, 5, 6]
   
-  console.log(flatten([1, 2, 3, [4, 5, 6]])); // [1, 2, 3, 4, 5, 6]
-  console.log(flatten([[1], [2], [3], [4, 5, 6]])); // [1, 2, 3, 4, 5, 6]
-
-
+console.log(flatten([1, 2, 3, [4, 5, 6]])); // [1, 2, 3, 4, 5, 6]
+console.log(flatten([[1], [2], [3], [4, 5, 6]])); // [1, 2, 3, 4, 5, 6]
