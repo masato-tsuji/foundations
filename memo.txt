@@ -30,6 +30,10 @@ git pull --allow-unrelated-histories  origin main
 # Githubへ強制Push
 git pull --f  origin main
 
+//---------------------------------------------
+絵文字コード
+https://gray-code.com/html_css/list-of-emoji/
+
 
 //---------------------------------------------
 arr = [[1, 2], [3, 4], [5, 6]]
