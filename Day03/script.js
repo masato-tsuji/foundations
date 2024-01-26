@@ -83,12 +83,24 @@ console.log("---------- kiso6 ----------");
 //日本では 20 歳以上になるとお酒を飲めるようになります。script.js に 
 //数値 型の引数を 1 つ取り、与えられた年齢がお酒を飲める年齢かどうかを 
 //boolean 型の値で返す isOfAge という関数を宣言しましょう。
+function isOfAge(age) {
+  return age >= 20;
+}
+
+console.log(isOfAge(19));
+console.log(isOfAge(20));
 
 
 console.log("---------- chukyu1 ----------");
 //先ほど作成した関数 isOfAge が「boolean 型の値を返す動きに加えて、
 //飲酒可能年齢なのかどうかを表す文字列をコンソールに表示する関数」になるよう修正しましょう。
+function isOfAge2(age) {
+  console.log(age >= 20 ? "飲酒可能です" : "飲酒できません");
+  return age >= 20;
+}
 
+console.log(isOfAge2(19));
+console.log(isOfAge2(20));
 
 
 console.log("---------- chukyu2 ----------");
@@ -164,6 +176,37 @@ console.log(
   
 console.log(flatten([1, 2, 3, [4, 5, 6]])); // [1, 2, 3, 4, 5, 6]
 console.log(flatten([[1], [2], [3], [4, 5, 6]])); // [1, 2, 3, 4, 5, 6]
+
+
+console.log("---------- kaisetsu ----------");
+
+true + true;    // => 2
+false + false;  // => 0
+true + false;   // => 1
+false + true;   // => 1
+true + 5;       // => 6
+false + 5;      // => 5
+true * "5";     // => 1
+false * "5";    // => 0
+"true" + false; // => "truefalse"
+"true" + true;  // => "truetrue"
+false / true;   // => 0
+true / false;   // => infinity
+true / "1";     // => 1
+true / "a";     // => NaN
+!1;             // => false
+!0;             // => true
+!5;             // => false
+!(-1);          // => false
+!null;          // => true
+!undefined;     // => true
+!NaN;           // => true
+!"";            // => true
+
+// => 演算対象にするとtrueは1,falseは0として扱われる
+// => 数値を評価すると0はfalseでそれ以外はtrueとして扱われる
+
+
 
 
 
