@@ -26,12 +26,12 @@ console.log(average2(2, 4));  // => 3
 console.log("---------- kiso1 ----------");
 //以下の式がどんな値になるか、まず頭で考えてみましょう。
 //考えたら Google Chrome のコンソールに 1 行ずつ入力し、導き出される値を確かめてください。
-"true" == true;
+"true" == true; // => false
 // 上の例では使っていますが、基本的に等価演算子 ( == ) は使わず、
 //必ず厳密等価演算子 ( === ) を使うようにしましょう。
-"true" === true;
-3 >= 3;
-3 !== 4;
+"true" === true;  // => false
+3 >= 3; // => true
+3 !== 4;  // => true
 
 
 
@@ -41,20 +41,20 @@ console.log("---------- kiso2 ----------");
 //比較演算子を入れてください。index.html を Google Chrome で開き、
 //コンソールに出力された結果を確認してください。
 
-/*
-console.log(1100 ??? 99) // => true を表示
-console.log(1 ??? 21) // => false を表示
-console.log(62 !== ???) // => true を表示
-console.log("5" ??? 5) // => false を表示
-console.log("6" ??? "six") // => true を表示
-*/
+/**/
+console.log(1100 >= 99) // => true を表示
+console.log(1 === 21) // => false を表示
+console.log(62 !== "62") // => true を表示
+console.log("5" === 5) // => false を表示
+console.log("6" !== "six") // => true を表示
+
 
 console.log("---------- kiso3 ----------");
 //script.js に以下のコードをコピーして、「算術演算子」を「 1 つだけ」変えましょう。
 //そのとき、以下の式の結果が true になるようにしてください。
 //式が算術演算子を評価する順番を確認しておきましょう！
 
-console.log(2 + 3 * 10 > 50);
+console.log(2 * 3 * 10 > 50);
 
 
 console.log("---------- kiso4 ----------");
@@ -66,18 +66,21 @@ function isEqual(valueOne, valueTwo) {
   return valueOne == valueTwo;
 }
 
-//console.log(isEqual(???, ???));
+console.log(isEqual(2, "2")); // => true
 
 
 console.log("---------- kiso5 ----------");
 //以下の関数を script.js に追加してください。valueOne が valueTwo より
 //大きいとき true、小さいときには false を返すように関数の中身を書いてください。
 
-function isGreaterThan(valueOne, valueTwo) {}
+function isGreaterThan(valueOne, valueTwo) {
+  return valueOne > valueTwo;
+}
 
 //テストケースをいくつか書いてみましょう！ また、false が表示されるように 
 //2 つの異なる引数を渡して isGreaterThan を呼び出してみましょう。
-
+console.log(isGreaterThan(3, 2)); // => true
+console.log(isGreaterThan(3, 4)); // => false
 
 console.log("---------- kiso6 ----------");
 //日本では 20 歳以上になるとお酒を飲めるようになります。script.js に 
@@ -96,7 +99,12 @@ console.log("---------- chukyu1 ----------");
 console.log("---------- chukyu2 ----------");
 //引数に数字 n をとる isEven という名前の関数を作成しましょう。
 //引数が偶数であれば true を、そうでなければ false を返してください。
+function isEven(n) {
+  return !(n % 2);
+}
 
+console.log(isEven(22));  // => true
+console.log(isEven(21));  // => false
 
 
 console.log("---------- chukyu3 ----------");
@@ -105,19 +113,31 @@ console.log("---------- chukyu3 ----------");
 //true を、そうでなければ false を返してください。「十分な長さ」は自由に決めてください。
 
 
-throw new Error('処理を中断');
-
 console.log("---------- oyo1 ----------");
-console.log(Number.isInteger(5 / 2));
+//％ 演算子を使用しないで isEven 関数を書き換えてください。
+function isEven2(number) {
+  return Number.isInteger(number / 2);
+}
+
+console.log(isEven2(2));  // => true
+console.log(isEven2(3));  // => false
+console.log(isEven2(0));  // => true
+console.log(isEven2(-8)); // => true
 
 
 console.log("---------- oyo2 ----------");
+//2 つの引数のうち大きい数字を返す getGreaterValue という名前の関数を作成してください。
+function getGreaterValue1(num1, num2) {
+  return Math.max(num1, num2);
+}
 
+console.log(getGreaterValue1(4, 9));
 
 console.log("---------- oyo3 ----------");
+//与えられた引数のうち一番大きい数字を返すgetGreatestValue という名前の関数を作成してください。
 //残余引数
-function getGreatestValue(...args) {
-  console.log(args);
+function getGreatestValue(...arrNum) {
+  return Math.max(...arrNum);
 }
 
 console.log(getGreatestValue(10, 15)); // 15 を表示
@@ -131,7 +151,7 @@ console.log("---------- Nightmare ----------");
 //https://qiita.com/shizen-shin/items/7552b36d24db3f2d0b94
 
 const flatten = arr => arr.reduce((newArr,elem) => {
-  return  newArr.concat(elem)
+  return  newArr.concat(elem);
 }, [] );
 
 console.log(
@@ -143,3 +163,8 @@ console.log(
   
 console.log(flatten([1, 2, 3, [4, 5, 6]])); // [1, 2, 3, 4, 5, 6]
 console.log(flatten([[1], [2], [3], [4, 5, 6]])); // [1, 2, 3, 4, 5, 6]
+
+
+
+
+
