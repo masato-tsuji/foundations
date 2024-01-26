@@ -34,7 +34,6 @@ console.log("---------- kiso1 ----------");
 3 !== 4;  // => true
 
 
-
 console.log("---------- kiso2 ----------");
 //以下のコードを script.js にコピーして、それぞれの式の結果が 
 //boolean 型の値になるようにしましょう。コードの ??? 部分に適切な
@@ -53,7 +52,7 @@ console.log("---------- kiso3 ----------");
 //script.js に以下のコードをコピーして、「算術演算子」を「 1 つだけ」変えましょう。
 //そのとき、以下の式の結果が true になるようにしてください。
 //式が算術演算子を評価する順番を確認しておきましょう！
-
+console.log(2 + 3 * 10 > 50);
 console.log(2 * 3 * 10 > 50);
 
 
@@ -61,7 +60,6 @@ console.log("---------- kiso4 ----------");
 //以下の関数を script.js にコピーして、式が true と評価されるように 
 //??? の部分に、異なる 2 つの引数を渡してみましょう。アドバイス：=== は
 //値とデータ型両方の一致を評価し、== は値の一致のみを評価します。
-
 function isEqual(valueOne, valueTwo) {
   return valueOne == valueTwo;
 }
@@ -72,7 +70,6 @@ console.log(isEqual(2, "2")); // => true
 console.log("---------- kiso5 ----------");
 //以下の関数を script.js に追加してください。valueOne が valueTwo より
 //大きいとき true、小さいときには false を返すように関数の中身を書いてください。
-
 function isGreaterThan(valueOne, valueTwo) {
   return valueOne > valueTwo;
 }
@@ -86,8 +83,6 @@ console.log("---------- kiso6 ----------");
 //日本では 20 歳以上になるとお酒を飲めるようになります。script.js に 
 //数値 型の引数を 1 つ取り、与えられた年齢がお酒を飲める年齢かどうかを 
 //boolean 型の値で返す isOfAge という関数を宣言しましょう。
-
-
 
 
 console.log("---------- chukyu1 ----------");
@@ -111,6 +106,12 @@ console.log("---------- chukyu3 ----------");
 //2 つの引数 username と password をとる validCredentials 
 //という名前の関数を作成しましょう。両方の引数が十分な長さであれば 
 //true を、そうでなければ false を返してください。「十分な長さ」は自由に決めてください。
+function validCredential(username, password) {
+  return (username.length >= 5 && password.length >= 8);
+}
+
+console.log(validCredential("masato", "12345678")); // => true
+console.log(validCredential("masa", "12345678"));   // => false
 
 
 console.log("---------- oyo1 ----------");
