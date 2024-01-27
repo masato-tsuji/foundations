@@ -11,6 +11,20 @@ function kugiri(title) {
     return console.log(line + title + line );
 }
 
+
+function test(expected, actual) {
+    // 正しい結果を返すことを確認する
+    if (JSON.stringify(actual) === JSON.stringify(expected)) {
+        console.log("OK! Test PASSED.");
+    } else {
+        console.error("Test FAILED. Try again!");
+        console.group("Result:");
+        console.log("  actual:", actual);
+        console.log("expected:", expected);
+        console.groupEnd();
+    }
+}
+
 console.log("lib.js loaded!");
 console.log(getDirName() + "\n\n");
 

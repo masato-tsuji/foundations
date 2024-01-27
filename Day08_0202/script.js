@@ -21,13 +21,13 @@ function mySort(numbers) {
           break;
         }
       }
-      console.log(accVals, curVal);
+      //console.log(accVals, curVal);
       return accVals;
     }, []);
     return sortArr;
   }
   
-  let numbers = [4, 5, 3, 2, 1];
+  let numbers = [5, 4, 3, 2, 1];
   
   let actual = mySort(numbers);
   let expected = [1, 2, 3, 4, 5];
@@ -55,3 +55,64 @@ function mySort(numbers) {
   }
   
   // さらにテストを書きましょう。
+
+
+
+  kugiri("Nightmare2"); //---------------------------------------------
+//関数 flattenDeep を宣言してください。配列の配列（何段階も深く入れ子になっている場合もある）
+//を引数として受け取り、平坦化された、つまり、入れ子のない配列（＝ 1 次元配列）を新しく作って返します。
+
+/**
+ * @param {Array<any>} ???
+ * @returns {Array<any>} 与えられた配列を 1 次元配列に平坦化した配列
+ */
+
+/*
+const flattenDeep = arr => arr.reduce((newArr,currentVal) => {
+  console.log(newArr, currentVal);
+  return  newArr.concat(currentVal);
+}, []);
+*/
+
+const flattenDeep = arr => arr.forEach(elm => {
+  console.log(elm);
+  //return  newArr.concat(currentVal);
+});
+
+
+expected = [1, 2, 3, 4, 5, 6];
+//actual = flattenDeep([1, 2, 3, [4, 5, 6]]);
+
+// 正しい結果を返すことを確認する
+//test(expected, actual);
+
+expected = [1, 2, 3, 4, 5, 6];
+//actual = flattenDeep([[1, 2, 3], [4, 5, 6],]);
+
+// 正しい結果を返すことを確認する
+//test(expected, actual);
+
+expected = [1, 2, 3, 4, 5, 6];
+//actual = flattenDeep([[1], [2], [3], [4, 5, 6]]);
+
+// 正しい結果を返すことを確認する
+//test(expected, actual);
+
+expected = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+actual = flattenDeep([[1, [2, [3, [4, [5, [6, [7, [8, [9]]]]]]]]]]);
+
+// 正しい結果を返すことを確認する
+test(expected, actual);
+
+
+
+
+/*
+arr = [[[1,2]],[[3,4],[5,6]]]
+
+res = arr.reduce( (newArr,elem) => 
+            newArr.concat(elem), [] 
+            ).reduce( (newArr2, elem2) => 
+            newArr2.concat(elem2), [] )
+*/
+
