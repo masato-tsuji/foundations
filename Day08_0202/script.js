@@ -67,24 +67,34 @@ function mySort(numbers) {
  * @returns {Array<any>} 与えられた配列を 1 次元配列に平坦化した配列
  */
 
-/*
-const flattenDeep = arr => arr.reduce((newArr,currentVal) => {
-  console.log(newArr, currentVal);
-  return  newArr.concat(currentVal);
+let res = [];
+const flattenDeep = arr => arr.reduce((newArr, currentVal, inx) => {
+  //const res = [];
+  //console.log(res, currentVal, "index:" + inx);
+  if (Array.isArray(currentVal)) {
+    flattenDeep(currentVal);
+  } else {
+    //console.log(Array.isArray(newArr));
+    return res.push(currentVal);
+  }
+  //const res2 = res;
+  //res = [];
+  console.log("ifの後 ", res, currentVal);
+  return res;
 }, []);
-*/
 
+/*
 const flattenDeep = arr => arr.forEach(elm => {
-  console.log(elm);
+  console.log(elm.length, elm);
   //return  newArr.concat(currentVal);
 });
-
+*/
 
 expected = [1, 2, 3, 4, 5, 6];
-//actual = flattenDeep([1, 2, 3, [4, 5, 6]]);
+actual = flattenDeep([1, 2, 3, [4, 5, 6]]);
 
 // 正しい結果を返すことを確認する
-//test(expected, actual);
+test(expected, actual);
 
 expected = [1, 2, 3, 4, 5, 6];
 //actual = flattenDeep([[1, 2, 3], [4, 5, 6],]);
