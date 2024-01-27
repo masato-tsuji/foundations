@@ -163,9 +163,11 @@ console.log("---------- Nightmare ----------");
 //reduce　=> 配列を１つずつ取り出す　 concat => 配列の末尾に追加
 //https://qiita.com/shizen-shin/items/7552b36d24db3f2d0b94
 
-const flatten = arr => arr.reduce((newArr,elem) => {
-  return  newArr.concat(elem);
-}, [] );
+
+const flatten = arr => arr.reduce((newArr,currentVal) => {
+  //console.log(newArr);
+  return  newArr.concat(currentVal);
+}, []);
 
 console.log(
   flatten([

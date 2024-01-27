@@ -4,7 +4,8 @@
 
 kugiri("Nightmare1"); //---------------------------------------------
 //関数 mySort を宣言してください。JavaScript のビルトインメソッド sort は使わないでください。
-//アドバイス： 配列を並び替える方法はたくさんあります。自分の好きな方法を選んでください。これまでに同じような関数を書いたことがある人は違う方法にトライしましょう。
+//アドバイス： 配列を並び替える方法はたくさんあります。自分の好きな方法を選んでください。
+//これまでに同じような関数を書いたことがある人は違う方法にトライしましょう。
 
 /**
  * @param {Array<number>} 数値型の要素を持つ配列
@@ -12,13 +13,24 @@ kugiri("Nightmare1"); //---------------------------------------------
  */
 function mySort(numbers) {
     // ここにコードを書きましょう。
-    return;
+    const sortArr = numbers.reduce((accVals, curVal) => {
+      if (Math.max(...accVals) <= curVal) accVals.push(curVal);
+      for (let i = 0; i < accVals.length; i++) {
+        if (accVals[i] > curVal) {
+          accVals.splice(i, 0, curVal);
+          break;
+        }
+      }
+      console.log(accVals, curVal);
+      return accVals;
+    }, []);
+    return sortArr;
   }
   
-  let numbers = [5, 4, 3, 2, 1];
+  let numbers = [4, 5, 3, 2, 1];
   
-  actual = mySort(numbers);
-  expected = [1, 2, 3, 4, 5];
+  let actual = mySort(numbers);
+  let expected = [1, 2, 3, 4, 5];
   
   // 正しい結果を返すことを確認する
   if (JSON.stringify(actual) === JSON.stringify(expected)) {
