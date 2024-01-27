@@ -1,4 +1,7 @@
 
+# アセスメント　→　Day7, Day13, Day19
+
+
 
 # リモートリポジトリと連携
 git remote add origin https://github.com/masato-tsuji/foundations.git
@@ -9,9 +12,10 @@ git config --global user.name "masato-tsuji"
 git config --global user.email "masato_tsuji@mail.toyota.co.jp"
 
 
-♯ 会社PCでPULL、PUSHするならProxy設定が必要
+# 会社PCでPULL、PUSHするならProxy設定が必要
 git config --global http.proxy http://proxy1000.adm.toyota.co.jp:15520
-# 削除する場合
+
+# proxy削除する場合
 git config --global --unset http.proxy
 
 
@@ -30,12 +34,14 @@ git pull --allow-unrelated-histories  origin main
 # Githubへ強制Push
 git pull --f  origin main
 
-//---------------------------------------------
+
+# ---------------------------------------------
 絵文字コード
 https://gray-code.com/html_css/list-of-emoji/
 
 
-//---------------------------------------------
+# --------------------------------------------
+## 2次元配列を1次元に
 arr = [[1, 2], [3, 4], [5, 6]]
 
 res = arr.reduce( (newArr,elem) => {
@@ -49,8 +55,8 @@ res = arr.reduce( (newArr,elem) =>
    newArr.concat(elem)
 , [] )
 
-//---------------------------------------------
-//3次元
+# ---------------------------------------------
+## 3次元
 arr = [[[1,2]],[[3,4],[5,6]]]
 
 res = arr.reduce( (newArr,elem) => 
