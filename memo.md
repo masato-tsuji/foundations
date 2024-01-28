@@ -26,6 +26,9 @@ git branch -M main
 ## Githubへ転送
 git push -u origin main
 
+## Githubからブランチの定義を新しく定義（合流）してPull（競合時にもOK）
+git pull --rebase
+
 
 ## Githubから強制Pull（github上に最新があるのならこれをする）
 git pull --allow-unrelated-histories  origin main
@@ -43,6 +46,9 @@ https://gray-code.com/html_css/list-of-emoji/
 ## --------------------------------------------
 ### スプレッド構文はECMAScript 2015（ES6）から追加された機能
 ...array
+
+### 配列を征するものはJSを征す
+https://ics.media/entry/200825/#for-in%E6%96%87%E3%82%92foreach%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%A7%E8%A1%A8%E7%8F%BE
 
 
 ### 2次元配列を1次元に

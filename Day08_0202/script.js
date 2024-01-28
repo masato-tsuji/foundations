@@ -2,6 +2,9 @@
 // 1行目に記載している 'use strict' は削除しないでください
 
 
+
+
+
 kugiri("Nightmare1"); //---------------------------------------------
 //関数 mySort を宣言してください。JavaScript のビルトインメソッド sort は使わないでください。
 //アドバイス： 配列を並び替える方法はたくさんあります。自分の好きな方法を選んでください。
@@ -61,10 +64,12 @@ test(expected, actual);
 //を引数として受け取り、平坦化された、つまり、入れ子のない配列（＝ 1 次元配列）を新しく作って返します。
 
 /**
- * @param {Array<any>, Array<any>} 数値型の要素を持つ多次元配列, 数値型の要素を持つ配列
+ * @param {Array<any>} 数値型の要素を持つ多次元配列
+ * @param {Array<any>} 一次元配列を記憶するための数値型の要素を持つ配列
  * @returns {Array<any>} 与えられた配列を 1 次元配列に平坦化した配列
  */
-const flattenDeep = (arr, flatArr = []) => arr.reduce((accum, currentVal) => {
+const flattenDeep = (multiArr, flatArr = []) => multiArr.reduce((accum, currentVal) => {
+  //取り出した値が配列なら再帰、数値ならflatArrに追加
   if (Array.isArray(currentVal)) {
     flattenDeep(currentVal, flatArr);
   } else {
