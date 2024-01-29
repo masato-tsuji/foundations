@@ -11,6 +11,12 @@ function kugiri(title) {
     return console.log(line + title + line );
 }
 
+function separatorLine(title) {
+    const dirName = getDirName()
+    const line = " --------------- " ;
+    return console.log(line + title + line );
+}
+
 
 function test(expected, actual) {
     // 正しい結果を返すことを確認する

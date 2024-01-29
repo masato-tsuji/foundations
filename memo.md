@@ -122,8 +122,10 @@ function getRandomInt(min, max) {
 }
 ````
 
-### ▼ Math.floor
-Math.floor() 関数は与えられた数値以下の最大の**整数**を返します。
+### ▼ Math.floor()
+Math.floor() 関数は与えられた数値以下の最大の**整数**を返します。切り捨て
+※マイナスは勘違いしやすいので注意⚠️
+
 ````JS
 console.log(Math.floor(5.95));
 // Expected output: 5
@@ -139,9 +141,29 @@ console.log(Math.floor(-5.05));
 
 ````
 
+### ▼ Math.cewil()
+Math.ceil() 関数は、引数として与えた数以上の最小の整数を返します。切り上げ
+注: Math.ceil(null) は整数の 0 を返し、 NaN エラーは返しません。
+````JS
+console.log(Math.ceil(0.95));
+// Expected output: 1
 
+console.log(Math.ceil(4));
+// Expected output: 4
 
+console.log(Math.ceil(7.004));
+// Expected output: 8
 
+console.log(Math.ceil(-7.004));
+// Expected output: -7
+
+Math.ceil(0.95); // 1
+Math.ceil(4); // 4
+Math.ceil(7.004); // 8
+Math.ceil(-0.95); // -0
+Math.ceil(-4); // -4
+Math.ceil(-7.004); // -7
+````
 
 
 ### ▼十進数の丸め
