@@ -209,13 +209,65 @@ line("TDD - Nightmare 😈"); //---------------------------------------------
  * @returns {number} 与えられた数値をアルファベットで記した時の名前
  */
 // ここにコードを書きましょう
-const getNumberName = number => {
-    
+//      100 => one handred
+//    1,000 => one thousand
+//  100,000 => one hundred thousand
+//1,000,000 => one million
+
+
+
+const englishNum = {
+  0: "zero", 1: "one", 2: "two" , 3:"three", 4: "four", 5: "five", 6: "six", 7: "seven",
+  8: "eight", 9: "nine", 10: "ten", 11:"eleven", 12: "tweleve", 13: "thirteen", 14: "fourteen",
+  15: "fifteen", 16: "sixteen", 17: "seventeen", 18: "eighteen", 19: "nineteen", 20: "twenty" ,
+  30: "thirty", 40: "fourty", 50: "fifty", 60: "sixty", 70: "seventy", 80: "eighty", 90: "ninety"
 }
 
+const getHandredNum = splitNum => {
+  let resNumName = "";
+  //百の位を取得
+  const handredNum = Math.floor(splitNum / 100);
+  if (handredNum > 0) {
+    resNumName = " " + englishNum[handredNum] + " handred";
+  }
+  //十の位を取得
+  const teenNum = splitNum - handredNum * 100;
+  if (teenNum > 0 && teenNum < 20) {
+    resNumName += " " + englishNum[teenNum];
+  } else {
+    const tyNum = Math.floor(teenNum / 10 ) * 10;
+    //一の位を取得
+    const lastNum = teenNum - tyNum;
+    //console.log(teenNum, tyNum, lastNum);
+    if (tyNum > 0) {
+      resNumName += " " + englishNum[tyNum];
+    }
+    if (lastNum > 0) {
+      resNumName += " " + englishNum[lastNum];
+    }
+  }
+  return resNumName.trim();
+}
+
+console.log(getHandredNum(123));
+console.log(getHandredNum(6));
+console.log(getHandredNum(57));
+console.log(getHandredNum(408));
+console.log(getHandredNum(999));
+console.log(getHandredNum(300));
+
+const getNumberName = number => {
+ 
+  const unitName = ["", "thousand", "million"]
+
+  //num.toLocaleString();
+  //String();
 
 
 
+
+  return englishNum[number];
+}
 
 
 actual = getNumberName(0);
@@ -241,6 +293,6 @@ if (actual === expected) {
 }
 
 // さらにテストを書いて、コードが正しいことを確認してください
-
-
-
+actual = getNumberName(16);
+expected = "sixteen";
+test(expected, actual);
