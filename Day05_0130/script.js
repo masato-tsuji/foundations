@@ -83,11 +83,7 @@ if (actual === expected) {
 }
 
 
-
-
-
-
-line("基礎1"); //---------------------------------------------
+line("TDD - 基礎1"); //---------------------------------------------
 
 /**
  * @param {string} firstName - 下の名前
@@ -112,7 +108,7 @@ function getFullName(firstName, lastName) {
   }
   
 
-  line("基礎2"); //---------------------------------------------
+  line("TDD - 基礎2"); //---------------------------------------------
 
   /**
  * @param {string} name - 人の名前
@@ -154,7 +150,9 @@ function simpleGreeting(name, isFormal) {
     console.groupEnd();
   }
 
-  line("基礎3"); //---------------------------------------------
+  
+
+
 
 
   line("演習"); //---------------------------------------------
@@ -181,9 +179,169 @@ function simpleGreeting(name, isFormal) {
   console.log(message);
 
 
+  line("TDD - Nightmare 😈"); //---------------------------------------------
+//関数 isPrime を宣言してください。（素数かどうか）
+//素数・・・1より大きい数値で1かその数でしか割れないもの2 ,3 ,5...
+
+/**
+ * @param {number} number - 確認したい数字
+ * @returns {boolean} 与えられた数字が素数かどうか
+ */
+// ここにコードを書きましょう
+// function isPrime(number) {
+//   if (number <= 1) return false;
+//   for (let i = 2; i < number; i++) {
+//     if (number % i === 0) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+
+function isPrime(number) {
+  if (number <= 1) return false;
+  //平方根までのループで良い（但し4 => 2はループ範囲外になるので1を加算）
+  const max = Math.floor(Math.sqrt(number)) + 1;
+  for (let i = 2; i < max; i++) {
+    if (number % i === 0) {
+      return false;
+    }
+  }
+  return true;
+}
 
 
+actual = isPrime(1);
+expected = false;
 
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.group("Result:");
+  console.log("  actual:", actual);
+  console.log("expected:", expected);
+  console.groupEnd();
+}
 
+actual = isPrime(2);
+expected = true;
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.group("Result:");
+  console.log("  actual:", actual);
+  console.log("expected:", expected);
+  console.groupEnd();
+}
+
+actual = isPrime(3);
+expected = true;
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.group("Result:");
+  console.log("  actual:", actual);
+  console.log("expected:", expected);
+  console.groupEnd();
+}
+
+actual = isPrime(4);
+expected = false;
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.group("Result:");
+  console.log("  actual:", actual);
+  console.log("expected:", expected);
+  console.groupEnd();
+}
+
+actual = isPrime(5);
+expected = true;
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.group("Result:");
+  console.log("  actual:", actual);
+  console.log("expected:", expected);
+  console.groupEnd();
+}
+
+actual = isPrime(104728);
+expected = false;
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.group("Result:");
+  console.log("  actual:", actual);
+  console.log("expected:", expected);
+  console.groupEnd();
+}
+
+actual = isPrime(104729);
+expected = true;
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.group("Result:");
+  console.log("  actual:", actual);
+  console.log("expected:", expected);
+  console.groupEnd();
+}
+
+// 必要に応じてテストを書きましょう。
 
   
+
+line("code - 基礎2"); //---------------------------------------------
+
+function isPositive(thing) {
+  if (thing < 0) {
+      return false;
+  } else if (thing > 0) {
+      return true;
+  } else if (thing === 0) {
+      return false;
+  } 
+}
+
+expected = true; // 期待するテスト結果
+actual = isPositive(1); // テストする式
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.group("Result:");
+  console.log("  actual:", actual);
+  console.log("expected:", expected);
+  console.groupEnd();
+}
+
+// さらにテストを書きましょう。
+expected = false; // 期待するテスト結果
+actual = isPositive(0); // テストする式
+
+test(expected, actual);
+
+
+
+
+
+
+
+
+
