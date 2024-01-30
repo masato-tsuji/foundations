@@ -214,7 +214,15 @@ line("TDD - Nightmare 😈"); //---------------------------------------------
 //  100,000 => one hundred thousand
 //1,000,000 => one million
 
+// const str = "あいうえおかきくけこ";
 
+// //先頭５文字
+// const strHead  = str.slice( 0, 5 );   // -> "あいうえお"
+// const strHead2 = str.substr( 0, 5 );  // -> "あいうえお"
+
+// //末尾５文字
+// const strFoot  = str.slice( -5 );      // -> "かきくけこ"
+// const strFoot2 = str.substr( -5, 5 );  // -> "かきくけこ"
 
 const englishNum = {
   0: "zero", 1: "one", 2: "two" , 3:"three", 4: "four", 5: "five", 6: "six", 7: "seven",
@@ -258,10 +266,11 @@ console.log(getHandredNum(300));
 
 const getNumberName = number => {
  
-  const unitName = ["", "thousand", "million"]
+  const unitName = ["", "thousand", "million", "billion", "trillion"]
 
   //num.toLocaleString();
   //String();
+  //Array.reverse()
 
 
 
