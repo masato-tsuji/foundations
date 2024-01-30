@@ -239,13 +239,13 @@ const getHandredNum = splitNum => {
     resNumName = " " + englishNum[handredNum] + " handred";
   }
   //十の位を取得
-  const teenNum = splitNum - handredNum * 100;
+  const teenNum = splitNum % 100;
   if (teenNum > 0 && teenNum < 20) {
     resNumName += " " + englishNum[teenNum];
   } else {
     const tyNum = Math.floor(teenNum / 10 ) * 10;
     //一の位を取得
-    const lastNum = teenNum - tyNum;
+    const lastNum = teenNum % 10;
     //console.log(teenNum, tyNum, lastNum);
     if (tyNum > 0) {
       resNumName += " " + englishNum[tyNum];
