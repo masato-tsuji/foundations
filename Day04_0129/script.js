@@ -2,7 +2,7 @@
 // 1行目に記載している 'use strict' は削除しないでください
 
 
-kugiri("worming up1"); //---------------------------------------------
+line("worming up1"); //---------------------------------------------
 //isMultipleOfThree という名前の関数を宣言しましょう。引数の数字が 3 の倍数であれば true、
 //そうでなければ false を返してください。
 function isMultipleOfThree(number) {
@@ -14,7 +14,7 @@ function isMultipleOfThree(number) {
 console.log(isMultipleOfThree(6)); // => true
 console.log(isMultipleOfThree(10)); // => false
 
-kugiri("worming up2"); //---------------------------------------------
+line("worming up2"); //---------------------------------------------
 //isMultipleOf という名前の関数を宣言しましょう。1 つ目の引数が 2 つ目の引数の倍数であれば true 、
 //そうでなければ false を返してください。
 function isMultipleOf(num1, num2) {
@@ -28,7 +28,7 @@ console.log(isMultipleOf(10, 4)); // => false
 console.log(isMultipleOf(-7, 4)); // => false
 
 
-kugiri("kiso4"); //---------------------------------------------
+line("kiso4"); //---------------------------------------------
 
 function biggerNumber(number1, number2) {
   if (number1 > number2) {
@@ -44,7 +44,7 @@ console.log(biggerNumber(3, 4)); // => 'The second argument is bigger.' と表�
 console.log(biggerNumber(4, 4)); // => 'The second argument is bigger.' と表示されるようにする。
 
 
-kugiri("kiso5"); //---------------------------------------------
+line("kiso5"); //---------------------------------------------
 
 function printDataType(data) {
   if (typeof data === "number") {
@@ -67,7 +67,7 @@ printDataType(undefined); // => "This is not a string, boolean, or number." が�
 printDataType("42"); // => "This is a string." が表示されるようにする。
 
 
-kugiri("kiso6"); //---------------------------------------------
+line("kiso6"); //---------------------------------------------
 function greeting(name, language) {
   if (language === "Japanese") {
     return "Konnichiwa, "  + name + "!";
@@ -87,13 +87,13 @@ console.log(greeting("Harry Potter", "Spanish")); // => "Hola, Harry Potter!" �
 
 
 /**/
-kugiri("chukyu1"); //---------------------------------------------
+line("chukyu1"); //---------------------------------------------
 
 
 
 
 
-kugiri("oyo1"); //---------------------------------------------
+line("oyo1"); //---------------------------------------------
 //randomStopLight という名前の関数を宣言してください。
 //この関数が呼び出されたら 0 以上 10 以下のランダムな整数を生成します。
 //生成された数字が 3 未満であれば "🔴Red" を、3 以上 6 以下であれば

@@ -1,7 +1,7 @@
 'use strict'
 // 1行目に記載している 'use strict' は削除しないでください
 
-separatorLine("worming up1"); //---------------------------------------------
+line("worming up1"); //---------------------------------------------
 
 // function isHot(temperature) {
 //     if temperature>30 {
@@ -26,7 +26,7 @@ console.log(isHot(2)); // "暑くない" を表示
 console.log(isHot(30)); // "暑くない" を表示
 
 
-separatorLine("worming up2"); //---------------------------------------------
+line("worming up2"); //---------------------------------------------
 
 // function getTypeOfSchool(age) {
 //     if age < 6
@@ -65,7 +65,7 @@ console.log(getTypeOfSchool(16)); // "高校" を表示
 console.log(getTypeOfSchool(30)); // "高校卒業後" を表示
 
 
-separatorLine("基礎1"); //---------------------------------------------
+line("基礎1"); //---------------------------------------------
 
 
 
