@@ -5,7 +5,13 @@ function getDirName() {
     return arrPath[arrPath.length - 2];
 }
 
-function kugiri(title) {
+
+//区切り線
+/**
+ * 
+ * 
+ */
+function line(title) {
     const dirName = getDirName()
     const line = " --------------- " ;
     return console.log(line + title + line );
@@ -27,4 +33,3 @@ function test(expected, actual) {
 
 console.log("lib.js loaded!");
 console.log(getDirName() + "\n\n");
-
