@@ -1,11 +1,83 @@
 'use strict'
 // 1行目に記載している 'use strict' は削除しないでください
 
+let actual;
+let expected;
+
+line("loop 応用2"); //---------------------------------------------
+//関数 deepCount を宣言してください。
+/**
+ * @param {Array<any>} deepArr
+ * @returns {number} 与えられた配列の「要素」の数。このとき、入れ子になった配列がある場合は、その配列内の要素も一つ一つカウントすること。
+ */
+function deepCount(deepArr) {
+  // ここにコードを書きましょう。
+  //let accCnt;
+  const cntArr = accCnt => deepArr.forEach((elm, i) => {
+    //console.log(i);
+    return i + 1;
+  });
+  console.log(cntArr);
+  return cntArr;
+}
+
+actual = deepCount([1]);
+expected = 1;
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.group("Result:");
+  console.log("  actual:", actual);
+  console.log("expected:", expected);
+  console.groupEnd();
+}
+
+actual = deepCount([1, 3]);
+expected = 2;
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.group("Result:");
+  console.log("  actual:", actual);
+  console.log("expected:", expected);
+  console.groupEnd();
+}
+
+actual = deepCount([1, 3, [2, 4]]);
+expected = 4;
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.group("Result:");
+  console.log("  actual:", actual);
+  console.log("expected:", expected);
+  console.groupEnd();
+}
+
+actual = deepCount(["a", "b", ["c", ["d", "e", ["f"]]]]);
+expected = 6;
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.group("Result:");
+  console.log("  actual:", actual);
+  console.log("expected:", expected);
+  console.groupEnd();
+}
+
+// さらにテストを書きましょう。
 
 
 
-
-line("Nightmare1"); //---------------------------------------------
+line("TDD - Nightmare 😈"); //---------------------------------------------
 //関数 mySort を宣言してください。JavaScript のビルトインメソッド sort は使わないでください。
 //アドバイス： 配列を並び替える方法はたくさんあります。自分の好きな方法を選んでください。
 //これまでに同じような関数を書いたことがある人は違う方法にトライしましょう。
@@ -33,8 +105,8 @@ function mySort(numbers) {
 
 let numbers = [5, 4, 3, 2, 1];
 
-let actual = mySort(numbers);
-let expected = [1, 2, 3, 4, 5];
+actual = mySort(numbers);
+expected = [1, 2, 3, 4, 5];
 
 // 正しい結果を返すことを確認する
 test(expected, actual);
