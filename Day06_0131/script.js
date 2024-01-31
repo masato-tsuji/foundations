@@ -323,10 +323,6 @@ line("TDD - Nightmare 😈"); //---------------------------------------------
 1345: one thousand three hundred forty five
 */
 
-/**
- * @param {number} number - 数値。その名前がアルファベットの形で返ることになる
- * @returns {number} 与えられた数値をアルファベットで記した時の名前
- */
 // ここにコードを書きましょう
 //      100 => one handred
 //    1,000 => one thousand
@@ -347,28 +343,27 @@ const englishNum = {
   0: "zero", 1: "one", 2: "two" , 3:"three", 4: "four", 5: "five", 6: "six", 7: "seven",
   8: "eight", 9: "nine", 10: "ten", 11:"eleven", 12: "tweleve", 13: "thirteen", 14: "fourteen",
   15: "fifteen", 16: "sixteen", 17: "seventeen", 18: "eighteen", 19: "nineteen", 20: "twenty" ,
-  30: "thirty", 40: "fourty", 50: "fifty", 60: "sixty", 70: "seventy", 80: "eighty", 90: "ninety"
+  30: "thirty", 40: "forty", 50: "fifty", 60: "sixty", 70: "seventy", 80: "eighty", 90: "ninety"
 }
 
 /**
- * 
  * @param {number} splitNum - 英語に変換するための整数
  * @returns {string} - 与えられた数値の英語を文字列で返す　
  */
-const getHandredNum = splitNum => {
+const getHundredNum = splitNum => {
   let resNumName = "";
-  //百の位を取得
+  //百の位を変換
   const handredNum = Math.floor(splitNum / 100);
   if (handredNum > 0) {
-    resNumName = " " + englishNum[handredNum] + " handred";
+    resNumName = " " + englishNum[handredNum] + " hundred";
   }
-  //十の位を取得
+  //十の位を変換
   const teenNum = splitNum % 100;
   if (teenNum > 0 && teenNum < 20) {
     resNumName += " " + englishNum[teenNum];
   } else {
     const tyNum = Math.floor(teenNum / 10 ) * 10;
-    //一の位を取得
+    //一の位を変換
     const lastNum = teenNum % 10;
     //console.log(teenNum, tyNum, lastNum);
     if (tyNum > 0) {
@@ -381,60 +376,58 @@ const getHandredNum = splitNum => {
   return resNumName.trim();
 }
 
-console.log(getHandredNum(123));
-console.log(getHandredNum(6));
-console.log(getHandredNum(57));
-console.log(getHandredNum(408));
-console.log(getHandredNum(999));
-console.log(getHandredNum(300));
-
+// console.log(getHundredNum(123));
+// console.log(getHundredNum(6));
+// console.log(getHundredNum(57));
+// console.log(getHundredNum(408));
+// console.log(getHundredNum(999));
+// console.log(getHundredNum(300));
 
 /**
- * 
  * @param {number} number -  
  * @returns {string} -
  */
 const getNumberName = number => {
- 
+  //ゼロチェック
   if (number === 0) return "zero";
+  //単位を定義
   const unitName = ["", " thousand", " million", " billion", " trillion"]
-  const arrFmtNums = String(number.toLocaleString()).split(",").reverse();
+  //絶対値にし3桁区切りの文字列の配列にして要素の並びを反転
+  const arrFmtNums = String(Math.abs(number).toLocaleString()).split(",").reverse();
   let resEnglish;
-
-  console.log(arrFmtNums);
-
+  //console.log(arrFmtNums);
+  //3桁ブロックごとにループ
   arrFmtNums.forEach((fmtNum, i) => {
-    //console.log(Number(fmtNum) + " => " + getHandredNum(Number(fmtNum)));
-    //resEnglish =+ getHandredNum(Number(fmtNum)) + unitName[i];
-    resEnglish.join(getHandredNum(Number(fmtNum)) + unitName[i], resEnglish);
+    resEnglish = ([getHundredNum(Number(fmtNum)) + unitName[i], resEnglish]).join(" ");
   });
-  return resEnglish;
-
+  //マイナスチェック
+  if (number < 0) resEnglish = "negative " + resEnglish;
+  return resEnglish.trim();
 }
 
+//test
 actual = getNumberName(0);
 expected = "zero";
-
-if (actual === expected) {
-  console.log("OK! Test PASSED.");
-} else {
-  console.error("Test FAILED. Try again!");
-  console.log("    actual: ", actual);
-  console.log("  expected: ", expected);
-}
+test(expected, actual);
 
 actual = getNumberName(1345);
 expected = "one thousand three hundred forty five";
-
-if (actual === expected) {
-  console.log("OK! Test PASSED.");
-} else {
-  console.error("Test FAILED. Try again!");
-  console.log("    actual: ", actual);
-  console.log("  expected: ", expected);
-}
+test(expected, actual);
 
 // さらにテストを書いて、コードが正しいことを確認してください
 actual = getNumberName(16);
 expected = "sixteen";
 test(expected, actual);
+
+actual = getNumberName(100);
+expected = "one hundred";
+test(expected, actual);
+
+actual = getNumberName(-7284);
+expected = "negative seven thousand two hundred eighty four";
+test(expected, actual);
+
+actual = getNumberName(625945876);
+expected = "six hundred twenty five million nine hundred forty five thousand eight hundred seventy six";
+test(expected, actual);
+
