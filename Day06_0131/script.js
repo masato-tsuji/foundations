@@ -409,6 +409,7 @@ console.log(getHandredNum(408));
 console.log(getHandredNum(999));
 console.log(getHandredNum(300));
 
+
 /**
  * 
  * @param {number} number -  
