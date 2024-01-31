@@ -245,13 +245,9 @@ if (actual === expected) {
 line("conditionals-cont 応用2"); //---------------------------------------------
 //&& 演算子を使用せずに、&& のように機能する関数 and を宣言してください。
 /**
-<<<<<<< HEAD
- * @param {any} ??? - 1 つめの被演算子
- * @param {any} ??? - 2 つめの被演算子
-=======
+
  * @param {any} bool1 - 1 つめの被演算子
  * @param {any} bool2 - 2 つめの被演算子
->>>>>>> 301ec275929174afa56340268d93e9c77ca238ad
  * @returns {any} 2 つの被演算子を与えられた順番のまま && で評価したときと同じ結果
  */
 // ここにコードを書きましょう
@@ -375,14 +371,11 @@ const englishNum = {
   30: "thirty", 40: "fourty", 50: "fifty", 60: "sixty", 70: "seventy", 80: "eighty", 90: "ninety"
 }
 
-<<<<<<< HEAD
-=======
 /**
  * 
  * @param {number} splitNum - 英語に変換するための整数
  * @returns {string} - 与えられた数値の英語を文字列で返す　
  */
->>>>>>> 301ec275929174afa56340268d93e9c77ca238ad
 const getHandredNum = splitNum => {
   let resNumName = "";
   //百の位を取得
@@ -415,18 +408,6 @@ console.log(getHandredNum(57));
 console.log(getHandredNum(408));
 console.log(getHandredNum(999));
 console.log(getHandredNum(300));
-<<<<<<< HEAD
-
-const getNumberName = number => {
- 
-  const unitName = ["", "thousand", "million", "billion", "trillion"]
-
-  //num.toLocaleString();
-  //String();
-  //Array.reverse()
-=======
->>>>>>> 301ec275929174afa56340268d93e9c77ca238ad
-
 
 /**
  * 
@@ -450,10 +431,6 @@ const getNumberName = number => {
   return resEnglish;
 
 }
-
-  return englishNum[number];
-}
-
 
 actual = getNumberName(0);
 expected = "zero";
