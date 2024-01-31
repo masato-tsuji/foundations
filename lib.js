@@ -33,4 +33,3 @@ function test(expected, actual) {
 
 console.log("lib.js loaded!");
 console.log(getDirName() + "\n\n");
-

@@ -4,6 +4,7 @@
 
 line("worming up1"); //---------------------------------------------
 /**
+<<<<<<< HEAD
  * @param {number} ??? - 1 番目の数字
  * @param {number} ??? - 2 番目の数字
  * @returns {"X は Y と等しい" | "X は Y より小さい" | "X は Y より大きい"} 与えられた 2 つの数字の比較結果
@@ -11,6 +12,22 @@ line("worming up1"); //---------------------------------------------
 // ここに関数を定義しましょう
 function compareTwoNumbers() {
   
+=======
+ * @param {number} numX - 1 番目の数字
+ * @param {number} numY - 2 番目の数字
+ * @returns {"X は Y と等しい" | "X は Y より小さい" | "X は Y より大きい"} 与えられた 2 つの数字の比較結果
+ */
+// ここに関数を定義しましょう
+function compareTwoNumbers(numX, numY) {
+  if (numX === numY) {
+    const res = `${numX} は ${numY} と等しい`;
+    return res;
+  } else if (numX < numY) {
+    return `${numX} は ${numY} より小さい`;
+  } else {
+    return `${numX} は ${numY} より大きい`;
+  }
+>>>>>>> 301ec275929174afa56340268d93e9c77ca238ad
 }
 
 let actual = compareTwoNumbers(1, 1);
@@ -36,6 +53,7 @@ if (actual === expected) {
 }
 
 // 期待値が "X は Y より大きい" になるテストを書いてみましょう
+<<<<<<< HEAD
 
 
 
@@ -44,6 +62,127 @@ line("conditionals-cont 応用1"); //-------------------------------------------
 /**
  * @param {any} ??? - １つめの被演算子
  * @param {any} ??? - ２つめの被演算子
+=======
+actual = compareTwoNumbers(5, 1);
+expected = "5 は 1 より大きい";
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.log("    actual: ", actual);
+  console.log("  expected: ", expected);
+}
+
+
+line("conditionals-cont 基礎2"); //---------------------------------------------
+/**
+ * @param {number} age - 年齢
+ * @returns {boolean} 与えられた年齢がティーンエイジャー（13 歳から 19 歳までの間：「thirTEEN」から「nineTEEN」）かどうか
+ */
+function isTeenager(age) {
+  // ここにコードを書きましょう.
+  if (age >= 13 && age <= 19) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+actual = isTeenager(3);
+expected = false;
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.log("    actual: ", actual);
+  console.log("  expected: ", expected);
+}
+
+actual = isTeenager(14);
+expected = true;
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.log("    actual: ", actual);
+  console.log("  expected: ", expected);
+}
+
+// さらにテストを書いて、コードが正しいことを確認してください。
+
+
+line("functions-comparisons-conditionals-review 基礎1"); //---------------------------------------------
+
+
+/**
+ * @param {string} str - テストの対象となる文字列
+ * @param {number} num - 確認したい文字数
+ * @returns {any} 与えられた文字列の長さが確認したい文字数より長いかどうか
+ */
+function isLongerThan(str, num) {
+  if (typeof str === "string") {
+    return str.length > num;
+  } else {
+    return "Invalid input.";
+  }
+  
+}
+
+actual = isLongerThan("three", 3);
+expected = true;
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.log("    actual: ", actual);
+  console.log("  expected: ", expected);
+}
+actual = isLongerThan("three", 4);
+expected = true;
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.log("    actual: ", actual);
+  console.log("  expected: ", expected);
+}
+
+actual = isLongerThan("three", 5);
+expected = false;
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.log("    actual: ", actual);
+  console.log("  expected: ", expected);
+}
+
+actual = isLongerThan(3, 5);
+expected = "Invalid input.";
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.log("    actual: ", actual);
+  console.log("  expected: ", expected);
+}
+
+
+
+
+line("conditionals-cont 応用1"); //---------------------------------------------
+//|| 演算子を使用せずに、|| のように機能する関数 or を宣言してください。
+/**
+ * @param {any} bool1 - １つめの被演算子
+ * @param {any} bool2 - ２つめの被演算子
+>>>>>>> 301ec275929174afa56340268d93e9c77ca238ad
  * @returns {any} ２つの被演算子を与えられた順番のまま || で評価したときと同じ結果
  */
 // ここにコードを書きましょう
@@ -106,8 +245,13 @@ if (actual === expected) {
 line("conditionals-cont 応用2"); //---------------------------------------------
 //&& 演算子を使用せずに、&& のように機能する関数 and を宣言してください。
 /**
+<<<<<<< HEAD
  * @param {any} ??? - 1 つめの被演算子
  * @param {any} ??? - 2 つめの被演算子
+=======
+ * @param {any} bool1 - 1 つめの被演算子
+ * @param {any} bool2 - 2 つめの被演算子
+>>>>>>> 301ec275929174afa56340268d93e9c77ca238ad
  * @returns {any} 2 つの被演算子を与えられた順番のまま && で評価したときと同じ結果
  */
 // ここにコードを書きましょう
@@ -231,6 +375,14 @@ const englishNum = {
   30: "thirty", 40: "fourty", 50: "fifty", 60: "sixty", 70: "seventy", 80: "eighty", 90: "ninety"
 }
 
+<<<<<<< HEAD
+=======
+/**
+ * 
+ * @param {number} splitNum - 英語に変換するための整数
+ * @returns {string} - 与えられた数値の英語を文字列で返す　
+ */
+>>>>>>> 301ec275929174afa56340268d93e9c77ca238ad
 const getHandredNum = splitNum => {
   let resNumName = "";
   //百の位を取得
@@ -263,6 +415,7 @@ console.log(getHandredNum(57));
 console.log(getHandredNum(408));
 console.log(getHandredNum(999));
 console.log(getHandredNum(300));
+<<<<<<< HEAD
 
 const getNumberName = number => {
  
@@ -271,9 +424,32 @@ const getNumberName = number => {
   //num.toLocaleString();
   //String();
   //Array.reverse()
+=======
+>>>>>>> 301ec275929174afa56340268d93e9c77ca238ad
 
 
+/**
+ * 
+ * @param {number} number -  
+ * @returns {string} -
+ */
+const getNumberName = number => {
+ 
+  if (number === 0) return "zero";
+  const unitName = ["", " thousand", " million", " billion", " trillion"]
+  const arrFmtNums = String(number.toLocaleString()).split(",").reverse();
+  let resEnglish;
 
+  console.log(arrFmtNums);
+
+  arrFmtNums.forEach((fmtNum, i) => {
+    //console.log(Number(fmtNum) + " => " + getHandredNum(Number(fmtNum)));
+    //resEnglish =+ getHandredNum(Number(fmtNum)) + unitName[i];
+    resEnglish.join(getHandredNum(Number(fmtNum)) + unitName[i], resEnglish);
+  });
+  return resEnglish;
+
+}
 
   return englishNum[number];
 }
