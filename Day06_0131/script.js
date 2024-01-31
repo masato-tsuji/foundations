@@ -393,12 +393,14 @@ const getNumberName = number => {
   //単位を定義
   const unitName = ["", " thousand", " million", " billion", " trillion"]
   //絶対値にし3桁区切りの文字列の配列にして要素の並びを反転
-  const arrFmtNums = String(Math.abs(number).toLocaleString()).split(",").reverse();
+  const arrStrFmtNums = String(Math.abs(number).toLocaleString()).split(",").reverse();
   let resEnglish;
   //console.log(arrFmtNums);
   //3桁ブロックごとにループ
-  arrFmtNums.forEach((fmtNum, i) => {
-    resEnglish = ([getHundredNum(Number(fmtNum)) + unitName[i], resEnglish]).join(" ");
+  arrStrFmtNums.forEach((strFmtNum, i) => {
+    if (Number(strFmtNum) > 0) {
+      resEnglish = ([getHundredNum(Number(strFmtNum)) + unitName[i], resEnglish]).join(" ");
+    }
   });
   //マイナスチェック
   if (number < 0) resEnglish = "negative " + resEnglish;
@@ -421,6 +423,10 @@ test(expected, actual);
 
 actual = getNumberName(100);
 expected = "one hundred";
+test(expected, actual);
+
+actual = getNumberName(8000005);
+expected = "eight million five";
 test(expected, actual);
 
 actual = getNumberName(-7284);
