@@ -4,15 +4,6 @@
 
 line("worming up1"); //---------------------------------------------
 /**
-<<<<<<< HEAD
- * @param {number} ??? - 1 番目の数字
- * @param {number} ??? - 2 番目の数字
- * @returns {"X は Y と等しい" | "X は Y より小さい" | "X は Y より大きい"} 与えられた 2 つの数字の比較結果
- */
-// ここに関数を定義しましょう
-function compareTwoNumbers() {
-  
-=======
  * @param {number} numX - 1 番目の数字
  * @param {number} numY - 2 番目の数字
  * @returns {"X は Y と等しい" | "X は Y より小さい" | "X は Y より大きい"} 与えられた 2 つの数字の比較結果
@@ -27,7 +18,6 @@ function compareTwoNumbers(numX, numY) {
   } else {
     return `${numX} は ${numY} より大きい`;
   }
->>>>>>> 301ec275929174afa56340268d93e9c77ca238ad
 }
 
 let actual = compareTwoNumbers(1, 1);
@@ -53,16 +43,6 @@ if (actual === expected) {
 }
 
 // 期待値が "X は Y より大きい" になるテストを書いてみましょう
-<<<<<<< HEAD
-
-
-
-line("conditionals-cont 応用1"); //---------------------------------------------
-//|| 演算子を使用せずに、|| のように機能する関数 or を宣言してください。
-/**
- * @param {any} ??? - １つめの被演算子
- * @param {any} ??? - ２つめの被演算子
-=======
 actual = compareTwoNumbers(5, 1);
 expected = "5 は 1 より大きい";
 
@@ -182,7 +162,6 @@ line("conditionals-cont 応用1"); //-------------------------------------------
 /**
  * @param {any} bool1 - １つめの被演算子
  * @param {any} bool2 - ２つめの被演算子
->>>>>>> 301ec275929174afa56340268d93e9c77ca238ad
  * @returns {any} ２つの被演算子を与えられた順番のまま || で評価したときと同じ結果
  */
 // ここにコードを書きましょう
