@@ -18,7 +18,7 @@ function line(title) {
 }
 
 
-function test(expected, actual) {
+function test(actual, expected) {
     // 正しい結果を返すことを確認する
     if (JSON.stringify(actual) === JSON.stringify(expected)) {
         console.log("OK! Test PASSED.");
