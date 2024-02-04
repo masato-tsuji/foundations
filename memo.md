@@ -40,7 +40,7 @@ git pull --allow-unrelated-histories  origin main
 
 
 ### ▼Githubへ強制Push
-git pull --f  origin main
+git push -f  origin main
 
 
 ## ---------------------------------------------
