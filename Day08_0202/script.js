@@ -10,16 +10,25 @@ line("loop 応用2"); //---------------------------------------------
  * @param {Array<any>} deepArr
  * @returns {number} 与えられた配列の「要素」の数。このとき、入れ子になった配列がある場合は、その配列内の要素も一つ一つカウントすること。
  */
-function deepCount(deepArr) {
-  // ここにコードを書きましょう。
-  //let accCnt;
-  const cntArr = accCnt => deepArr.forEach((elm, i) => {
-    //console.log(i);
-    return i + 1;
-  });
-  console.log(cntArr);
-  return cntArr;
-}
+
+const deepCount = (deepArr, accCnt = 0) => deepArr.reduce((accum, currentVal) => {
+  //取り出した値が配列なら再帰、数値ならflatArrに追加
+  
+  if (Array.isArray(currentVal)) {
+    deepCount(currentVal, accCnt);
+  } else {
+
+    accCnt++;
+    console.log(currentVal, accCnt);
+    return accCnt;
+  }
+  console.log(accCnt);
+  //return accCnt;
+}, []);
+
+
+
+
 
 actual = deepCount([1]);
 expected = 1;
