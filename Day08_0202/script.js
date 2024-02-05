@@ -53,16 +53,10 @@ line("loop 応用2"); //---------------------------------------------
  * @param {Array<any>} deepArr
  * @returns {number} 与えられた配列の「要素」の数。このとき、入れ子になった配列がある場合は、その配列内の要素も一つ一つカウントすること。
  */
-function deepCount(deepArr) {
-  // ここにコードを書きましょう。
-  //let accCnt;
-  const cntArr = accCnt => deepArr.forEach((elm, i) => {
-    //console.log(i);
-    return i + 1;
-  });
-  //console.log(cntArr);
-  //return cntArr;
-}
+const deepCount = (deepArr, elmCnt = 0) => deepArr.reduce((accum, currentVal) => {
+  return !Array.isArray(currentVal) ? ++elmCnt : deepCount(currentVal, elmCnt);
+}, []);
+
 
 actual = deepCount([1]);
 expected = 1;
@@ -121,7 +115,7 @@ if (actual === expected) {
 
 
 
-line("TDD - Nightmare 😈"); //---------------------------------------------
+line("TDD - Nightmare"); //---------------------------------------------
 //関数 mySort を宣言してください。JavaScript のビルトインメソッド sort は使わないでください。
 //アドバイス： 配列を並び替える方法はたくさんあります。自分の好きな方法を選んでください。
 //これまでに同じような関数を書いたことがある人は違う方法にトライしましょう。
@@ -175,10 +169,7 @@ expected = [1, 2, 3, 4, 5];
 test(expected, actual);
 
 
-
-
-
-  line("loop - Nightmare 😈"); //---------------------------------------------
+  line("Nightmare2"); //---------------------------------------------
 //関数 flattenDeep を宣言してください。配列の配列（何段階も深く入れ子になっている場合もある）
 //を引数として受け取り、平坦化された、つまり、入れ子のない配列（＝ 1 次元配列）を新しく作って返します。
 
@@ -193,7 +184,9 @@ const flattenDeep = (multiArr, flatArr = []) => multiArr.reduce((accum, currentV
     flattenDeep(currentVal, flatArr);
   } else {
     return flatArr.push(currentVal);
+    // flatArr.push(currentVal);
   }
+  //console.log(currentVal, flatArr);
   return flatArr;
 }, []);
 

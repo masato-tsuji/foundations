@@ -14,8 +14,22 @@ function getDirName() {
 function line(title) {
     const dirName = getDirName()
     const line = " --------------- " ;
-    return console.log(line + title + line );
+    let icon = "";
+
+    if (title.includes("worm up")) {
+        icon = " 💪";
+    } else if (title.includes("基礎")){
+        icon = " 🕺";
+    } else if (title.includes("中級")){
+        icon = " 🙈";
+    } else if (String(title).includes("応用")){
+        icon = " 👽";
+    } else if (title.includes("Nightmare")){
+        icon = " 😈";
+    }
+    return console.log(line + title + icon + line );
 }
+
 
 
 function test(actual, expected) {
@@ -33,3 +47,4 @@ function test(actual, expected) {
 
 console.log("lib.js loaded!");
 console.log(getDirName() + "\n\n");
+

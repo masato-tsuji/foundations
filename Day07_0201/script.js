@@ -47,8 +47,78 @@ if (JSON.stringify(actual) === JSON.stringify(expected)) {
 }
 
 
+let actual;
+let expected;
 
 
+
+line("中級2"); //---------------------------------------------
+//関数 myPop を宣言してください。ビルトインの .pop() メソッドを使ってはいけません。 
+//アドバイス： .splice() メソッドの使用を検討してみてください。
+/**
+ * 与えられた配列から最後の要素を取り除き、その要素を返す
+ * @param {Array<any>} arry - 配列
+ * @returns {any} 与えられた配列の最後の要素を返す
+ */
+function myPop(arry) {
+  return arry.splice(arry.length -1)[0];
+}
+
+const array = [1, 2, 3, 4];
+
+actual = myPop(array);
+expected = 4;
+
+if (actual === expected) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.group("Result:");
+  console.log("  actual:", actual);
+  console.log("expected:", expected);
+  console.groupEnd("Result:");
+}
+
+actual = array;
+expected = [1, 2, 3];
+
+if (JSON.stringify(actual) === JSON.stringify(expected)) {
+  console.log("OK! Test PASSED.");
+} else {
+  console.error("Test FAILED. Try again!");
+  console.group("Result:");
+  console.log("  actual:", actual);
+  console.log("expected:", expected);
+  console.groupEnd("Result:");
+}
+
+
+//line(""); //---------------------------------------------
+
+
+
+
+const carBrands = ["Toyota", "Honda", "Mazda", "Subaru"];
+
+// 調べてみよう！
+
+// 配列の最後の要素を削除
+carBrands.pop();
+console.log(carBrands);
+
+// 配列の最初に要素を追加
+// "Suzuki" を追加
+carBrands.unshift("Suzuki");
+console.log(carBrands);
+
+// 配列の最初から要素を削除
+carBrands.shift();
+console.log(carBrands);
+
+// 二つの配列を結合（carBrands と addBrands）
+const addBrands = ["Suzuki", "Subaru"]
+const newCarBrands = carBrands.concat(addBrands);
+console.log(newCarBrands);
 
 
 line("TDD - Nightmare 😈"); //---------------------------------------------
