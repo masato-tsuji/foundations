@@ -178,41 +178,41 @@ test(expected, actual);
  * @param {Array<any>} 一次元配列を記憶するための数値型の要素を持つ配列
  * @returns {Array<any>} 与えられた配列を 1 次元配列に平坦化した配列
  */
+// const flattenDeep = (multiArr, flatArr = []) => multiArr.reduce((accum, currentVal) => {
+//   //取り出した値が配列なら再帰、数値ならflatArrに追加
+//   if (Array.isArray(currentVal)) {
+//     flattenDeep(currentVal, flatArr);
+//   } else {
+//     return flatArr.push(currentVal);
+//     // flatArr.push(currentVal);
+//   }
+//   //console.log(currentVal, flatArr);
+//   return flatArr;
+// }, []);
+
+
 const flattenDeep = (multiArr, flatArr = []) => multiArr.reduce((accum, currentVal) => {
-  //取り出した値が配列なら再帰、数値ならflatArrに追加
-  if (Array.isArray(currentVal)) {
-    flattenDeep(currentVal, flatArr);
-  } else {
-    return flatArr.push(currentVal);
-    // flatArr.push(currentVal);
-  }
-  //console.log(currentVal, flatArr);
+  !Array.isArray(currentVal) ? flatArr.push(currentVal) : flattenDeep(currentVal, flatArr);
   return flatArr;
 }, []);
+
+
 
 //テスト
 expected = [1, 2, 3, 4, 5, 6];
 actual = flattenDeep([1, 2, 3, [4, 5, 6]]);
-
-// 正しい結果を返すことを確認する
-test(expected, actual);
+test(actual, expected);
 
 expected = [1, 2, 3, 4, 5, 6];
 actual = flattenDeep([[1, 2, 3], [4, 5, 6],]);
-
-// 正しい結果を返すことを確認する
-test(expected, actual);
+test(actual, expected);
 
 expected = [1, 2, 3, 4, 5, 6];
 actual = flattenDeep([[1], [2], [3], [4, 5, 6]]);
-
-// 正しい結果を返すことを確認する
-test(expected, actual);
+test(actual, expected);
 
 expected = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 actual = flattenDeep([[1, [2, [3, [4, [5, [6, [7, [8, [9]]]]]]]]]]);
-
-// 正しい結果を返すことを確認する
-test(expected, actual);
+test(actual, expected);
 
 
