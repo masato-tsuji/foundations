@@ -47,6 +47,32 @@ function outrFunc() {
 const func = outrFunc();
 
 
+line("loop 応用1"); //---------------------------------------------
+//お医者さんを呼ぶ callADoctor（call a doctor）と言う名前の関数を作ります。この関数はお医者さんに身体のどこが痛いかを伝えます。
+/**
+ * @param {Array<string>} hurtsArr 「痛む場所」が入った配列
+ * @returns {string} お医者さんに診てもらうときに言うセリフ
+ */
+function callADoctor(hurtsArr) {
+  return `先生、${hurtsArr.join("と")}が痛いんです！`;
+}
+
+actual = callADoctor(["頭"]);
+expected = "先生、頭が痛いんです！";
+test(actual, expected);
+
+actual = callADoctor(["肩"]);
+expected = "先生、肩が痛いんです！";
+test(actual, expected);
+
+actual = callADoctor(["頭", "肩", "膝", "足の指"]);
+expected = "先生、頭と肩と膝と足の指が痛いんです！";
+test(actual, expected);
+
+// さらにテストを書きましょう。
+
+
+
 line("loop 応用2"); //---------------------------------------------
 //関数 deepCount を宣言してください。
 /**
@@ -60,55 +86,20 @@ const deepCount = (deepArr, elmCnt = 0) => deepArr.reduce((accum, currentVal) =>
 
 actual = deepCount([1]);
 expected = 1;
-
-if (actual === expected) {
-  console.log("OK! Test PASSED.");
-} else {
-  console.error("Test FAILED. Try again!");
-  console.group("Result:");
-  console.log("  actual:", actual);
-  console.log("expected:", expected);
-  console.groupEnd();
-}
+test(actual, expected);
 
 actual = deepCount([1, 3]);
 expected = 2;
-
-if (actual === expected) {
-  console.log("OK! Test PASSED.");
-} else {
-  console.error("Test FAILED. Try again!");
-  console.group("Result:");
-  console.log("  actual:", actual);
-  console.log("expected:", expected);
-  console.groupEnd();
-}
+test(actual, expected);
 
 actual = deepCount([1, 3, [2, 4]]);
 expected = 4;
-
-if (actual === expected) {
-  console.log("OK! Test PASSED.");
-} else {
-  console.error("Test FAILED. Try again!");
-  console.group("Result:");
-  console.log("  actual:", actual);
-  console.log("expected:", expected);
-  console.groupEnd();
-}
+test(actual, expected);
 
 actual = deepCount(["a", "b", ["c", ["d", "e", ["f"]]]]);
 expected = 6;
+test(actual, expected);
 
-if (actual === expected) {
-  console.log("OK! Test PASSED.");
-} else {
-  console.error("Test FAILED. Try again!");
-  console.group("Result:");
-  console.log("  actual:", actual);
-  console.log("expected:", expected);
-  console.groupEnd();
-}
 
 // さらにテストを書きましょう。
 
@@ -147,7 +138,7 @@ actual = mySort(numbers);
 expected = [1, 2, 3, 4, 5];
 
 // 正しい結果を返すことを確認する
-test(expected, actual);
+test(actual, expected);
 
 // 元の配列が変更されていないことを確認する
 if (JSON.stringify(numbers) === JSON.stringify([5, 4, 3, 2, 1])) {
@@ -166,7 +157,7 @@ numbers = [3, 4, 5, 2, 1];
 actual = mySort(numbers);
 expected = [1, 2, 3, 4, 5];
 // 正しい結果を返すことを確認する
-test(expected, actual);
+test(actual, expected);
 
 
   line("Nightmare2"); //---------------------------------------------
