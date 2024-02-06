@@ -100,8 +100,6 @@ const object2 = { 1: "a", 2: "b", hello: "c" };
 // test(getKeys(object2), ["1", "2", "hello"]);
 
 
-
-
 /**
  * @param {object} ???
  * @returns {Array<any>} 与えられたオブジェクトのすべての値が入った配列
@@ -123,121 +121,94 @@ test(getValues(object2), ["a", "b", "c"]);
 
 
 
+  line("Nightmare"); //---------------------------------------------
+  //関数 getDepth を宣言してください。
+/**
+ * @param {object} nestObj - 多次元のオブジェクト
+ * @returns {number} 引数のオブジェクトの深さ（何層になっているか）を返す。入れ子になったオブジェクトが複数ある場合は、一番深い層の数を返してください。
+ */
+
+function getDepth(nestObj, depthCnt = 0) {
+    for (const obj in nestObj) {
+        console.log(nestObj[obj]);
+        return typeof nestObj[obj] === "String" ? ++depthCnt : getDepth(nestObj[obj], depthCnt);
+
+    }
+}
 
 
 
 
+// forEach
+// const getDepth = (nestObj, depthCnt = 0) => Object.keys(nestObj).forEach((element) => {
+//     // キー
+//     console.log(element);
+//     // 値
+//     console.log(nestObj[element], typeof nestObj[element]);
+
+//   });
 
 
+const nestedObject1 = { a: "A" };
+const nestedObject2 = { a: "A", b: { c: "C" } };
+const nestedObject3 = { a: "A", b: { c: "C" }, d: { e: { f: "F" } } };
+const nestedObjectZ = {
+  z: {
+    y: {
+      x: {
+        w: {
+          v: {
+            u: {
+              t: {
+                s: {
+                  r: {
+                    q: {
+                      p: {
+                        o: {
+                          n: {
+                            m: {
+                              l: {
+                                k: {
+                                  j: {
+                                    i: {
+                                      h: {
+                                        g: {
+                                          f: {
+                                            e: "E",
+                                          },
+                                        },
+                                      },
+                                    },
+                                  },
+                                },
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+};
 
+// nestedObject1 の深さは 1 です
+test(getDepth(nestedObject1), 1);
 
+// nestedObject2 の深さは 2 です
+test(getDepth(nestedObject2), 2);
 
+// nestedObject3 の深さは 3 です
+test(getDepth(nestedObject3), 3);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//   line("Nightmare"); //---------------------------------------------
-//   //関数 getDepth を宣言してください。
-// /**
-//  * @param {object} nestObj - 多次元のオブジェクト
-//  * @returns {number} 引数のオブジェクトの深さ（何層になっているか）を返す。入れ子になったオブジェクトが複数ある場合は、一番深い層の数を返してください。
-//  */
-
-// function getDepth(nestObj, depthCnt = 0) {
-//     for (const obj in nestObj) {
-//         console.log(obj);
-//     }
-// }
-
-// const nestedObject1 = { a: "A" };
-// const nestedObject2 = { a: "A", b: { c: "C" } };
-// const nestedObject3 = { a: "A", b: { c: "C" }, d: { e: { f: "F" } } };
-// const nestedObjectZ = {
-//   z: {
-//     y: {
-//       x: {
-//         w: {
-//           v: {
-//             u: {
-//               t: {
-//                 s: {
-//                   r: {
-//                     q: {
-//                       p: {
-//                         o: {
-//                           n: {
-//                             m: {
-//                               l: {
-//                                 k: {
-//                                   j: {
-//                                     i: {
-//                                       h: {
-//                                         g: {
-//                                           f: {
-//                                             e: "E",
-//                                           },
-//                                         },
-//                                       },
-//                                     },
-//                                   },
-//                                 },
-//                               },
-//                             },
-//                           },
-//                         },
-//                       },
-//                     },
-//                   },
-//                 },
-//               },
-//             },
-//           },
-//         },
-//       },
-//     },
-//   },
-// };
-
-// // nestedObject1 の深さは 1 です
-// test(getDepth(nestedObject1), 1);
-
-// // nestedObject2 の深さは 2 です
-// test(getDepth(nestedObject2), 2);
-
-// // nestedObject3 の深さは 3 です
-// test(getDepth(nestedObject3), 3);
-
-// // nestedObjectZ の深さは 22 です。
-// test(getDepth(nestedObjectZ), 22);
+// nestedObjectZ の深さは 22 です。
+test(getDepth(nestedObjectZ), 22);
 
 
 
