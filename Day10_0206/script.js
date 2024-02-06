@@ -9,6 +9,19 @@ line("worm up"); //---------------------------------------------
  * @returns {Array<any>} 配列の中のオブジェクトから、第 2 引数と同じキーに対応する値だけを拾って（＝ pluck して）、配列に入れたもの
  */
 
+function test(actual, expected) {
+    if (JSON.stringify(actual) === JSON.stringify(expected)) {
+      console.log("OK! Test PASSED.");
+    } else {
+      console.error("Test FAILED. Try again!");
+      console.log("    actual: ", actual);
+      console.log("  expected: ", expected);
+      console.trace();
+    }
+  }
+
+
+//アロー関数
 // function pluck(arrObjs, key) {
 //     return arrObjs.map(item => item[key]);
 // }
@@ -21,29 +34,6 @@ function pluck(arrObjs, key) {
     return resArr;
 }
 
-
-/*
-const animals = [
-  {'id': 1, 'category': 'bird', 'name': 'sparrow'},
-  {'id': 2, 'category': 'bird', 'name': 'swallow'},
-  {'id': 3, 'category': 'dog', 'name': 'shiba'},
-  {'id': 4, 'category': 'bird', 'name': 'crow'},
-  {'id': 5, 'category': 'dog', 'name': 'poodle'}
-]
-
-// animalsは定義済
-//
-const doubleItems = items.map( function (item) {
-  return item * 2
-})
-
-//アロー関数
-const names = animals.map(item => item.name)
-console.log(names)
-// ***出力結果***
-// [ 'sparrow', 'swallow', 'shiba', 'crow', 'poodle' ]
-*/
-
 const arrayOfObjects = [
     { a: 1, b: 2, c: 3 },
     { a: 4, b: 5, c: 6 },
@@ -53,81 +43,201 @@ const arrayOfObjects = [
   test(pluck(arrayOfObjects, "a"), [1, 4, 7]);
   test(pluck(arrayOfObjects, "b"), [2, 5, 8]);
   test(pluck(arrayOfObjects, "c"), [3, 6, 9]);
+  test(pluck(arrayOfObjects, "d"), [undefined, undefined, undefined]);
 
 
-  line("Nightmare"); //---------------------------------------------
-  //関数 getDepth を宣言してください。
+
+
+
+  const hellos = {
+    English: "Hello",
+    Japanese: "Konnichiwa",
+    German: "Hallo",
+    Spanish: "Hola",
+    Arabic: "Ahlan wa sahlan",
+    Chinese: "Nihao",
+  };
+  
+  /*
+   * @returns {undefined} この関数は挨拶をコンソールに表示するだけで、返り値は必要ありません。
+   */
+  
+  // ここにコードを書きましょう
+  function sayHellos() {
+    for (const key in hellos) {
+        console.log(hellos[key]);
+    }
+  }
+
+
+  sayHellos();　// 実際にこの関数を呼び出すと、以下のようにコンソールに表示されることを確認しましょう。
+  // "Hello"
+  // "Konnichiwa"
+  // "Hallo"
+  // "Hola"
+  // "Ahlan wa sahlan"
+  // "Nihao"
+  
+
 /**
- * @param {object} nestObj - 多次元のオブジェクト
- * @returns {number} 引数のオブジェクトの深さ（何層になっているか）を返す。入れ子になったオブジェクトが複数ある場合は、一番深い層の数を返してください。
+ * @param {object} object
+ * @returns {Array<string>} 与えられたオブジェクトのすべてのキーが入った配列
  */
 
-function getDepth(nestObj, depthCnt = 0) {
-    for (const obj in nestObj) {
-        console.log(obj);
+// ここにコードを書きましょう
+function getKeys(object) {
+    const result = [];
+    for (const key in object) {
+        result.push(key);
     }
+    return result;
 }
 
-const nestedObject1 = { a: "A" };
-const nestedObject2 = { a: "A", b: { c: "C" } };
-const nestedObject3 = { a: "A", b: { c: "C" }, d: { e: { f: "F" } } };
-const nestedObjectZ = {
-  z: {
-    y: {
-      x: {
-        w: {
-          v: {
-            u: {
-              t: {
-                s: {
-                  r: {
-                    q: {
-                      p: {
-                        o: {
-                          n: {
-                            m: {
-                              l: {
-                                k: {
-                                  j: {
-                                    i: {
-                                      h: {
-                                        g: {
-                                          f: {
-                                            e: "E",
-                                          },
-                                        },
-                                      },
-                                    },
-                                  },
-                                },
-                              },
-                            },
-                          },
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  },
-};
+const object1 = { a: 1, b: 2, c: "hello" };
+const object2 = { 1: "a", 2: "b", hello: "c" };
 
-// nestedObject1 の深さは 1 です
-test(getDepth(nestedObject1), 1);
+// test(getKeys(object1), ["a", "b", "c"]);
+// test(getKeys(object2), ["1", "2", "hello"]);
 
-// nestedObject2 の深さは 2 です
-test(getDepth(nestedObject2), 2);
 
-// nestedObject3 の深さは 3 です
-test(getDepth(nestedObject3), 3);
 
-// nestedObjectZ の深さは 22 です。
-test(getDepth(nestedObjectZ), 22);
+
+/**
+ * @param {object} ???
+ * @returns {Array<any>} 与えられたオブジェクトのすべての値が入った配列
+ */
+
+// ここにコードを書きましょう
+function getValues(object) {
+    const result = [];
+    for (const key in object) {
+        result.push(object[key]);
+    }
+    return result;
+}
+
+test(getValues(object1), [1, 2, "hello"]);
+test(getValues(object2), ["a", "b", "c"]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//   line("Nightmare"); //---------------------------------------------
+//   //関数 getDepth を宣言してください。
+// /**
+//  * @param {object} nestObj - 多次元のオブジェクト
+//  * @returns {number} 引数のオブジェクトの深さ（何層になっているか）を返す。入れ子になったオブジェクトが複数ある場合は、一番深い層の数を返してください。
+//  */
+
+// function getDepth(nestObj, depthCnt = 0) {
+//     for (const obj in nestObj) {
+//         console.log(obj);
+//     }
+// }
+
+// const nestedObject1 = { a: "A" };
+// const nestedObject2 = { a: "A", b: { c: "C" } };
+// const nestedObject3 = { a: "A", b: { c: "C" }, d: { e: { f: "F" } } };
+// const nestedObjectZ = {
+//   z: {
+//     y: {
+//       x: {
+//         w: {
+//           v: {
+//             u: {
+//               t: {
+//                 s: {
+//                   r: {
+//                     q: {
+//                       p: {
+//                         o: {
+//                           n: {
+//                             m: {
+//                               l: {
+//                                 k: {
+//                                   j: {
+//                                     i: {
+//                                       h: {
+//                                         g: {
+//                                           f: {
+//                                             e: "E",
+//                                           },
+//                                         },
+//                                       },
+//                                     },
+//                                   },
+//                                 },
+//                               },
+//                             },
+//                           },
+//                         },
+//                       },
+//                     },
+//                   },
+//                 },
+//               },
+//             },
+//           },
+//         },
+//       },
+//     },
+//   },
+// };
+
+// // nestedObject1 の深さは 1 です
+// test(getDepth(nestedObject1), 1);
+
+// // nestedObject2 の深さは 2 です
+// test(getDepth(nestedObject2), 2);
+
+// // nestedObject3 の深さは 3 です
+// test(getDepth(nestedObject3), 3);
+
+// // nestedObjectZ の深さは 22 です。
+// test(getDepth(nestedObjectZ), 22);
 
 
 
