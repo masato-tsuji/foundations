@@ -1,6 +1,17 @@
 'use strict'
 // 1行目に記載している 'use strict' は削除しないでください
 
+function test(actual, expected) {
+  if (JSON.stringify(actual) === JSON.stringify(expected)) {
+    console.log("OK! Test PASSED.");
+  } else {
+    console.error("Test FAILED. Try again!");
+    console.log("    actual: ", actual);
+    console.log("  expected: ", expected);
+    console.trace();
+  }
+}
+
 
 line("worm up"); //---------------------------------------------
 /**
@@ -9,16 +20,6 @@ line("worm up"); //---------------------------------------------
  * @returns {Array<any>} 配列の中のオブジェクトから、第 2 引数と同じキーに対応する値だけを拾って（＝ pluck して）、配列に入れたもの
  */
 
-function test(actual, expected) {
-    if (JSON.stringify(actual) === JSON.stringify(expected)) {
-      console.log("OK! Test PASSED.");
-    } else {
-      console.error("Test FAILED. Try again!");
-      console.log("    actual: ", actual);
-      console.log("  expected: ", expected);
-      console.trace();
-    }
-  }
 
 
 //アロー関数
@@ -128,12 +129,22 @@ test(getValues(object2), ["a", "b", "c"]);
  * @returns {number} 引数のオブジェクトの深さ（何層になっているか）を返す。入れ子になったオブジェクトが複数ある場合は、一番深い層の数を返してください。
  */
 
-function getDepth(nestObj, depthCnt = 0) {
-    for (const obj in nestObj) {
-        console.log(nestObj[obj]);
-        return typeof nestObj[obj] === "String" ? ++depthCnt : getDepth(nestObj[obj], depthCnt);
+function getDepth(nestObj, depthCnt = 1) {
+    console.log("roop before: ", nestObj);
 
+    for (const key in nestObj) {
+        if (typeof nestObj[key] === "object") {
+          console.log("if: ", key, nestObj[key], typeof nestObj[key], depthCnt);
+          return getDepth(nestObj[key], depthCnt++);
+          // depthCnt++;
+        }
+        return depthCnt;
+        
+        //return typeof nestObj[obj] === "object" ? ++depthCnt : getDepth(nestObj[obj], depthCnt);
+        
     }
+    
+    
 }
 
 
