@@ -137,7 +137,7 @@ console.log(greet("りか")); // => りかさん、おはよう！
 line("スコープ基礎2"); //------------------------------------------------
 
 function sumArray(arrayOfNumbers) {
-    let sum = 0;    //関数スコープ内で宣言しないと次に関数が呼び出されたときに前の結果も反映される
+    let sum = 0;    //関数スコープ内で宣言しないとグローバル変数なので次に関数が呼び出されたときに前の結果も反映される
     for (const number of arrayOfNumbers) {
         console.log(number, sum);
         sum += number;

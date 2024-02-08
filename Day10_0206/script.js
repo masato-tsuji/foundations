@@ -129,13 +129,13 @@ test(getValues(object2), ["a", "b", "c"]);
  * @returns {number} 引数のオブジェクトの深さ（何層になっているか）を返す。入れ子になったオブジェクトが複数ある場合は、一番深い層の数を返してください。
  */
 
-function getDepth(nestObj, depthCnt = 1) {
+function getDepth1(nestObj, depthCnt = 1) {
     console.log("roop before: ", nestObj);
     let resKey;
     for (const key in nestObj) {
         if (typeof nestObj[key] === "object") {
           console.log("if: ", key, nestObj[key], typeof nestObj[key], depthCnt);
-          return getDepth(nestObj[key], depthCnt++);
+          return getDepth(nestObj[key], Math.max(++depthCnt, depthCnt));
           // depthCnt++;
         } else {
           depthCnt = 1;
@@ -146,6 +146,21 @@ function getDepth(nestObj, depthCnt = 1) {
 }
 
 
+function getDepth(nestObj, depthCnt = 1) {
+  console.log("func: ", nestObj, depthCnt);
+  for (const key in nestObj) {
+    console.log("for: ", typeof nestObj[key], nestObj, nestObj[key]);
+    if (typeof nestObj[key] === "object") {
+      console.log("if中", key, nestObj[key], Math.max(depthCnt + 1, depthCnt));
+      return getDepth(nestObj[key], Math.max(depthCnt + 1, depthCnt));
+    } else {
+      delete nestObj[key];
+      console.log("next: ", nestObj, depthCnt);
+      return getDepth(nestObj, depthCnt);
+    }
+  }
+  return depthCnt;
+}
 
 
 // forEach
