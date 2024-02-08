@@ -131,20 +131,18 @@ test(getValues(object2), ["a", "b", "c"]);
 
 function getDepth(nestObj, depthCnt = 1) {
     console.log("roop before: ", nestObj);
-
+    let resKey;
     for (const key in nestObj) {
         if (typeof nestObj[key] === "object") {
           console.log("if: ", key, nestObj[key], typeof nestObj[key], depthCnt);
           return getDepth(nestObj[key], depthCnt++);
           // depthCnt++;
+        } else {
+          depthCnt = 1;
         }
-        return depthCnt;
-        
         //return typeof nestObj[obj] === "object" ? ++depthCnt : getDepth(nestObj[obj], depthCnt);
-        
     }
-    
-    
+    return getDepth(nestObj[key], depthCnt++);
 }
 
 
