@@ -168,24 +168,61 @@ function getDepth5(nestObj) {
   console.log(Object.keys(nestObj));
 }
 
-
-function getDepth3(nestObj, depthCnt = 1) {
-
+//一次元目の値は取得できている
+function getDepth9(nestObj) {
   for (const key in nestObj) {
-    if (typeof nestObj[key] === "object") {
-      return getDepth(nestObj[key], Math.max(depthCnt + 1, depthCnt));
-    } else {
-      console.log("delete key: ", nestObj[key]);
-      delete nestObj[key];
-      console.log(nestObj);
-      return getDepth(nestObj, depthCnt);
-    }
+    console.log(nestObj[key]);
+
   }
-  return depthCnt;
 }
 
 
-const nestedObjectA = { a: "A", b: { c: "C", d: "D", e: {f: "F"} } };
+// function getDepth(nestObj, depthCnt = 1) {
+
+//   for (const key in nestObj) {
+//     console.log("key", key);
+//     if (typeof nestObj[key] === "object") {
+//       return getDepth(nestObj[key], Math.max(depthCnt + 1, depthCnt));
+//     } else {
+//       console.log("delete key: ", nestObj[key]);
+//       delete nestObj[key];
+//       console.log(nestObj);
+//       return getDepth(nestObj, depthCnt);
+//     }
+//   }
+//   return depthCnt;
+// }
+
+
+function getDepth(nestObj) {
+  let depthMax = 1;
+  let depthCnt = 1;
+  function counter(obj) {
+    for (const key in obj) {
+      if (typeof obj[key] === "object") {
+        depthMax = Math.max(depthMax, depthCnt + 1);
+        depthCnt = depthMax;
+        //console.log("counter:", key,depthMax, depthCnt, obj[key]);
+        return counter(obj[key]);
+      }
+    }
+    depthMax = Math.max(depthMax, depthCnt);
+    depthCnt = 1;
+    return depthMax;
+  }
+
+  for (const key in nestObj) {
+    if (typeof nestObj[key] === "object") {
+      depthCnt++;
+      //console.log("main: ", key, nestObj[key], depthMax, depthCnt);
+      counter(nestObj[key]);
+    }
+  }
+  return depthMax;
+}
+
+
+const nestedObjectA = { a: "A", b: { c: "C", d: "D", e: {f: "F"}}, g:"G", H: {i: {j: "J"}} };
 
 const nestedObject1 = { a: "A" };
 const nestedObject2 = { a: "A", b: { c: "C" } };
