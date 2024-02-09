@@ -163,7 +163,8 @@ function getDepth2(nestObj, depthCnt = 1) {
 }
 
 
-function getDepth(nestObj) {
+// ネストのキーは取れない
+function getDepth5(nestObj) {
   console.log(Object.keys(nestObj));
 }
 
