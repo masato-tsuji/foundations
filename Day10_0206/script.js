@@ -163,12 +163,20 @@ function getDepth2(nestObj, depthCnt = 1) {
 }
 
 
-function getDepth(nestObj, depthCnt = 1) {
+function getDepth(nestObj) {
+  console.log(Object.keys(nestObj));
+}
+
+
+function getDepth3(nestObj, depthCnt = 1) {
+
   for (const key in nestObj) {
     if (typeof nestObj[key] === "object") {
       return getDepth(nestObj[key], Math.max(depthCnt + 1, depthCnt));
     } else {
+      console.log("delete key: ", nestObj[key]);
       delete nestObj[key];
+      console.log(nestObj);
       return getDepth(nestObj, depthCnt);
     }
   }
