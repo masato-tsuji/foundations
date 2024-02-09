@@ -90,6 +90,48 @@ res = arr.reduce( (newArr,elem) =>
 console.log(res) //[1, 2, 3, 4, 5, 6]
 ````
 
+### オブジェクトの変換
+
+
+````js
+// Object.keys() キーの配列を作成
+const fruits = {
+  banana: 28,
+  apple: 17,
+  orange: 54,
+}
+
+const keys = Object.keys(fruits)
+console.log(keys) // [banana, apple, orange]
+````
+
+````js
+// Object.values() 値の配列を作成
+const fruits = {
+  banana: 28,
+  apple: 17,
+  orange: 54,
+}
+
+const values = Object.values(fruits)
+console.log(values) // [28, 17, 54]
+````
+
+````js
+// Object.entries() キーと値の配列を作成
+const fruits = {
+  banana: 28,
+  apple: 17,
+  orange: 54,
+}
+
+const entries = Object.entries(fruits)
+console.log(entries)
+// [[apple, 28], [orange, 17], [pear, 54]]
+````
+
+
+
 ## ------------------------------------------------
 ## Math
 ## ------------------------------------------------

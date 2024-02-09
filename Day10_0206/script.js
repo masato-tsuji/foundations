@@ -145,8 +145,8 @@ function getDepth1(nestObj, depthCnt = 1) {
     return getDepth(nestObj[key], depthCnt++);
 }
 
-
-function getDepth(nestObj, depthCnt = 1) {
+// 〇
+function getDepth2(nestObj, depthCnt = 1) {
   console.log("func: ", nestObj, depthCnt);
   for (const key in nestObj) {
     console.log("for: ", typeof nestObj[key], nestObj, nestObj[key]);
@@ -163,15 +163,20 @@ function getDepth(nestObj, depthCnt = 1) {
 }
 
 
-// forEach
-// const getDepth = (nestObj, depthCnt = 0) => Object.keys(nestObj).forEach((element) => {
-//     // キー
-//     console.log(element);
-//     // 値
-//     console.log(nestObj[element], typeof nestObj[element]);
+function getDepth(nestObj, depthCnt = 1) {
+  for (const key in nestObj) {
+    if (typeof nestObj[key] === "object") {
+      return getDepth(nestObj[key], Math.max(depthCnt + 1, depthCnt));
+    } else {
+      delete nestObj[key];
+      return getDepth(nestObj, depthCnt);
+    }
+  }
+  return depthCnt;
+}
 
-//   });
 
+const nestedObjectA = { a: "A", b: { c: "C", d: "D", e: {f: "F"} } };
 
 const nestedObject1 = { a: "A" };
 const nestedObject2 = { a: "A", b: { c: "C" } };
@@ -221,6 +226,11 @@ const nestedObjectZ = {
     },
   },
 };
+
+
+// nestedObject1 の深さは 1 です
+test(getDepth(nestedObjectA), 3);
+
 
 // nestedObject1 の深さは 1 です
 test(getDepth(nestedObject1), 1);
