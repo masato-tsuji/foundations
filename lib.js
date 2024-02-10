@@ -48,3 +48,33 @@ function test(actual, expected) {
 console.log("lib.js loaded!");
 console.log(getDirName() + "\n\n");
 
+
+function csv2json() {
+    const csvFilePath = './presen_test/img/pref_info.csv'
+    const jsonFilePath = './presen_test/img/pref_info.json'
+
+    const csv = require('csvtojson')
+    const moment = require('moment')
+    const fs = require('fs')
+
+    csv()
+    .fromFile(csvFilePath)
+    .then((rows)=>{
+    rows = rows.map((row) => {
+        row.id = new Number(row.id)
+        row.area = new String(row.area)
+        row.prefName = new String(row.prefName)
+        row.temp_2023 = new Number(row.temp_2023)
+        // row.registrationDate = moment(row.registrationDate).format("YYYY-MM-DD")
+        return row
+    })
+    fs.writeFile(jsonFilePath, JSON.stringify(rows, null, 2), (err) => {
+        if (err) {
+        throw err;
+        }
+        console.log("JSON generated.");
+    })
+    })
+}
+
+

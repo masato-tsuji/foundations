@@ -1,0 +1,23 @@
+
+
+
+#all_japan {
+    fill: #fea;
+    /* fill: rgb(212, 236, 179); */
+    stroke-width: 20px;
+    /* opacity: 70%; */
+}
+
+/* マウスオーバー時 */
+.pref:hover {
+    fill: orange;
+    cursor: pointer;
+}
+
+
+
+#japan_space {
+    width: 300;
+    height: 900;
+    background-color: skyblue;
+}
