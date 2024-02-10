@@ -140,6 +140,75 @@ const adultAccount = createWebsiteAccount(33);
 test(adultAccount(), true); // => true (何回呼び出すかに関わらず、いつも true を返す)
 
 
+line("Nightmare 1"); //---------------------------------------------
+
+//テストをよく見て関数 accumulate を宣言してください。
+/**
+ * @param {number} num 加算する数値
+ * @returns {Function} 呼び出しが連鎖できる関数。呼び出す度に渡された引数の値を累計していく。
+ * 累計値が分かるように関数を呼び出したときに値をコンソールに表示するようにしておきましょう。
+*/
+
+// 関数宣言
+function accumulate1(num) {
+    return function accum(accumNum) {
+        num += accumNum;
+        console.log(num);
+        return accum;
+    }
+}
+
+// アロー関数
+// const accumulate2 = num => {
+//     const accum = accumNum => {
+//         num += accumNum;
+//         console.log(num);
+//         return accum;
+//     }
+//     return accum;
+// };
+
+
+const accumulate2 = num => {
+    return function accum(accumNum) {
+        num += accumNum;
+        console.log(num);
+        return accum;
+    };
+};
+
+
+
+// accumulate(1); // 初回は何もコンソールに表示されなくてよしとします。
+
+// 関数呼び出しを連鎖させることができます。
+// accumulate(1)(2); // 3
+// accumulate(1)(2)(3); // 3 6
+accumulate2(1)(2)(3)(4)(5)(6); // 3 6 10 15 21
+
+
+line("Nightmare 2"); //---------------------------------------------
+//accumulate を修正して、console.log を外し、代わりに .value() というメソッドで値を返すようにしてください。
+/**
+ * @param {number} num
+ * @returns {Function} 呼び出しが連鎖できる関数。累計の値を返す `.value()` というメソッドを持つ。
+ */
+const accumulate = num => {
+    const accum = accumNum => {
+        num += accumNum;
+        return accum;
+    };
+    accum.value = () => num;  // 関数にプロパティを持たせる
+    return accum;
+};
+
+// 関数を呼び出すと `.value()` でその時点の累計値を 1 つ返します。初回の関数呼び出しから使えます。
+test(accumulate(1).value(), 1);
+
+// 関数呼び出しを連鎖させることができ、`.value()` で累計の値が得られます。
+test(accumulate(1)(2).value(), 3);
+test(accumulate(1)(2)(3)(4)(5)(6).value(), 21);
+
 
 
 
