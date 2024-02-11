@@ -33,24 +33,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });   
     
     // オプション設定トグルイベント
-    const cnfElms = document.querySelectorAll(".cnf-tgl")
+    const cnfElms = document.querySelectorAll(".toggle_switch > input")
     .forEach(elm => {
-        elm.addEventListener("click", (event) => {
+        elm.addEventListener("change", (event) => {
             // console.log(elm.id);
-
-            // トグル反転
-            const changeTgl = tgl => {
-                const chkBtn = tgl.querySelector('.cnf-chk');
-                chkBtn.checked = !chkBtn.checked;
-                tgl.checked = true;
-                console.log(chkBtn, chkBtn.checked, chkBtn.value);
-
-            }
-
             // 県名表示
-            if (elm.id === "pref_name_disp") {
-                changeTgl(elm);
+            if (elm.id === "disp_pref_name") {
+
             }
+            // 沖縄移動
+            if (elm.id === "okinawa_move") {
+
+            }
+            // 知名度UP
+            if (elm.id === "disp_pref_highlite") {
+                document.querySelector("#pref24").style.fill = "pink";
+            }
+
             
         });
     });
