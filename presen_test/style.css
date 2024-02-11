@@ -2,6 +2,11 @@
 * 命名規則 - id名はxx_xxxx class名はxx-xxxx
 */
 
+body {
+    background-color: skyblue;
+    color: rgb(128,128,128);
+}
+
 /* --- メニューエリア --- */
 #menu_area {
     position:  absolute;
@@ -100,6 +105,9 @@
     color: #180474;
     font-weight: bold;
 }
+.toggle_switch > #disp_pref_highlite:checked + #pref24 {
+    fill: #ff11c7;
+}
 
 /* --- マップエリア --- */
 #map_area {
@@ -123,6 +131,4 @@
     cursor: pointer;
 }
 
-body {
-    background-color: skyblue;
-}
+

@@ -43,11 +43,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             // 沖縄移動
             if (elm.id === "okinawa_move") {
+                document.querySelector("#pref47")
+                .setAttribute("transform", "translate(400,-180)");
 
             }
             // 知名度UP
             if (elm.id === "disp_pref_highlite") {
-                document.querySelector("#pref24").style.fill = "pink";
+                document.querySelector("#pref24").style.fill = "#ff11c7";
             }
 
             
