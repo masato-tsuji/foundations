@@ -12,37 +12,68 @@ const prefecturesQuiz = () => {
     const nvTime = document.querySelector("#navi_time");
     const nvStart = document.querySelector("#navi_start");
     const nvReset = document.querySelector("#navi_reset");
-
     const tglOkinawa = document.querySelector("#okinawa_move");
 
+    // 出題用配列
     const prefDatas = prefInfos.map(pref => ({[pref["id"]]: pref["prefName"]}));
+    let inQuiz = false;
+    let resetQuiz = false;
+    let choicePrefId = "";
 
-    // ＄初期化（表示リセットと県情報を取得）
+    // スタート、リセットボタン
+
+
+
+
+    // ＄初期化（表示リセット）
     const initialize = () => {
-
         tglOkinawa.checked = true;
         setViewBox();
-
         nvArea.style.display = "block";
+        nvDesc.innerHTML = "出題される都道府県の🗾場所を\nクリックしてください"
+    }
 
-        nvDesc.innerHTML = "出題される都道府県の🗾場所を\nクリックしてください！"
-
+    // ＄クイズ開始
+    const execQuiz = () => {
+        // while (!resetQuiz) {
+        // }
+        inQuiz = true;
+        nvRes.innerHTML = "";
+        const rnd = Math.floor(Math.random() * prefDatas.length);
+        choicePrefId = Object.keys(prefDatas[rnd])[0];
+        nvQuiz.innerHTML = prefDatas[rnd][choicePrefId];
 
 
     }
 
-    // ＄出題（ランダムに都道府県を出力）
-    // Math.floor(Math.random() * max)
-
     // ＄県クリック検出
+    const prefElms = document.querySelectorAll(".jp-pref")
+    .forEach(elm => {
+        elm.addEventListener("click", (event) => {
+            let msg;
+            if (choicePrefId === elm.id) {
+                msg = "正解です🎉";
+            } else {
+                msg = "不正解です😱";
+            }
+            nvRes.innerHTML = msg;
+        });
+    });
 
     // ＄判定して結果表示
 
-    // ＄待機
+    // ＄数秒待機
 
     // ＄次の問題
 
+    // スタートボタン
+    nvStart.addEventListener("click", (event) => {
+        execQuiz();
+    });
+
     // ＄リセットボタンで初期化
+    const reset = () => resetQuiz = true;
+
 
     return initialize;
 }
