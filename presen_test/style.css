@@ -2,17 +2,24 @@
 * 命名規則 - id名はxx_xxxx class名はxx-xxxx
 */
 
+/* degub時表示させる */
+#vb_monitor {
+    display: none;
+}
+
+/* 共通 */
 body {
     background-color: skyblue;
     color: rgb(128,128,128);
+    font-size: 20px;
 }
 
 /* --- メニューエリア --- */
 #menu_area {
     position:  absolute;
-    top: 15%;
+    top: 12%;
     left: 5%;
-    height: 420px;
+    height: 470px;
     width: 220px;
     background: #ffffff;
     box-shadow: 0px 0px 0px 5px #dfefff;
@@ -59,17 +66,16 @@ body {
 
 
 /* トグルスイッチ */
-.toggle_switch {
-    /* display: table; */
+.cnf-tgl {
     position: relative;
     height: 35px;
     margin-top: 20px;
-    font-size: 20px;
+    font-size: 20px;    /*サイズに指定にトグルサイズ追従*/
 }
-.toggle_switch > input {
+.cnf-tgl > input {
     display: none;
 }
-.toggle_switch > label {
+.cnf-tgl > label {
     display: block;
     position: relative;
     width: 2.8em;
@@ -78,10 +84,10 @@ body {
     background-color: #dadada;
     cursor: pointer;
 }
-.toggle_switch > input:checked + label {
+.cnf-tgl > input:checked + label {
     background-color: #00a118;
 }
-.toggle_switch > label::before {
+.cnf-tgl > label::before {
     content: "";
     position: absolute;
     top: 0.1em;
@@ -92,22 +98,38 @@ body {
     background-color: #fff;
     transition: 0.5s;
 }
-.toggle_switch > input:checked + label::before {
+.cnf-tgl > input:checked + label::before {
     left: calc(100% - 1.5em + 0.05em);
 }
-.toggle_switch > span {
+.cnf-tgl > span {
     position: relative;
     top: -28px;
     left: 70px;
     color: #aaaaaa;
 }
-.toggle_switch > input:checked + label + span {
+.cnf-tgl > input:checked + label + span {
     color: #180474;
     font-weight: bold;
 }
-.toggle_switch > #disp_pref_highlite:checked + #pref24 {
+.cnf-tgl > #disp_pref_highlite:checked + #pref24 {
     fill: #ff11c7;
 }
+
+/* --- ナビエリア --- */
+#navi_area {
+    position:  absolute;
+    top: 12%;
+    left: 30%;
+    /* height: 470px; */
+    /* width: 220px; */
+    background: #ffffff;
+    box-shadow: 0px 0px 0px 5px #dfefff;
+    padding: 0.2em 0.5em;
+    color: #454545;
+    opacity: 100%;
+}
+
+
 
 /* --- マップエリア --- */
 #map_area {
@@ -115,7 +137,6 @@ body {
     /* height: 900px; */
     background-color: skyblue;
 }
-
 
 #svg_japan {
     fill: #fea;
@@ -125,7 +146,6 @@ body {
     /* margin-left: 250px; */
 }
 
-/* マウスオーバー時 */
 .jp-pref:hover {
     fill: orange;
     cursor: pointer;

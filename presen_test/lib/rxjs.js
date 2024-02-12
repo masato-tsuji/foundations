@@ -8837,7 +8837,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const { map, switchMap, takeUntil } = rxjs.operators;
     
     const svg = document.querySelector('svg');
-    const message = document.querySelector('#message span');
+    const message = document.querySelector('#vb_monitor span');
     
     // display initial condition
     
@@ -8878,12 +8878,14 @@ document.addEventListener('DOMContentLoaded', function() {
       viewBoxList[0] = '' + (parseInt(viewBoxList[0]) - dx);
       viewBoxList[1] = '' + (parseInt(viewBoxList[1]) - dy);
       const viewBox = viewBoxList.join(' ');
-      svg.setAttribute('viewBox', viewBox);
-      message.textContent = viewBox;
+      if (!zoomLock) {
+          svg.setAttribute('viewBox', viewBox);
+          message.textContent = viewBox;
+      }
     };
     
     mousedrag$.subscribe(({ x, y }) => updateViewBoxMin(x, y));
-    
+
     const getEventPosition = ev => {
       let x, y;
       if (ev.offsetX) {
@@ -8924,9 +8926,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const scaledViewBox = [scaledMinX, scaledMinY, scaledWidth, scaledHeight].
       map(s => s.toFixed(2)).
       join(' ');
-    
+ 
       svg.setAttribute('viewBox', scaledViewBox);
       message.textContent = scaledViewBox;
+
     };
     
     svg.addEventListener('wheel', ev => {
@@ -8934,7 +8937,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const position = getEventPosition(ev);
       // console.log(position);
       const scale = Math.pow(scaleFactor, ev.deltaY < 0 ? 5 : -5);
-      zoomAtPoint(position, svg, scale);
+     // ズームロックされていなければ      
+      if (!zoomLock) {  // 
+          zoomAtPoint(position, svg, scale);
+      }
     });
 
 });
