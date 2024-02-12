@@ -9,7 +9,6 @@
     <script type="text/javascript" src="./lib/rxjs.js"></script>
     <script type="text/javascript" src="script.js"></script>
     <script type="text/javascript" src="./lib/prefecturesQuiz.js"></script>
-
   </head>
 
   <body>
@@ -45,7 +44,7 @@
         <div class="cnf-tgl">
           <input type="checkbox" id="zoom_lock">
           <label for="zoom_lock"></label>
-          <span class="tgl-name">ズームロック</span>
+          <span class="tgl-name">地図ロック</span>
         </div>
 
       </div>
@@ -53,14 +52,14 @@
 
     <div id="navi_area">
       <div id="navi_description">説明</div>
-      <div id="navi_option">ナビ</div>
+      <div id="navi_option">レベル選択</div>
       <div id="navi_message">メッセージ</div>
       <div id="navi_question">問題</div>
       <div id="navi_result">結果</div>
       <div id="navi_time">タイム</div>
       <div id="navi_btns">
-        <button class="navi-btn" type="button">スタート</button>
-        <button class="navi-btn" type="button">リセット</button>
+        <button class="navi-btn" id="navi_start" type="button">スタート</button>
+        <button class="navi-btn" id="navi_reset" type="button">リセット</button>
       </div>
     </div>
 

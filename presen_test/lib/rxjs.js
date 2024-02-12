@@ -8878,7 +8878,7 @@ document.addEventListener('DOMContentLoaded', function() {
       viewBoxList[0] = '' + (parseInt(viewBoxList[0]) - dx);
       viewBoxList[1] = '' + (parseInt(viewBoxList[1]) - dy);
       const viewBox = viewBoxList.join(' ');
-      if (!zoomLock) {
+      if (!mapZoomLock) {
           svg.setAttribute('viewBox', viewBox);
           message.textContent = viewBox;
       }
@@ -8938,7 +8938,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // console.log(position);
       const scale = Math.pow(scaleFactor, ev.deltaY < 0 ? 5 : -5);
      // ズームロックされていなければ      
-      if (!zoomLock) {  // 
+      if (!mapZoomLock) {  // 
           zoomAtPoint(position, svg, scale);
       }
     });

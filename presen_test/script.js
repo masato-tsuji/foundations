@@ -5,9 +5,9 @@ const prefInfos = [{"id":"pref01","area":"北海道","prefName":"北海道","tem
 
 
 /**
- * 
+ * 引数のidと一致する都道府県の情報を返す
  * @param {string} id - 都道府県を識別するための文字列 pref_xx
- * @returns {object} - 引数のidと一致する都道府県の情報
+ * @returns {object} - 一致した都道府県情報のオブジェクト
  */
 const getPrefInfo = id => {
     for (const pref of prefInfos) {
@@ -15,9 +15,32 @@ const getPrefInfo = id => {
     }
 }
 
-// グローバル変数宣言
-let zoomLock;
 
+/**
+ * マップ表示のViewBox（座標と縮尺）を設定しマップに反映する
+ * 引数が無い場合はズームと位置を沖縄移動の設定に合わせ調整する
+ * @param {Array} viewParams - viewBoxを設定する配列又は空を受け取る
+ */
+const setViewBox = viewParam => {
+    const svg = document.querySelector("#svg_japan");
+    const okinawa = document.querySelector("#pref47");
+    const tglOkinawa = document.querySelector("#okinawa_move");
+
+    if (Array.isArray(viewParam)) {
+
+    } else if (tglOkinawa.checked) {
+        okinawa.setAttribute("transform", "translate(400,-180)");
+        svg.setAttribute("viewBox", "-325 -4 1300 1100");
+    } else {
+        okinawa.setAttribute("transform", "translate(0,0)");
+        svg.setAttribute("viewBox", "-440 0 1600 1350");
+    }
+}
+
+
+
+// グローバル変数宣言
+let mapZoomLock;
 
 
 //DOMツリーが出来上がったら実行※画像読み込み前
@@ -31,9 +54,18 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(elm.innerHTML);
 
             // 都道府県を知ろう
-            if (elm.id === "game_01") {
+            if (elm.id === "btn_game01") {
                 
             }
+            
+            // 都道府県当てクイズ
+            if (elm.id === "btn_game02") {
+
+                const quiz = prefecturesQuiz();
+                
+                quiz();
+            }
+            //prefecturesQuiz
             
         });
     });   
@@ -50,15 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // 沖縄移動
             if (elm.id === "okinawa_move") {
-                const svg = document.querySelector("#svg_japan");
-                const okinawa = document.querySelector("#pref47");
-                if (elm.checked) {
-                    okinawa.setAttribute("transform", "translate(400,-180)");
-                    svg.setAttribute("viewBox", "-325 -4 1300 1100");
-                } else {
-                    okinawa.setAttribute("transform", "translate(0,0)");
-                    svg.setAttribute("viewBox", "-440 0 1600 1350");
-                }
+                setViewBox();
             }
 
             // 知名度UP
@@ -68,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // ズームロック(rxjs.jsにて変数使用)
             if (elm.id === "zoom_lock") {
-                zoomLock = elm.checked;
+                mapZoomLock = elm.checked;
             }
             
         });
