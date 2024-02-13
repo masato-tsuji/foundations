@@ -40,7 +40,7 @@ body {
     box-shadow: 0px 0px 0px 5px #d1f5a8;
     border: dashed 2px white;
     padding: 0.2em 0.5em;
-    margin-top: 20px;
+    margin-bottom: 20px;
     color: #180474;
     font-size: 20px;
     text-align: center;
@@ -57,6 +57,10 @@ body {
     cursor: pointer;
 }
 
+/* コンフィグ エリア */
+#config_area {
+    margin-top: 40px;
+}
 
 /* トグルスイッチ */
 .cnf-tgl {
