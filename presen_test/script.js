@@ -32,11 +32,11 @@ const setViewBox = viewParam => {
     if (Array.isArray(viewParam)) {
 
     } else if (tglOkinawa.checked) {
-        okinawa.setAttribute("transform", "translate(400,-180)");
-        svg.setAttribute("viewBox", "-325 -4 1300 1100");
+        okinawa.setAttribute("transform", "translate(540,-250)");
+        svg.setAttribute("viewBox", "-450 -20 1935 1637");
     } else {
         okinawa.setAttribute("transform", "translate(0,0)");
-        svg.setAttribute("viewBox", "-440 0 1600 1350");
+        svg.setAttribute("viewBox", "-700 0 2380 2010");
     }
 }
 

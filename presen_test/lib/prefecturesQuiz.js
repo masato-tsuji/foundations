@@ -36,13 +36,13 @@ const prefecturesQuiz = () => {
         nvDesc.innerHTML = "出題される都道府県の🗾場所を\nクリックしてください"
         nvOpt.innerHTML = "<input id='radio_normal' name='nv_opt' type='radio'>ノーマル\
             <input id='radio_time' name='nv_opt' type='radio'>タイムトライアル";
-        const normalMsg = "";
-        const timetryalMsg = "";
+        const normalMsg = "スタートボタンを押す度に出題されます";
+        const timetryalMsg = "47都道府県全て正解するタイムを計測します";
         nvOpt.addEventListener('change', (event) => {
             if (event.target.id === "radio_normal") {
-                nvMsg.innerHTML = "";
+                nvMsg.innerHTML = normalMsg;
             } else if (event.target.id === "radio_time") {
-                nvMsg.innerHTML = "";
+                nvMsg.innerHTML = timetryalMsg;
             }
         });
 
