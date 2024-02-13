@@ -14,6 +14,7 @@ const prefecturesQuiz = () => {
     const nvReset = document.querySelector("#navi_reset");
     const tglOkinawa = document.querySelector("#okinawa_move");
     const tglMapLock = document.querySelector("#map_lock");
+    const recArea = document.querySelector("#record_area");
 
     // 出題用配列
     const prefDatas = prefInfos.map(pref => ({[pref["id"]]: pref["prefName"]}));
@@ -24,27 +25,40 @@ const prefecturesQuiz = () => {
     // スタート、リセットボタン
 
 
-
-
     // 初期化
     const initialize = () => {
         tglOkinawa.checked = true;
         setViewBox();
-        tglMapLock.checked = true;
-        tglMapLock.disabled = true;
+        // tglMapLock.checked = true;
+        !tglMapLock.checked ? tglMapLock.click(): null;
+        recArea.style.display = "block";
         nvArea.style.display = "block";
         nvDesc.innerHTML = "出題される都道府県の🗾場所を\nクリックしてください"
+        nvOpt.innerHTML = "<input id='radio_normal' name='nv_opt' type='radio'>ノーマル\
+            <input id='radio_time' name='nv_opt' type='radio'>タイムトライアル";
+        const normalMsg = "";
+        const timetryalMsg = "";
+        nvOpt.addEventListener('change', (event) => {
+            if (event.target.id === "radio_normal") {
+                nvMsg.innerHTML = "";
+            } else if (event.target.id === "radio_time") {
+                nvMsg.innerHTML = "";
+            }
+        });
+
+
+
     }
 
-    // クイズ開始
+    // クイズ出題
     const execQuiz = () => {
-        // while (!resetQuiz) {
-        // }
+
         inQuiz = true;
         nvRes.innerHTML = "";
         const rnd = Math.floor(Math.random() * prefDatas.length);
         choicePrefId = Object.keys(prefDatas[rnd])[0];
         nvQuiz.innerHTML = prefDatas[rnd][choicePrefId];
+
 
 
     }
@@ -55,9 +69,9 @@ const prefecturesQuiz = () => {
         elm.addEventListener("click", (event) => {
             let msg;
             if (choicePrefId === elm.id) {
-                msg = `正解です${rndChoice(["🎉", "🎊", "🎈"])}`;
+                msg = `正解${rndChoice(["🎉", "🎊", "🎈", "👍", "😊"])}`;
             } else {
-                msg = "不正解です😱";
+                msg = `不正解${rndChoice(["😱", "😣", "😵", "🙈", "👻"])}`;
             }
             nvRes.innerHTML = msg;
         });
