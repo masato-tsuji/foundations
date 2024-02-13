@@ -13,6 +13,7 @@ const prefecturesQuiz = () => {
     const nvStart = document.querySelector("#navi_start");
     const nvReset = document.querySelector("#navi_reset");
     const tglOkinawa = document.querySelector("#okinawa_move");
+    const tglMapLock = document.querySelector("#map_lock");
 
     // 出題用配列
     const prefDatas = prefInfos.map(pref => ({[pref["id"]]: pref["prefName"]}));
@@ -25,15 +26,17 @@ const prefecturesQuiz = () => {
 
 
 
-    // ＄初期化（表示リセット）
+    // 初期化
     const initialize = () => {
         tglOkinawa.checked = true;
         setViewBox();
+        tglMapLock.checked = true;
+        tglMapLock.disabled = true;
         nvArea.style.display = "block";
         nvDesc.innerHTML = "出題される都道府県の🗾場所を\nクリックしてください"
     }
 
-    // ＄クイズ開始
+    // クイズ開始
     const execQuiz = () => {
         // while (!resetQuiz) {
         // }
@@ -46,13 +49,13 @@ const prefecturesQuiz = () => {
 
     }
 
-    // ＄県クリック検出
+    // 都道府県クリック検出
     const prefElms = document.querySelectorAll(".jp-pref")
     .forEach(elm => {
         elm.addEventListener("click", (event) => {
             let msg;
             if (choicePrefId === elm.id) {
-                msg = "正解です🎉";
+                msg = `正解です${rndChoice(["🎉", "🎊", "🎈"])}`;
             } else {
                 msg = "不正解です😱";
             }

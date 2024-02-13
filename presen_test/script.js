@@ -39,7 +39,14 @@ const setViewBox = viewParam => {
     }
 }
 
-
+/**
+ * 
+ * @param {Array} array 
+ * @returns 
+ */
+const rndChoice = array => {
+    return array[Math.floor(Math.random() * array.length)];
+}
 
 
 //DOMツリーが出来上がったら実行※画像読み込み前
@@ -89,8 +96,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.querySelector("#pref24").style.fill = "#ff11c7";
             }
             
-            // ズームロック(rxjs.jsにて変数使用)
-            if (elm.id === "zoom_lock") {
+            // 地図ロック(rxjs.jsにて変数使用)
+            if (elm.id === "map_lock") {
                 mapZoomLock = elm.checked;
             }
             
