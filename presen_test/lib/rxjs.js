@@ -8936,8 +8936,8 @@ document.addEventListener('DOMContentLoaded', function() {
       ev.preventDefault();
       const position = getEventPosition(ev);
       // console.log(position);
-      const scale = Math.pow(scaleFactor, ev.deltaY < 0 ? 5 : -5);
-     // ズームロックされていなければ      
+      const scale = Math.pow(scaleFactor, ev.deltaY < 0 ? -5 : 5);
+     // ズームロックされていなければ
       if (!mapZoomLock) {  // 
           zoomAtPoint(position, svg, scale);
       }

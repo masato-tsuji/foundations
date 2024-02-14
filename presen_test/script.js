@@ -19,6 +19,18 @@ const getPrefInfo = id => {
     }
 }
 
+
+/**
+ * 
+ */
+let mapLock = (locked) => {
+    retuen = () => {
+        return locked;
+    };
+}
+
+
+
 /**
  * マップ表示のViewBox（座標と縮尺）を設定しマップに反映する
  * 引数が無い場合はズームと位置を沖縄移動の設定に合わせ調整する
@@ -51,8 +63,20 @@ const rndChoice = array => {
 
 
 //DOMツリーが出来上がったら実行※画像読み込み前
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM tree created");
+
+
+    
+    window.addEventListener("resize", () => {
+        // console.log(window.innerWidth , window.innerHeight );
+
+
+
+
+    });
+
+
 
     // メニュークリック
     const menuElms = document.querySelectorAll(".menu-btn")
@@ -81,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cnfElms = document.querySelectorAll(".cnf-tgl > input")
     .forEach(elm => {
         elm.addEventListener("change", (event) => {
+
             // console.log(elm.id);
             // 県名表示
             if (elm.id === "disp_pref_name") {
@@ -91,15 +116,16 @@ document.addEventListener('DOMContentLoaded', function() {
             if (elm.id === "okinawa_move") {
                 setViewBox();
             }
-
-            // 知名度UP
-            if (elm.id === "disp_pref_highlite") {
-                document.querySelector("#pref_24").style.fill = "#ff11c7";
-            }
             
             // 地図ロック(rxjs.jsにて変数使用)
             if (elm.id === "map_lock") {
                 mapZoomLock = elm.checked;
+            }
+
+            // 知名度UP
+            if (elm.id === "disp_pref_highlite") {
+                document.querySelector("#pref_24").style.fill = "#ff11c7";
+                console.log("chenged");
             }
             
         });

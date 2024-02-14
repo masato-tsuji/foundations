@@ -2,10 +2,10 @@
 * 命名規則 - id名はxx_xxxx class名はxx-xxxx
 */
 
-/* degub時表示させる */
+/* debug用 通常非表示 */
 #vb_monitor {
-    display: none;
-    font-size: 12px;
+    /* display: none; */
+    position: absolute;
 }
 
 /* 共通 */

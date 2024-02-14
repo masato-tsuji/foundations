@@ -198,7 +198,7 @@ const accumulate = num => {
         num += accumNum;
         return accum;
     };
-    accum.value = () => num;  // 関数にプロパティを持たせる
+    accum.value = () => num;  // 関数にメソッドを持たせる
     return accum;
 };
 

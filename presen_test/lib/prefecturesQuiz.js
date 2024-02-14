@@ -34,6 +34,7 @@ const prefecturesQuiz = () => {
         recArea.style.display = "block";
         nvArea.style.display = "block";
         nvDesc.innerHTML = "出題される都道府県の🗾場所を\nクリックしてください"
+
         nvOpt.innerHTML = "<input id='radio_normal' name='nv_opt' type='radio'>ノーマル\
             <input id='radio_time' name='nv_opt' type='radio'>タイムトライアル";
         const normalMsg = "スタートボタンを押す度に出題されます";
@@ -45,6 +46,11 @@ const prefecturesQuiz = () => {
                 nvMsg.innerHTML = timetryalMsg;
             }
         });
+        //checkedではイベント発火しないのでclickイベントで
+        nvOpt.childNodes[0].click();
+
+
+
 
 
 

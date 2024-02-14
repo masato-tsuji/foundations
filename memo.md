@@ -68,6 +68,12 @@ https://ics.media/entry/200825/#for-in%E6%96%87%E3%82%92foreach%E3%83%A1%E3%82%B
 ### ▼スプレッド構文はECMAScript 2015（ES6）から追加された機能
 ...array
 
+### ▼changeイベントでの注意
+change イベントは <input>, <select>, <textarea> 要素において、
+ユーザーが要素の値を変更したときに発行されます。 input イベントとは異なり、 
+change イベントは要素の値 (value) が変更されるたびに発生するとは限りません。
+
+
 ### ▼2次元配列を1次元に
 ````JS
 arr = [[1, 2], [3, 4], [5, 6]]
