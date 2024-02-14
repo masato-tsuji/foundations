@@ -27,9 +27,8 @@ const prefecturesQuiz = () => {
 
     // 初期化
     const initialize = () => {
-        tglOkinawa.checked = true;
-        setViewBox();
-        // tglMapLock.checked = true;
+
+        !tglOkinawa.checked ? tglOkinawa.click(): setViewBox();
         !tglMapLock.checked ? tglMapLock.click(): null;
         recArea.style.display = "block";
         nvArea.style.display = "block";
@@ -42,17 +41,14 @@ const prefecturesQuiz = () => {
         nvOpt.addEventListener('change', (event) => {
             if (event.target.id === "radio_normal") {
                 nvMsg.innerHTML = normalMsg;
+                nvTime.style.display = "none";
             } else if (event.target.id === "radio_time") {
                 nvMsg.innerHTML = timetryalMsg;
+                nvTime.innerHTML = "0:00";
+                nvTime.style.display = "block";
             }
         });
-        //checkedではイベント発火しないのでclickイベントで
         nvOpt.childNodes[0].click();
-
-
-
-
-
 
     }
 
@@ -65,8 +61,34 @@ const prefecturesQuiz = () => {
         choicePrefId = Object.keys(prefDatas[rnd])[0];
         nvQuiz.innerHTML = prefDatas[rnd][choicePrefId];
 
+    }
 
+    // タイムトライアル
 
+    // // 開始
+    // timeoutID = setTimeout(displayTime, 10);
+    // // 停止
+    // clearTimeout(timeoutID);
+
+    // Date.now();  // で都度差分を見ていけば経過時間が算出できる
+    // // フォーマットする場合
+    // new Date(Date.now());
+
+    const timer = () => {
+        let cnt = 0;
+        let timeoutID;
+        const execTimer = () => {
+            timeoutID = setTimeout(execTimer, 1000);
+            ++cnt;
+            nvTime.innerHTML = `${Math.floor(cnt / 60)}:${("0" + (cnt % 60)).toString().slice(-2)}`;
+        }
+        execTimer.start = () => execTimer();
+        execTimer.stop = () => {
+            clearTimeout(timeoutID);
+            nvTime.innerHTML = "0:00";
+            cnt = 0;
+        }
+        return execTimer;
     }
 
     // 都道府県クリック検出
@@ -89,13 +111,26 @@ const prefecturesQuiz = () => {
 
     // ＄次の問題
 
+    const quizTimer = timer();
+
     // スタートボタン
     nvStart.addEventListener("click", (event) => {
         execQuiz();
-    });
+        if (document.querySelector("#radio_time").checked) {
+            console.log("time!");
+            quizTimer.start();
+            nvStart.disabled = true;
+        }
 
+    });
+    
     // ＄リセットボタンで初期化
-    const reset = () => resetQuiz = true;
+    nvReset.addEventListener("click", (event) => {
+        quizTimer.stop();
+        nvStart.disabled = false;
+    });
+    
+    // const reset = () => quizTimer.stop();    //resetQuiz = true;
 
 
     return initialize;

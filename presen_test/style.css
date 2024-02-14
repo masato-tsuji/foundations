@@ -18,7 +18,7 @@ body {
 /* --- メニューエリア --- */
 #menu_area {
     position:  absolute;
-    top: 10%;
+    top: 8%;
     left: 3%;
     height: 470px;
     width: 220px;
@@ -117,7 +117,7 @@ body {
     display: none;
     position:  absolute;
     text-align: center;
-    top: 10%;
+    top: 8%;
     left: 22%;
     /* height: 470px; */
     /* width: 220px; */
@@ -132,6 +132,10 @@ body {
     width: 300px;
     height: 70px;
     /* background-color: skyblue; */
+}
+
+#navi_option {
+    height: 40px;
 }
 
 #navi_message {
@@ -157,7 +161,7 @@ body {
 
 #navi_result {
     width: 300px;
-    height: 30px;
+    height: 40px;
     font-size: 28px;
     /* font-weight: bold; */
     /* color: blue; */
@@ -166,11 +170,16 @@ body {
     /* background-color: skyblue; */
 }
 
+#navi_time {
+    margin-top: 20px;
+}
+
 #navi_buttons {
-    margin-top: 30px;
+    margin-top: 20px;
     text-align: center;
     /* background-color: skyblue; */
 }
+
 
 /* --- レコードエリア --- */
 #record_area {
