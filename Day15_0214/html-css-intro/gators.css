@@ -1,0 +1,25 @@
+
+
+
+.area {
+    /* position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0; */
+    margin: auto;
+    background-color: green;
+    /* vertical-align: middle; */
+    width: 200px;
+    height: 200px;
+    text-align: center;
+}
+
+#croco {
+    position: relative;
+    background-color: blue;
+    margin: auto;
+    /* vertical-align: middle; */
+    width: 300px;
+    text-align: center;
+}

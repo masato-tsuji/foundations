@@ -18,16 +18,10 @@ const prefecturesQuiz = () => {
 
     // 出題用配列
     const prefDatas = prefInfos.map(pref => ({[pref["id"]]: pref["prefName"]}));
-    let inQuiz = false;
-    let resetQuiz = false;
     let choicePrefId = "";
-
-    // スタート、リセットボタン
-
 
     // 初期化
     const initialize = () => {
-
         !tglOkinawa.checked ? tglOkinawa.click(): setViewBox();
         !tglMapLock.checked ? tglMapLock.click(): null;
         recArea.style.display = "block";
@@ -48,19 +42,15 @@ const prefecturesQuiz = () => {
                 nvTime.style.display = "block";
             }
         });
-        nvOpt.childNodes[0].click();
-
+        nvOpt.childNodes[0].click();    // default
     }
 
     // クイズ出題
     const execQuiz = () => {
-
-        inQuiz = true;
-        nvRes.innerHTML = "";
-        const rnd = Math.floor(Math.random() * prefDatas.length);
-        choicePrefId = Object.keys(prefDatas[rnd])[0];
-        nvQuiz.innerHTML = prefDatas[rnd][choicePrefId];
-
+        nvRes.innerText = "";
+        const obj = rndChoice(prefDatas); // script.jsの関数を使用
+        choicePrefId = Object.keys(obj)[0]; 
+        nvQuiz.innerText = Object.values(obj)[0];
     }
 
     // タイムトライアル
@@ -74,18 +64,30 @@ const prefecturesQuiz = () => {
     // // フォーマットする場合
     // new Date(Date.now());
 
-    const timer = () => {
+
+    /**
+     * 
+     * @param {*} elm - 経過時刻を表示させる要素
+     * @returns タイマーを実行する関数
+     */
+    const timer = (elm) => {
         let cnt = 0;
         let timeoutID;
-        const execTimer = () => {
-            timeoutID = setTimeout(execTimer, 1000);
+        const counter = () => {
             ++cnt;
-            nvTime.innerHTML = `${Math.floor(cnt / 60)}:${("0" + (cnt % 60)).toString().slice(-2)}`;
+            // nvTime.innerHTML = `${Math.floor(cnt / 60)}:${("0" + (cnt % 60)).toString().slice(-2)}`;
+            elm.innerText = `${Math.floor(cnt / 60)}:${("0" + (cnt % 60)).toString().slice(-2)}`;
+            execTimer();
+        }
+        const execTimer = () => {
+            timeoutID = setTimeout(counter, 1000);
         }
         execTimer.start = () => execTimer();
         execTimer.stop = () => {
             clearTimeout(timeoutID);
-            nvTime.innerHTML = "0:00";
+        }
+        execTimer.reset = () => {
+            execTimer.stop();
             cnt = 0;
         }
         return execTimer;
@@ -111,7 +113,7 @@ const prefecturesQuiz = () => {
 
     // ＄次の問題
 
-    const quizTimer = timer();
+    const quizTimer = timer(nvTime);
 
     // スタートボタン
     nvStart.addEventListener("click", (event) => {
@@ -121,17 +123,13 @@ const prefecturesQuiz = () => {
             quizTimer.start();
             nvStart.disabled = true;
         }
-
     });
     
-    // ＄リセットボタンで初期化
+    // ＄リセットボタン
     nvReset.addEventListener("click", (event) => {
-        quizTimer.stop();
+        quizTimer.reset();
         nvStart.disabled = false;
     });
-    
-    // const reset = () => quizTimer.stop();    //resetQuiz = true;
-
 
     return initialize;
 }
