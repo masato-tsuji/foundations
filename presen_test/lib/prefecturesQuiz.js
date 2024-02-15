@@ -32,17 +32,37 @@ const prefecturesQuiz = () => {
             <input id='radio_time' name='nv_opt' type='radio'>タイムトライアル";
         const normalMsg = "スタートボタンを押す度に出題されます";
         const timetryalMsg = "47都道府県全て正解するタイムを計測します";
-        nvOpt.addEventListener('change', (event) => {
-            if (event.target.id === "radio_normal") {
+        nvOpt.addEventListener('change', (e) => {
+            if (e.target.id === "radio_normal") {
                 nvMsg.innerHTML = normalMsg;
                 nvTime.style.display = "none";
-            } else if (event.target.id === "radio_time") {
+            } else if (e.target.id === "radio_time") {
                 nvMsg.innerHTML = timetryalMsg;
                 nvTime.innerHTML = "0:00";
                 nvTime.style.display = "block";
             }
         });
         nvOpt.childNodes[0].click();    // default
+    }
+
+    /**
+     * 出力用の要素を受け取り経過時間をフォーマットして表示させる
+     * @param {object} elm - 経過時刻を表示させる要素を受け取る
+     * @returns タイマーを実行する関数execTimer
+     */
+    const timer = (elm) => {
+        let cnt = 0;
+        let timeoutID;
+        const counter = () => {
+            ++cnt;
+            elm.innerText = `${Math.floor(cnt / 60)}:${("0" + (cnt % 60)).toString().slice(-2)}`;
+            execTimer();
+        }
+        const execTimer = () => timeoutID = setTimeout(counter, 1000);
+        execTimer.start = () => execTimer();
+        execTimer.stop = () => clearTimeout(timeoutID);
+        execTimer.reset = () => execTimer.stop(); cnt = 0;
+        return execTimer;
     }
 
     // クイズ出題
@@ -53,57 +73,58 @@ const prefecturesQuiz = () => {
         nvQuiz.innerText = Object.values(obj)[0];
     }
 
-    // タイムトライアル
-
-    // // 開始
-    // timeoutID = setTimeout(displayTime, 10);
-    // // 停止
-    // clearTimeout(timeoutID);
-
-    // Date.now();  // で都度差分を見ていけば経過時間が算出できる
-    // // フォーマットする場合
-    // new Date(Date.now());
-
-
-    /**
-     * 
-     * @param {*} elm - 経過時刻を表示させる要素
-     * @returns タイマーを実行する関数
-     */
-    const timer = (elm) => {
-        let cnt = 0;
-        let timeoutID;
-        const counter = () => {
-            ++cnt;
-            // nvTime.innerHTML = `${Math.floor(cnt / 60)}:${("0" + (cnt % 60)).toString().slice(-2)}`;
-            elm.innerText = `${Math.floor(cnt / 60)}:${("0" + (cnt % 60)).toString().slice(-2)}`;
-            execTimer();
+    // ノーマルモード 回答チェック
+    const chkNormalQuiz = (elm) => {
+        let msg;
+        if (choicePrefId === elm.id) {
+            msg = `正解${rndChoice(["🎉", "🎊", "🎈", "👍", "😊"])}`;
+        } else {
+            msg = `不正解${rndChoice(["😱", "😣", "😵", "🙈", "👻"])}`;
         }
-        const execTimer = () => {
-            timeoutID = setTimeout(counter, 1000);
-        }
-        execTimer.start = () => execTimer();
-        execTimer.stop = () => {
-            clearTimeout(timeoutID);
-        }
-        execTimer.reset = () => {
-            execTimer.stop();
-            cnt = 0;
-        }
-        return execTimer;
+        nvRes.innerHTML = msg;
     }
+
+    // タイムトライアル 回答チェック
+    const chkTimeQuiz = (elm) => {
+
+
+        // 結果表示　正解ならすぐ消す
+        let msg;
+        if (choicePrefId === elm.id) {
+            msg = `正解${rndChoice(["🎉", "🎊", "🎈", "👍", "😊"])}`;
+        } else {
+            msg = `不正解${rndChoice(["😱", "😣", "😵", "🙈", "👻"])}`;
+        }
+        nvRes.innerHTML = msg;
+
+
+        // 進捗チェック
+
+
+        // 継続なら出題した県を配列から抜ぬいてカウントアップ
+
+
+        // 次の出題
+
+
+        // 記録チェック
+
+
+        // 記録
+
+
+    }
+
 
     // 都道府県クリック検出
     const prefElms = document.querySelectorAll(".jp-pref")
     .forEach(elm => {
-        elm.addEventListener("click", (event) => {
-            let msg;
-            if (choicePrefId === elm.id) {
-                msg = `正解${rndChoice(["🎉", "🎊", "🎈", "👍", "😊"])}`;
-            } else {
-                msg = `不正解${rndChoice(["😱", "😣", "😵", "🙈", "👻"])}`;
+        elm.addEventListener("click", (e) => {
+            if (document.querySelector("#radio_normal").checked) {
+                chkNormalQuiz(elm);
+            } else if (document.querySelector("#radio_time").checked) {
+                chkTimeQuiz(elm);
             }
-            nvRes.innerHTML = msg;
         });
     });
 
@@ -116,17 +137,18 @@ const prefecturesQuiz = () => {
     const quizTimer = timer(nvTime);
 
     // スタートボタン
-    nvStart.addEventListener("click", (event) => {
+    nvStart.addEventListener("click", (e) => {
         execQuiz();
         if (document.querySelector("#radio_time").checked) {
-            console.log("time!");
             quizTimer.start();
             nvStart.disabled = true;
+            //カウント開始
+            
         }
     });
     
     // ＄リセットボタン
-    nvReset.addEventListener("click", (event) => {
+    nvReset.addEventListener("click", (e) => {
         quizTimer.reset();
         nvStart.disabled = false;
     });
