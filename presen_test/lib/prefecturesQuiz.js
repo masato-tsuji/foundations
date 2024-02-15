@@ -10,6 +10,7 @@ const prefecturesQuiz = () => {
     const nvQuiz = document.querySelector("#navi_question");
     const nvRes = document.querySelector("#navi_result");
     const nvCnt = document.querySelector("#navi_count");
+    const nvDnm = document.querySelector("#navi_denom");
     const nvTime = document.querySelector("#navi_time");
     const nvStart = document.querySelector("#navi_start");
     const nvReset = document.querySelector("#navi_reset");
@@ -27,7 +28,7 @@ const prefecturesQuiz = () => {
         !tglMapLock.checked ? tglMapLock.click(): null;
         recArea.style.display = "block";
         nvArea.style.display = "block";
-        nvDesc.innerHTML = "出題される都道府県の🗾場所を\nクリックしてください"
+        nvDesc.innerText = "出題される都道府県の🗾場所を\nクリックしてください"
 
         nvOpt.innerHTML = "<input id='radio_normal' name='nv_opt' type='radio'>ノーマル\
             <input id='radio_time' name='nv_opt' type='radio'>タイムトライアル";
@@ -35,15 +36,24 @@ const prefecturesQuiz = () => {
         const timetryalMsg = "47都道府県全て正解するタイムを<br>計測します";
         nvOpt.addEventListener('change', (e) => {
             if (e.target.id === "radio_normal") {
-                nvMsg.innerHTML = normalMsg;
+                nvMsg.innerText = normalMsg;
+                nvCnt.style.display = "none";
+                nvDnm.style.display = "none";
                 nvTime.style.display = "none";
             } else if (e.target.id === "radio_time") {
-                nvMsg.innerHTML = timetryalMsg;
-                nvTime.innerHTML = "0:00";
+                nvMsg.innerText = timetryalMsg;
+                nvCnt.innerText = "0";
+                nvCnt.style.display = "block";
+                nvDnm.innerText = "/47";
+                nvDnm.style.display = "block";
+                nvTime.innerText = "0:00";
                 nvTime.style.display = "block";
             }
         });
         nvOpt.childNodes[0].click();    // default
+        nvQuiz.innerText = "問題";
+        nvRes.innerText = "";
+        nvStart.disabled = false;
     }
 
     /**
@@ -54,17 +64,37 @@ const prefecturesQuiz = () => {
     const timer = (elm) => {
         let cnt = 0;
         let timeoutID;
-        const counter = () => {
+        const timeCnt = () => {
             ++cnt;
             elm.innerText = `${Math.floor(cnt / 60)}:${("0" + (cnt % 60)).toString().slice(-2)}`;
-            execTimer();
         }
-        const execTimer = () => timeoutID = setTimeout(counter, 1000);
+        const execTimer = () => timeoutID = setInterval(timeCnt, 1000);
         execTimer.start = () => execTimer();
-        execTimer.stop = () => clearTimeout(timeoutID);
-        execTimer.reset = () => execTimer.stop(); cnt = 0;
+        execTimer.stop = () => clearInterval(timeoutID);
+        execTimer.reset = () => {
+            execTimer.stop();
+            cnt = 0;
+            elm.innerText = "0:00";
+        }
         return execTimer;
     }
+    
+    const counter = (elm) => {
+        let cnt = 0;
+        const accum = () => {
+            cnt++;
+            elm.innerText = cnt;
+            return cnt;
+        }
+        accum.value =  () => cnt;
+        accum.up = () => accum();
+        accum.reset = () => cnt = 0;
+        return accum;
+    }
+
+
+
+
 
     // クイズ出題
     const execQuiz = () => {
@@ -87,31 +117,33 @@ const prefecturesQuiz = () => {
 
     // タイムトライアル 回答チェック
     const chkTimeQuiz = (elm) => {
-
+        const maxPref = 47;
 
         // 結果表示　正解ならすぐ消す
         let msg;
         if (choicePrefId === elm.id) {
-            msg = `正解${rndChoice(["🎉", "🎊", "🎈", "👍", "😊"])}`;
+            // msg = `正解${rndChoice(["🎉", "🎊", "🎈", "👍", "😊"])}`;
+            quizCounter.up();
         } else {
-            msg = `不正解${rndChoice(["😱", "😣", "😵", "🙈", "👻"])}`;
+            // msg = `不正解${rndChoice(["😱", "😣", "😵", "🙈", "👻"])}`;
         }
-        nvRes.innerHTML = msg;
-
 
         // 進捗チェック
-
-
-        // 継続なら出題した県を配列から抜ぬいてカウントアップ
-
-
-        // 次の出題
-
-
+        if (quizCounter.value() < 3) {
+            execQuiz();
+            return;
+        }
+        
+        quizTimer.stop();
+        msg = `クリアしました${rndChoice(["🎉", "🎊", "🚀", "🤗", "💮"])}`;
+        nvRes.innerText = msg;
+    
         // 記録チェック
 
 
         // 記録
+
+
 
 
     }
@@ -131,23 +163,22 @@ const prefecturesQuiz = () => {
 
 
     const quizTimer = timer(nvTime);
+    const quizCounter = counter(nvCnt);
 
     // スタートボタン
     nvStart.addEventListener("click", (e) => {
         execQuiz();
         if (document.querySelector("#radio_time").checked) {
-            quizTimer.start();
             nvStart.disabled = true;
-            //カウント開始
-
+            quizCounter.reset();
+            quizTimer.start();
         }
     });
     
     // ＄リセットボタン
     nvReset.addEventListener("click", (e) => {
         quizTimer.reset();
-        nvStart.disabled = false;
-        nvTime.innerHTML = "0:00";
+        initialize();
     });
 
     return initialize;

@@ -1,5 +1,5 @@
 /* 
-* 命名規則 - id名はxx_xxxx class名はxx-xxxx
+* 命名規則 - class名はkebab, id名はsnake 
 */
 
 /* debug用 通常非表示 */
@@ -174,17 +174,34 @@ body {
     /* background-color: skyblue; */
 }
 
+.side-by-side {
+    display: inline-flex;
+    /* height: 40px; */
+    text-align: center;
+    font-size: 24px;
+    padding-top: 15px;
+}
+
 #navi_count {
-    display: table-cell;
-    margin-top: 20px;
+    vertical-align: middle;
+    width: 50px;
+    text-align: right;
+    margin-right: 5px;
+    font-size: 26;
+    font-weight: bold;}
+
+#navi_denom {
+    vertical-align: middle;
+    text-align: left;
+    width: 60px;
 }
 
 #navi_time {
-    margin-top: 20px;
+    width: 100px;
 }
 
 #navi_buttons {
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: center;
     /* background-color: skyblue; */
 }
