@@ -135,18 +135,20 @@ body {
 }
 
 #navi_option {
-    height: 40px;
+    height: 35px;
+    padding-top: 10px;
 }
 
 #navi_message {
+    display: table-cell;
     width: 300px;
     height: 60px;
     /* margin-top: 10px; */
-    margin: auto;
+    /* margin: auto; */
     vertical-align: middle;
-    padding-top: 10px;
+    /* padding-top: 10px; */
     /* background-color: skyblue; */
-    font-size: 14px;
+    font-size: 16px;
 }
 
 #navi_question {
@@ -170,6 +172,11 @@ body {
     text-align: center;
     margin-top: 10px;
     /* background-color: skyblue; */
+}
+
+#navi_count {
+    display: table-cell;
+    margin-top: 20px;
 }
 
 #navi_time {

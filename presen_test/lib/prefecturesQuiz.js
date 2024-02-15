@@ -9,6 +9,7 @@ const prefecturesQuiz = () => {
     const nvMsg = document.querySelector("#navi_message");
     const nvQuiz = document.querySelector("#navi_question");
     const nvRes = document.querySelector("#navi_result");
+    const nvCnt = document.querySelector("#navi_count");
     const nvTime = document.querySelector("#navi_time");
     const nvStart = document.querySelector("#navi_start");
     const nvReset = document.querySelector("#navi_reset");
@@ -31,7 +32,7 @@ const prefecturesQuiz = () => {
         nvOpt.innerHTML = "<input id='radio_normal' name='nv_opt' type='radio'>ノーマル\
             <input id='radio_time' name='nv_opt' type='radio'>タイムトライアル";
         const normalMsg = "スタートボタンを押す度に出題されます";
-        const timetryalMsg = "47都道府県全て正解するタイムを計測します";
+        const timetryalMsg = "47都道府県全て正解するタイムを<br>計測します";
         nvOpt.addEventListener('change', (e) => {
             if (e.target.id === "radio_normal") {
                 nvMsg.innerHTML = normalMsg;
@@ -128,11 +129,6 @@ const prefecturesQuiz = () => {
         });
     });
 
-    // ＄判定して結果表示
-
-    // ＄数秒待機
-
-    // ＄次の問題
 
     const quizTimer = timer(nvTime);
 
@@ -143,7 +139,7 @@ const prefecturesQuiz = () => {
             quizTimer.start();
             nvStart.disabled = true;
             //カウント開始
-            
+
         }
     });
     
@@ -151,6 +147,7 @@ const prefecturesQuiz = () => {
     nvReset.addEventListener("click", (e) => {
         quizTimer.reset();
         nvStart.disabled = false;
+        nvTime.innerHTML = "0:00";
     });
 
     return initialize;

@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // メニュークリック
     const menuElms = document.querySelectorAll(".menu-btn")
-    .forEach(elm => {
+    .forEach( elm => {
         elm.addEventListener("click", (event) => {
             console.log(elm.innerHTML);
 
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // オプション設定トグルイベント
     const cnfElms = document.querySelectorAll(".cnf-tgl > input")
-    .forEach(elm => {
+    .forEach( elm => {
         elm.addEventListener("change", (event) => {
 
             // console.log(elm.id);
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 各県クリックイベント
     const prefElms = document.querySelectorAll(".jp-pref")
-    .forEach(elm => {
+    .forEach( elm => {
         elm.addEventListener("click", (event) => {
             // console.log(prefInfo.id[elm.id].prefName);
             console.log(getPrefInfo(elm.id).prefName);
