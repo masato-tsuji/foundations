@@ -18,46 +18,88 @@ const prefecturesQuiz = () => {
     const tglMapLock = document.querySelector("#map_lock");
     const recArea = document.querySelector("#record_area");
 
+    const defaultQuiz = "問題";
+
     // 出題用配列
     const prefDatas = prefInfos.map(pref => ({[pref["id"]]: pref["prefName"]}));
+    // console.log(prefDatas);
     let choicePrefId = "";
+
+    //出題用の配列
+    //const prefDatas = prefInfos.map(pref => ({[pref["id"]]: pref["prefName"]}));
+    const prefsData = () => {
+        let prefsArray = [];
+        let choicedPref;
+        prefsData.makePrefs = (childMode = false) => {
+            if (!childMode) {
+                prefsArray = prefInfos.map(pref => ({[pref["id"]]: pref["prefName"]}));
+            } else {
+                prefsArray = prefInfos.map(pref => ({[pref["id"]]: pref["prefHiragana"]}));
+            }
+        }
+        prefsData.getData = () => prefsArray;
+        prefsData.choicedPref = "";
+        prefsData.deletePref = () => {
+            const index = prefsArray.indexOf(prefsData.choicedPref);
+            console.log("delete index: ", index, prefsArray.length, prefsData.choicedPref);
+            if (index > -1) {
+                prefsArray.splice(index, 1);
+            }
+            console.log("delete index: ", index, prefsArray.length, prefsArray.indexOf(prefsData.choicedPref));
+        }
+        return prefsData;
+    };
+    const prefs = prefsData();
+
 
     // 初期化
     const initialize = () => {
+        prefs.makePrefs(true);
+        // console.log(prefs.getData());
         !tglOkinawa.checked ? tglOkinawa.click(): setViewBox();
         !tglMapLock.checked ? tglMapLock.click(): null;
         recArea.style.display = "block";
         nvArea.style.display = "block";
         nvDesc.innerText = "出題される都道府県の🗾場所を\nクリックしてください"
 
-        nvOpt.innerHTML = "<input id='radio_normal' name='nv_opt' type='radio'>ノーマル\
-            <input id='radio_time' name='nv_opt' type='radio'>タイムトライアル";
-        const normalMsg = "スタートボタンを押す度に出題されます";
-        const timetryalMsg = "47都道府県全て正解するタイムを<br>計測します";
-        nvOpt.addEventListener('change', (e) => {
-            if (e.target.id === "radio_normal") {
-                nvMsg.innerText = normalMsg;
-                nvCnt.style.display = "none";
-                nvDnm.style.display = "none";
-                nvTime.style.display = "none";
-            } else if (e.target.id === "radio_time") {
-                nvMsg.innerText = timetryalMsg;
-                nvCnt.innerText = "0";
-                nvCnt.style.display = "block";
-                nvDnm.innerText = "/47";
-                nvDnm.style.display = "block";
-                nvTime.innerText = "0:00";
-                nvTime.style.display = "block";
-            }
-        });
-        nvOpt.childNodes[0].click();    // default
-        nvQuiz.innerText = "問題";
+        // 初回のみ
+        if (nvOpt.hasChildNodes() === false) {
+            nvOpt.innerHTML = "<input id='radio_normal' name='nv_opt' type='radio'>ノーマル\
+                <input id='radio_time' name='nv_opt' type='radio'>タイムトライアル";
+            const normalMsg = "スタートボタンを押す度に出題されます";
+            const timetryalMsg = "47都道府県全て正解するタイムを<br>計測します";
+            nvOpt.addEventListener('change', (e) => {
+                if (e.target.id === "radio_normal") {
+                    nvMsg.innerText = normalMsg;
+                    nvCnt.style.display = "none";
+                    nvDnm.style.display = "none";
+                    nvTime.style.display = "none";
+                    initialize();
+                } else if (e.target.id === "radio_time") {
+                    nvMsg.innerHTML = timetryalMsg;
+                    nvCnt.innerHTML = "0";
+                    nvCnt.style.display = "block";
+                    nvDnm.innerHTML = "/47";
+                    nvDnm.style.display = "block";
+                    nvTime.innerHTML = "0:00";
+                    nvTime.style.display = "block";
+                    initialize();
+                }
+            });
+            nvOpt.childNodes[0].click();    // default
+        }
+
+        nvQuiz.style.backgroundColor = "";
+        nvQuiz.innerText = defaultQuiz;
         nvRes.innerText = "";
         nvStart.disabled = false;
     }
 
+
+    
+
     /**
-     * 出力用の要素を受け取り経過時間をフォーマットして表示させる
+     * 出力用の要素を受け取り経過時間をフォーマットして文字列を表示させる
      * @param {object} elm - 経過時刻を表示させる要素を受け取る
      * @returns タイマーを実行する関数execTimer
      */
@@ -88,18 +130,19 @@ const prefecturesQuiz = () => {
         }
         accum.value =  () => cnt;
         accum.up = () => accum();
-        accum.reset = () => cnt = 0;
+        accum.reset = () => {
+            cnt = 0;
+            elm.innerText = 0;
+        }
         return accum;
     }
-
-
-
-
 
     // クイズ出題
     const execQuiz = () => {
         nvRes.innerText = "";
-        const obj = rndChoice(prefDatas); // script.jsの関数を使用
+        // const obj = rndChoice(prefDatas); // script.jsの関数を使用
+        const obj = rndChoice(prefs.getData()); // script.jsの関数を使用
+        prefs.choicedPref = obj;
         choicePrefId = Object.keys(obj)[0]; 
         nvQuiz.innerText = Object.values(obj)[0];
     }
@@ -119,32 +162,35 @@ const prefecturesQuiz = () => {
     const chkTimeQuiz = (elm) => {
         const maxPref = 47;
 
-        // 結果表示　正解ならすぐ消す
+        // 結果表示
         let msg;
         if (choicePrefId === elm.id) {
             // msg = `正解${rndChoice(["🎉", "🎊", "🎈", "👍", "😊"])}`;
+            nvQuiz.style.backgroundColor = "rgb(218, 255, 178)";
+            prefs.deletePref();
             quizCounter.up();
         } else {
+            nvQuiz.style.backgroundColor = "rgb(243, 174, 178)";
             // msg = `不正解${rndChoice(["😱", "😣", "😵", "🙈", "👻"])}`;
+            return;
         }
 
         // 進捗チェック
-        if (quizCounter.value() < 3) {
+        // if (quizCounter.value() < maxPref) {
+        if (quizCounter.value() < 5) {
             execQuiz();
             return;
         }
         
         quizTimer.stop();
-        msg = `クリアしました${rndChoice(["🎉", "🎊", "🚀", "🤗", "💮"])}`;
+        msg = `おめでとう${rndChoice(["🎉", "🎊", "🚀", "🤗", "💮"])}`;
         nvRes.innerText = msg;
+      
     
         // 記録チェック
 
 
         // 記録
-
-
-
 
     }
 
@@ -153,6 +199,10 @@ const prefecturesQuiz = () => {
     const prefElms = document.querySelectorAll(".jp-pref")
     .forEach(elm => {
         elm.addEventListener("click", (e) => {
+
+            if (nvQuiz.innerText === defaultQuiz) return;
+
+            // 回答チェック
             if (document.querySelector("#radio_normal").checked) {
                 chkNormalQuiz(elm);
             } else if (document.querySelector("#radio_time").checked) {
@@ -178,6 +228,7 @@ const prefecturesQuiz = () => {
     // ＄リセットボタン
     nvReset.addEventListener("click", (e) => {
         quizTimer.reset();
+        quizCounter.reset();
         initialize();
     });
 

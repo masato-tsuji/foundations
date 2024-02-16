@@ -82,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuElms = document.querySelectorAll(".menu-btn")
     .forEach( elm => {
         elm.addEventListener("click", (event) => {
-            console.log(elm.innerHTML);
 
             // 都道府県を知ろう
             if (elm.id === "btn_game01") {
@@ -125,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // 知名度UP
             if (elm.id === "disp_pref_highlite") {
                 document.querySelector("#pref_24").style.fill = "#ff11c7";
-                console.log("chenged");
             }
             
         });
@@ -135,8 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const prefElms = document.querySelectorAll(".jp-pref")
     .forEach( elm => {
         elm.addEventListener("click", (event) => {
-            // console.log(prefInfo.id[elm.id].prefName);
-            console.log(getPrefInfo(elm.id).prefName);
+            // console.log(getPrefInfo(elm.id).prefName);
             selectPref = elm.id;
         
         });

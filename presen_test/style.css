@@ -6,6 +6,7 @@
 #vb_monitor {
     /* display: none; */
     position: absolute;
+    background-color: rgb(218, 255, 178);
 }
 
 /* 共通 */
