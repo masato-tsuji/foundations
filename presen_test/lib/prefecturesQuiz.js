@@ -16,17 +16,26 @@ const prefecturesQuiz = () => {
     const nvReset = document.querySelector("#navi_reset");
     const tglOkinawa = document.querySelector("#okinawa_move");
     const tglMapLock = document.querySelector("#map_lock");
+    const msgBox = document.querySelector("#msg_box");
+    const msgIcon = document.querySelector("#msg_icon");
+    const msgRec = document.querySelector("#msg_record");
+    const msgName = document.querySelector("#msg_input_name");
+    const msgSave = document.querySelector("#msg_save_btn");
     const recArea = document.querySelector("#record_area");
+    const recTbl = document.querySelector("#record_tbl");
+
 
     const defaultQuiz = "問題";
 
     // 出題用配列
     const prefDatas = prefInfos.map(pref => ({[pref["id"]]: pref["prefName"]}));
-    // console.log(prefDatas);
     let choicePrefId = "";
 
     //出題用の配列
-    //const prefDatas = prefInfos.map(pref => ({[pref["id"]]: pref["prefName"]}));
+    /**
+     * 
+     * @returns 
+     */
     const prefsData = () => {
         let prefsArray = [];
         let choicedPref;
@@ -40,16 +49,53 @@ const prefecturesQuiz = () => {
         prefsData.getData = () => prefsArray;
         prefsData.choicedPref = "";
         prefsData.deletePref = () => {
-            const index = prefsArray.indexOf(prefsData.choicedPref);
-            console.log("delete index: ", index, prefsArray.length, prefsData.choicedPref);
-            if (index > -1) {
+            if (prefsArray.indexOf(prefsData.choicedPref) > -1) {
+                const index = prefsArray.indexOf(prefsData.choicedPref);
                 prefsArray.splice(index, 1);
             }
-            console.log("delete index: ", index, prefsArray.length, prefsArray.indexOf(prefsData.choicedPref));
         }
         return prefsData;
     };
-    const prefs = prefsData();
+    const prefs = prefsData();  // 即時関数ではメソッドがundefinedになった･･･
+
+    /**
+     * 
+     * @param {string} score 
+     * @returns 
+     */
+    const record = () => {
+        const recArray = [];
+        const rowArray = [];
+        let rank = 1;
+        const getRecord = (score) => {
+            const tbl = recTbl.querySelectorAll("td");
+            if (tbl.length > 0) {rank = 1;}
+            for (let i = 0; i < tbl.length; i++) {
+                rowArray.push(tbl[i].innerText);
+                if (i % 2 === 1) {
+                    if (tbl[i].innerText < score) {rank++;}
+                    console.log(rank, tbl[i].innerText, "<", score);
+                    recArray.push(rowArray.concat());
+                    rowArray.splice(0);
+                }
+            }
+            return recArray;
+        }
+        getRecord.getRank = () => rank;
+        getRecord.writeRecord = (newRec) => {
+            recArray.splice(rank - 1, 0, newRec);
+            recArray.pop();
+            const tbl = recTbl.querySelectorAll("td");
+            for (let i = 0; i < recArray.length; i++) {
+                tbl[i * 2].innerText = recArray[i][0];
+                tbl[i * 2 + 1].innerText = recArray[i][1];
+            }
+
+
+        }
+
+        return getRecord;
+    }
 
 
     // 初期化
@@ -95,9 +141,6 @@ const prefecturesQuiz = () => {
         nvStart.disabled = false;
     }
 
-
-    
-
     /**
      * 出力用の要素を受け取り経過時間をフォーマットして文字列を表示させる
      * @param {object} elm - 経過時刻を表示させる要素を受け取る
@@ -121,6 +164,11 @@ const prefecturesQuiz = () => {
         return execTimer;
     }
     
+    /**
+     * 
+     * @param {*} elm 
+     * @returns 
+     */
     const counter = (elm) => {
         let cnt = 0;
         const accum = () => {
@@ -186,11 +234,28 @@ const prefecturesQuiz = () => {
         msg = `おめでとう${rndChoice(["🎉", "🎊", "🚀", "🤗", "💮"])}`;
         nvRes.innerText = msg;
       
-    
         // 記録チェック
+        const rec = record();
+        rec(nvTime.innerText);
 
+        // 6位以上ならreturn
+        if (rec.getRank() > 5) {
+            return;
+        }
+
+        // 記録更新メッセージ
+        msgIcon.innerText = ["🏆", "🥈", "🥉", "4位", "5位"][rec.getRank() - 1];
+        msgRec.innerText = nvTime.innerText;
+        const showMessage = (() => {
+            msgBox.style.display = "block";
+            setTimeout(() => {
+                msgBox.classList.add("show");
+            }, 100);
+        })();
 
         // 記録
+        rec.writeRecord(["ななし", nvTime.innerText]);
+
 
     }
 
@@ -229,7 +294,14 @@ const prefecturesQuiz = () => {
     nvReset.addEventListener("click", (e) => {
         quizTimer.reset();
         quizCounter.reset();
-        initialize();
+        initialize()
+
+
+        // const rec = record("03:00");
+        // rec();
+        // console.log(rec.getRank());
+
+
     });
 
     return initialize;

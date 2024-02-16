@@ -15,6 +15,7 @@
     <!-- デバッグ用　viewBoxの座標を表示 -->
     <div id="vb_monitor">ViewBox: (<span></span>)</div>
 
+    <!-- メニュー -->
     <div id="menu_area">
       <div class="menu-btn" id="menu_top">ＴＯＰ</div>
       <div class="menu-btn" id="btn_game01">都道府県を知ろう</div>
@@ -47,6 +48,7 @@
       </div>
     </div>
 
+    <!-- ナビ -->
     <div id="navi_area">
       <div id="navi_description"></div>
       <div id="navi_option"></div>
@@ -64,6 +66,7 @@
       </div>
     </div>
     
+    <!-- ハイスコア -->
     <div id="record_area">
       <table id="record_tbl">
         <caption>✨ハイスコア✨</caption>
@@ -71,15 +74,25 @@
          <tr><th>順位</th><th>名前</th><th>タイム</th></tr>
         </thead>
         <tbody>
-         <tr><th>🏆</th><td>TOYOTAさん</td><td>00:02:35</td></tr>
-         <tr><th>🥈</th><td>TOYOTAさん</td><td>00:06:42</td></tr>
-         <tr><th>🥉</th><td>TOYOTAさん</td><td>00:15:13</td></tr>
-         <tr><th>４</th><td>TOYOTAさん</td><td>00:15:13</td></tr>
-         <tr><th>５</th><td>TOYOTAさん</td><td>00:15:13</td></tr>
+         <tr><th>🏆</th><td>TOYOTAさん</td><td>0:05</td></tr>
+         <tr><th>🥈</th><td>TOYOTAさん</td><td>6:11</td></tr>
+         <tr><th>🥉</th><td>TOYOTAさん</td><td>8:24</td></tr>
+         <tr><th>４</th><td>TOYOTAさん</td><td>8:25</td></tr>
+         <tr><th>５</th><td>TOYOTAさん</td><td>8:25</td></tr>
       </table>
     </div>
 
+    <!-- メッセージボックス -->
+    <div class="msg-box" id="msg_box">
+      <div id="msg_icon">🏆</div>
+      <div id="msg_massage">おめでとうございます<br>ランクインしました‼️</div>
+      <div id="msg_record">0:07</div>
+      <p>名前を入力してください</p>
+      <input type="text" id="msg_input_name">
+      <button id="msg_save_btn">保存</button>
+    </div>
 
+    <!-- 地図 -->
     <div id="map_area">
       <!--沖縄移動版 ViewBox: (-457 -18 1935.52 1637.75) -->
       <!--正位置版 ViewBox: (-697 -6 2382.21 2009.97) width="921.46" height="1092.201" -->
