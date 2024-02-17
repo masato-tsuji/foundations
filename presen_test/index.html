@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="./lib/rxjs.js"></script>
     <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="./lib/prefecturesKnowit.js"></script>
     <script type="text/javascript" src="./lib/prefecturesQuiz.js"></script>
   </head>
 
@@ -18,10 +19,10 @@
     <!-- メニュー -->
     <div id="menu_area">
       <div class="menu-btn" id="menu_top">ＴＯＰ</div>
-      <div class="menu-btn" id="btn_game01">都道府県を知ろう</div>
-      <div class="menu-btn" id="btn_game02">都道府県当てゲーム</div>
+      <div class="menu-btn" id="manu_pref_knowit">都道府県を知ろう</div>
+      <div class="menu-btn" id="menu_pref_quiz">都道府県当てゲーム</div>
       <!--将来用 <div class="menu-btn" id="btn_game03">ランキングクイズ</div> -->
-      <div class="menu-btn" id="btn_game04">おまけ</div>
+      <div class="menu-btn" id="menu_bonus">おまけ</div>
 
       <div id="config_area">
         <div class="cnf-tgl">
@@ -48,14 +49,20 @@
       </div>
     </div>
 
-    <!-- ナビ -->
-    <div id="navi_area">
+    <!-- 都道府県を知ろう コンテンツ-->
+    <div class="map-app contents-box" id="knowit_area">
+      <p id="knowit_summary"></p>
+    </div>
+
+
+    <!-- 都道府県当てクイズ ナビ -->
+    <div class="map-app contents-box" id="navi_area">
       <div id="navi_description"></div>
       <div id="navi_option"></div>
       <div id="navi_message"></div>
       <div id="navi_question"></div>
       <div id="navi_result"></div>
-      <div class="side-by-side">
+      <div class="navi-flow">
         <div id="navi_count"></div>
         <div id="navi_denom">/</div>
         <div id="navi_time"></div>
@@ -67,7 +74,7 @@
     </div>
     
     <!-- ハイスコア -->
-    <div id="record_area">
+    <div class="map-app" id="record_area">
       <table id="record_tbl">
         <caption>✨ハイスコア✨</caption>
         <thead>
@@ -83,7 +90,7 @@
     </div>
 
     <!-- メッセージボックス -->
-    <div class="msg-box" id="msg_box">
+    <div class="map-app msg-box" id="msg_box">
       <div id="msg_icon">🏆</div>
       <div id="msg_massage">おめでとうございます<br>ランクインしました‼️</div>
       <div id="msg_record">0:07</div>

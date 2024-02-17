@@ -58,7 +58,7 @@ body {
     cursor: pointer;
 }
 
-/* コンフィグ エリア */
+/* メニュー内コンフィグ エリア*/
 #config_area {
     margin-top: 40px;
 }
@@ -113,15 +113,16 @@ body {
     fill: #ff11c7;
 }
 
-/* --- ナビエリア --- */
-#navi_area {
+
+/* #navi_area { */
+.contents-box {
     display: none;
     position:  absolute;
     text-align: center;
     top: 8%;
     left: 20%;
     /* height: 470px; */
-    /* width: 220px; */
+    width: 300px;
     background: rgba(255, 255, 255, 0.75);
     box-shadow: 0px 0px 0px 5px #dfefff;
     border-radius: 15px;
@@ -129,20 +130,45 @@ body {
     color: #454545;
 }
 
+
+/* --- 都道府県を知ろう エリア --- */
+#knowit_area {
+    /* display: block; */
+    height: 450px;
+}
+
+#knowit_summary {
+    text-align: left;
+    padding-left: 0px 5px;
+    font-size: 20px;
+}
+
+#knowit_summary::after {
+    content: "|";
+    animation: blinking 0.7s ease-in-out infinite alternate;
+}
+
+@keyframes blinking {
+	0% {opacity: 0;}
+	100% {opacity: 1;}
+}
+
+
+/* --- 都道府県クイズ ナビエリア --- */
 #navi_description {
     width: 300px;
     height: 70px;
-    /* background-color: skyblue; */
 }
 
 #navi_option {
     height: 35px;
     padding-top: 10px;
+    background-color: rgb(202, 226, 234);
 }
 
 #navi_message {
     display: table-cell;
-    width: 300px;
+    /* width: 300px; */
     height: 60px;
     /* margin-top: 10px; */
     /* margin: auto; */
@@ -153,7 +179,7 @@ body {
 }
 
 #navi_question {
-    width: 300px;
+    /* width: 300px; */
     height: 70px;
     font-size: 38px;
     font-weight: bold;
@@ -165,7 +191,7 @@ body {
 }
 
 #navi_result {
-    width: 300px;
+    /* width: 300px; */
     height: 40px;
     font-size: 28px;
     /* font-weight: bold; */
@@ -175,7 +201,7 @@ body {
     /* background-color: skyblue; */
 }
 
-.side-by-side {
+.navi-flow {
     display: inline-flex;
     /* height: 40px; */
     text-align: center;

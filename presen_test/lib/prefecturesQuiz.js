@@ -67,22 +67,21 @@ const prefecturesQuiz = () => {
         const recArray = [];
         const rowArray = [];
         let rank = 1;
-        const getRecord = (score) => {
+        const readRecord = (score) => {
             const tbl = recTbl.querySelectorAll("td");
             if (tbl.length > 0) {rank = 1;}
             for (let i = 0; i < tbl.length; i++) {
                 rowArray.push(tbl[i].innerText);
                 if (i % 2 === 1) {
-                    if (tbl[i].innerText < score) {rank++;}
-                    console.log(rank, tbl[i].innerText, "<", score);
+                    if (tbl[i].innerText !== "" && tbl[i].innerText < score) {rank++;}
                     recArray.push(rowArray.concat());
                     rowArray.splice(0);
                 }
             }
             return recArray;
         }
-        getRecord.getRank = () => rank;
-        getRecord.writeRecord = (newRec) => {
+        readRecord.getRank = () => rank;
+        readRecord.writeRecord = (newRec) => {
             recArray.splice(rank - 1, 0, newRec);
             recArray.pop();
             const tbl = recTbl.querySelectorAll("td");
@@ -90,17 +89,14 @@ const prefecturesQuiz = () => {
                 tbl[i * 2].innerText = recArray[i][0];
                 tbl[i * 2 + 1].innerText = recArray[i][1];
             }
-
-
         }
-
-        return getRecord;
+        return readRecord;
     }
 
 
     // 初期化
     const initialize = () => {
-        prefs.makePrefs(true);
+        prefs.makePrefs(false);
         // console.log(prefs.getData());
         !tglOkinawa.checked ? tglOkinawa.click(): setViewBox();
         !tglMapLock.checked ? tglMapLock.click(): null;
@@ -149,13 +145,21 @@ const prefecturesQuiz = () => {
     const timer = (elm) => {
         let cnt = 0;
         let timeoutID;
+        let state = false;
         const timeCnt = () => {
-            ++cnt;
+            cnt++;
             elm.innerText = `${Math.floor(cnt / 60)}:${("0" + (cnt % 60)).toString().slice(-2)}`;
         }
         const execTimer = () => timeoutID = setInterval(timeCnt, 1000);
-        execTimer.start = () => execTimer();
-        execTimer.stop = () => clearInterval(timeoutID);
+        execTimer.start = () => {
+            execTimer();
+            state = true;
+        }
+        execTimer.stop = () => {
+            clearInterval(timeoutID);
+            state = false;
+        }
+        execTimer.getState = () => state;
         execTimer.reset = () => {
             execTimer.stop();
             cnt = 0;
@@ -213,19 +217,17 @@ const prefecturesQuiz = () => {
         // 結果表示
         let msg;
         if (choicePrefId === elm.id) {
-            // msg = `正解${rndChoice(["🎉", "🎊", "🎈", "👍", "😊"])}`;
             nvQuiz.style.backgroundColor = "rgb(218, 255, 178)";
             prefs.deletePref();
             quizCounter.up();
         } else {
             nvQuiz.style.backgroundColor = "rgb(243, 174, 178)";
-            // msg = `不正解${rndChoice(["😱", "😣", "😵", "🙈", "👻"])}`;
             return;
         }
 
         // 進捗チェック
         // if (quizCounter.value() < maxPref) {
-        if (quizCounter.value() < 5) {
+        if (quizCounter.value() < 5) {  //デモ用
             execQuiz();
             return;
         }
@@ -253,29 +255,30 @@ const prefecturesQuiz = () => {
             }, 100);
         })();
 
-        // 記録
-        rec.writeRecord(["ななし", nvTime.innerText]);
-
-
+        // 保存ボタン
+        msgSave.addEventListener("click", (e) => {
+            const userName = msgName.value ? msgName.value + "さん" : "ななしさん";
+            rec.writeRecord([userName, nvTime.innerText]);
+            msgBox.style.display = "none";
+        });
     }
-
-
+    
     // 都道府県クリック検出
-    const prefElms = document.querySelectorAll(".jp-pref")
-    .forEach(elm => {
+    document.querySelectorAll(".jp-pref").forEach(elm => {
         elm.addEventListener("click", (e) => {
 
-            if (nvQuiz.innerText === defaultQuiz) return;
-
+            
             // 回答チェック
             if (document.querySelector("#radio_normal").checked) {
                 chkNormalQuiz(elm);
             } else if (document.querySelector("#radio_time").checked) {
-                chkTimeQuiz(elm);
+                if (quizTimer.getState()) {
+                    chkTimeQuiz(elm);
+                }
             }
+            
         });
     });
-
 
     const quizTimer = timer(nvTime);
     const quizCounter = counter(nvCnt);
@@ -295,13 +298,6 @@ const prefecturesQuiz = () => {
         quizTimer.reset();
         quizCounter.reset();
         initialize()
-
-
-        // const rec = record("03:00");
-        // rec();
-        // console.log(rec.getRank());
-
-
     });
 
     return initialize;
