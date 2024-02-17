@@ -5,6 +5,7 @@ const prefecturesKnowit = () => {
 
     const knArea = document.querySelector("#knowit_area");
     const knSumm = document.querySelector("#knowit_summary");
+    const knPin = document.querySelector(".map-pin");
     const tglOkinawa = document.querySelector("#okinawa_move");
 
     // 初期化
@@ -19,11 +20,12 @@ const prefecturesKnowit = () => {
 
         knSumm.innerText = "";
         knArea.style.display = "block";
+        knPin.style.display = "none";
 
     }
 
     const typing = () => {
-        const msDelay = 35; // 一文字追加する間隔（ミリ秒）75
+        const msDelay = 30; // 一文字追加する間隔（ミリ秒）75
         let index = 0;
         let intervalId;
         let summary;
@@ -59,6 +61,16 @@ const prefecturesKnowit = () => {
             if (knArea.offsetParent === null) {
                 return;
             }
+
+            // console.log(elm.getBoundingClientRect());
+            //console.log(elm.top, elm.left, elm.height, elm.width);
+
+            const svg = elm.getBoundingClientRect();
+            // ピン表示
+            knPin.style.top = svg.y - 20+ "px"//svg.top + svg.height / 2 + "px";
+            knPin.style.left = svg.x + "px"//svg.left + svg.width / 2 + "px";
+            knPin.style.display = "block";
+            console.log(knPin.style.top, knPin.style.left);
 
             let summary = "";
             switch (getPrefInfo(elm.id).prefName) {

@@ -302,11 +302,48 @@ body {
     opacity: 100%;
 }
 
+/* マップ用ピン */
+.map-pin {
+    font-size: 35px;
+    display: none;
+    vertical-align: middle;
+    color: #f27c7c;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.8em;
+    height: 0.8em;
+    background: currentColor;
+    border: 0.1em solid currentColor;
+    border-radius: 40% 60% 0% 100% / 40% 100% 0% 60%;
+    box-sizing: content-box;
+    transform: rotate(45deg);
+}
+
+.map-pin::before {
+    content: '';
+    position: absolute;
+    top: 18%;
+    left: 18%;
+    width: 0.336em;
+    height: 0.336em;
+    background: #fff;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+
+
 /* --- マップエリア --- */
 #map_area {
     /* width: 600px; */
     /* height: 900px; */
     background-color: skyblue;
+}
+
+#pref_line {
+    display: none;
 }
 
 #svg_japan {
@@ -322,4 +359,8 @@ body {
     cursor: pointer;
 }
 
-
+.pref-name {
+    position: absolute;
+    font-size: 18px;
+    color: blue;
+}

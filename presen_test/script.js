@@ -45,15 +45,19 @@ console.log(mapLock().locked);
 const setViewBox = viewParam => {
     const svg = document.querySelector("#svg_japan");
     const okinawa = document.querySelector("#pref_47");
+    const okinawaLine = document.querySelector("#pref_line");
     const tglOkinawa = document.querySelector("#okinawa_move");
 
     if (Array.isArray(viewParam)) {
         svg.setAttribute("viewBox", viewParam.join(" "));
     } else if (tglOkinawa.checked) {
         okinawa.setAttribute("transform", "translate(540,-250)");
+        okinawaLine.style.display = "block";
         svg.setAttribute("viewBox", "-500 -20 1935 1637");
+        
     } else {
         okinawa.setAttribute("transform", "translate(0,0)");
+        okinawaLine.style.display = "none";
         svg.setAttribute("viewBox", "-755 -25 2380 2010");
     }
     
@@ -104,10 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // TOP
             if (elm.id === "menu_top") {
-                // knArea.style.display = "none";
-                // nvArea.style.display = "none";
-                // recArea.style.display = "none";
-
                 hideAppElements();
 
                 if (tglOkinawa.checked) {
@@ -141,15 +141,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });   
     
     // オプション設定トグルイベント
-    const cnfElms = document.querySelectorAll(".cnf-tgl > input")
-    .forEach( elm => {
+    document.querySelectorAll(".cnf-tgl > input").forEach( elm => {
         elm.addEventListener("change", (event) => {
-
+            
             // 県名表示
             if (elm.id === "disp_pref_name") {
-
+   
             }
-
+        
             // 沖縄移動
             if (elm.id === "okinawa_move") {
                 setViewBox();
@@ -169,10 +168,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // 各県クリックイベント
-    const prefElms = document.querySelectorAll(".jp-pref")
-    .forEach( elm => {
+    document.querySelectorAll(".jp-pref").forEach( elm => {
+
+        if (elm.id === "pref_line") {
+            return;
+        }
+
+        // // console.log(elm.id, getPrefInfo(elm.id).prefName);
+
+        // // const prefName = getPrefInfo(elm.id).prefName;
+        // const p = document.createElement("div");
+        // p.className = "pref-name";
+        // p.id = elm.id + "_name";
+        // const svg = elm.getBoundingClientRect();
+        // document.body.appendChild(p);
+
+        // p.style.textAlign = "center";
+
+        // p.style.top = Math.floor(svg.y) + "px";
+        // p.style.left = Math.floor(svg.x) + "px";
+        // p.innerText = "愛知";
+
+        // console.log(svg.x, svg.y, p);
+
         elm.addEventListener("click", (event) => {
-            // console.log(getPrefInfo(elm.id).prefName);
+            console.log(getPrefInfo(elm.id).prefName);
         });
     });
 

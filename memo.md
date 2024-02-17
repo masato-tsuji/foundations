@@ -302,6 +302,45 @@ new Date(Date.now());
 ## CSS
 ## ------------------------------------------------
 
+### ▼要素にクラスを追加/削除
+
+element.classList.add('hoge');
+element.classList.remove('hoge');
+
+const div = document.createElement("div");
+div.className = "foo";
+
+// 最初の状態: <div class="foo"></div>
+console.log(div.outerHTML);
+
+// classList API を用いてクラスを除去、追加
+div.classList.remove("foo");
+div.classList.add("anotherclass");
+
+// <div class="anotherclass"></div>
+console.log(div.outerHTML);
+
+// visible が設定されていれば除去し、なければ追加
+div.classList.toggle("visible");
+
+// i が 10 未満であるかどうかの条件によって visible を追加または除去
+div.classList.toggle("visible", i < 10);
+
+// false
+console.log(div.classList.contains("foo"));
+
+// 複数のクラスを追加または除去
+div.classList.add("foo", "bar", "baz");
+div.classList.remove("foo", "bar", "baz");
+
+// スプレッド構文を使用したクラスの追加または除去
+const cls = ["foo", "bar"];
+div.classList.add(...cls);
+div.classList.remove(...cls);
+
+// "foo" クラスを "bar" クラスで置き換え
+div.classList.replace("foo", "bar");
+
 
 ### ▼vertical-alignが効かない
 

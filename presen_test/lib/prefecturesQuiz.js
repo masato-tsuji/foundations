@@ -267,6 +267,10 @@ const prefecturesQuiz = () => {
     document.querySelectorAll(".jp-pref").forEach(elm => {
         elm.addEventListener("click", (e) => {
 
+            // 非表示なら抜ける
+            if (nvArea.offsetParent === null) {
+                return;
+            }            
             
             // 回答チェック
             if (document.querySelector("#radio_normal").checked) {
