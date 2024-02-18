@@ -74,6 +74,10 @@ const hideAppElements = () => {
 }
 
 
+/**
+ * 
+ * @param {boolean} display - 
+ */
 const switchPrefName = display => {
     document.querySelectorAll(".jp-pref-name").forEach((elm) => {
         console.log(elm);
