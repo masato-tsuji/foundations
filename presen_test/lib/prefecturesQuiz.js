@@ -3,17 +3,17 @@
 
 const prefecturesQuiz = () => {
     
-    const nvArea = document.querySelector("#navi_area");
-    const nvDesc = document.querySelector("#navi_description");
-    const nvOpt = document.querySelector("#navi_option");
-    const nvMsg = document.querySelector("#navi_message");
-    const nvQuiz = document.querySelector("#navi_question");
-    const nvRes = document.querySelector("#navi_result");
-    const nvCnt = document.querySelector("#navi_count");
-    const nvDnm = document.querySelector("#navi_denom");
-    const nvTime = document.querySelector("#navi_time");
-    const nvStartBtn = document.querySelector("#navi_start");
-    const nvResetBtn = document.querySelector("#navi_reset");
+    const naviArea = document.querySelector("#navi_area");
+    const naviDesc = document.querySelector("#navi_description");
+    const naviOpt = document.querySelector("#navi_option");
+    const naviMsg = document.querySelector("#navi_message");
+    const naviQuiz = document.querySelector("#navi_question");
+    const naviResult = document.querySelector("#navi_result");
+    const naviCnt = document.querySelector("#navi_count");
+    const naviDenomi = document.querySelector("#navi_denominator"); // 都道府県数分母
+    const naviTime = document.querySelector("#navi_time");
+    const naviStartBtn = document.querySelector("#navi_start");
+    const naviResetBtn = document.querySelector("#navi_reset");
     const tglOkinawa = document.querySelector("#okinawa_move");
     const tglMapLock = document.querySelector("#map_lock");
     const tglChild = document.querySelector("#child_mode");
@@ -21,29 +21,33 @@ const prefecturesQuiz = () => {
     const msgIcon = document.querySelector("#msg_icon");
     const msgRec = document.querySelector("#msg_record");
     const msgName = document.querySelector("#msg_input_name");
-    const msgSave = document.querySelector("#msg_save_btn");
+    const msgSaveBtn = document.querySelector("#msg_save_btn");
     const recArea = document.querySelector("#record_area");
     const recTbl = document.querySelector("#record_tbl");
 
+    // デモモード（タイムトライアル時に [demoModeLimit] 個正解でクリア）
+    const tglDemoMode = document.querySelector("#demo_mode");
+    const demoModeLimit = 5;
 
     // 出題用配列
-    const prefDatas = prefsInfo.map(pref => ({[pref["id"]]: pref["prefName"]}));
     let choicePrefId = "";
 
-    //出題用の配列
     /**
-     * 
-     * @returns 
+     * 都道府県情報からオプションに応じた出題用の配列を作成。
+     * @param {object} argPrefsInfo - 各都道府県の情報オブジェクトの配列
+     * @property {string} choicedPref - 選択されている都道府県を受け取る
+     * @property {boolean} isChildMode - こどもモードの状態
+     * @returns {object} - 関数
      */
-    const prefsData = () => {
+    const prefsData = (argPrefsInfo) => {
         let prefsArray = [];
         let choicedPref;
         prefsData.makePrefsData = (childMode = false) => {
             if (!childMode) {
-                prefsArray = prefsInfo.map(pref => ({[pref["id"]]: pref["prefName"]}));
+                prefsArray = argPrefsInfo.map(pref => ({[pref["id"]]: pref["prefName"]}));
                 prefsData.isChildMode = false;
             } else {
-                prefsArray = prefsInfo.map(pref => ({[pref["id"]]: pref["prefHiragana"]}));
+                prefsArray = argPrefsInfo.map(pref => ({[pref["id"]]: pref["prefHiragana"]}));
                 prefsData.isChildMode = true;
             }
         }
@@ -58,14 +62,14 @@ const prefecturesQuiz = () => {
         }
         return prefsData;
     };
-    const prefs = prefsData();  // 即時関数ではメソッドがundefinedになった･･･
+    const prefs = prefsData(prefsInfo);  // 即時関数ではメソッドがundefinedになった･･･
 
     /**
-     * 
-     * @param {string} score 
-     * @returns 
+     * テーブルの記録を読み取りタイムトライアルのスコアの順位を算出し
+     * ランクインした場合は更新したテーブルを書き出す
+     * @returns {object} readRecord - テーブルから記録を読み取るための関数
      */
-    const record = () => {
+    const recordUpdate = () => {
         const recArray = [];
         const rowArray = [];
         let rank = 1;
@@ -95,50 +99,51 @@ const prefecturesQuiz = () => {
         return readRecord;
     }
 
-
     // 初期化
     const initialize = () => {
-        prefs.makePrefsData(tglChild.checked);  // クイズ用の都道府県データ作成
+        prefs.makePrefsData(tglChild.checked);
         !tglOkinawa.checked ? tglOkinawa.click(): setViewBox();
         !tglMapLock.checked ? tglMapLock.click(): null;
         recArea.style.display = "block";
-        nvArea.style.display = "block";
-        nvDesc.innerText = "出題される都道府県の🗾場所を\nクリックしてください"
+        naviArea.style.display = "block";
+        naviDesc.innerText = "出題される都道府県の🗾場所を\nクリックしてください"
 
         // 初回のみ
-        if (nvOpt.hasChildNodes() === false) {
-            nvOpt.innerHTML = "<input id='radio_normal' name='nv_opt' type='radio'>ノーマル\
+        if (naviOpt.hasChildNodes() === false) {
+            naviOpt.innerHTML = "<input id='radio_normal' name='nv_opt' type='radio'>ノーマル\
                 <input id='radio_time' name='nv_opt' type='radio'>タイムトライアル";
             const normalMsg = "スタートボタンを押す度に出題されます";
             const timetryalMsg = "47都道府県全て正解するタイムを<br>計測します";
-            nvOpt.addEventListener('change', (e) => {
+            naviOpt.addEventListener('change', (e) => {
                 if (e.target.id === "radio_normal") {
-                    nvMsg.innerText = normalMsg;
-                    nvCnt.style.display = "none";
-                    nvDnm.style.display = "none";
-                    nvTime.style.display = "none";
+                    naviMsg.innerText = normalMsg;
+                    naviCnt.style.display = "none";
+                    naviDenomi.style.display = "none";
+                    naviTime.style.display = "none";
                     initialize();
                 } else if (e.target.id === "radio_time") {
-                    nvMsg.innerHTML = timetryalMsg;
-                    nvCnt.innerHTML = "0";
-                    nvCnt.style.display = "block";
-                    nvDnm.innerHTML = "/47";
-                    nvDnm.style.display = "block";
-                    nvTime.innerHTML = "0:00";
-                    nvTime.style.display = "block";
+                    naviMsg.innerHTML = timetryalMsg;
+                    naviCnt.innerHTML = "0";
+                    naviCnt.style.display = "block";
+                    naviDenomi.innerHTML = "/47";
+                    naviDenomi.style.display = "block";
+                    naviTime.innerHTML = "0:00";
+                    naviTime.style.display = "block";
                     initialize();
                 }
             });
-            nvOpt.childNodes[0].click();    // default
+            naviOpt.childNodes[0].click();    // default
         }
 
-        nvQuiz.style.backgroundColor = "";
-        nvQuiz.innerText = ["問題", "もんだい"][Number(tglChild.checked)];
-        nvRes.innerText = "";
-        nvStartBtn.innerText = ["スタート", "はじめる"][Number(tglChild.checked)];
-        nvResetBtn.innerText = ["リセット", "さいしょから"][Number(tglChild.checked)];
-        nvStartBtn.disabled = false;
+        naviQuiz.style.backgroundColor = "";
+        naviQuiz.innerText = tglChild.checked ? "もんだい" : "問題";
+        naviResult.innerText = "";
+        naviStartBtn.innerText = tglChild.checked ? "はじめる" : "スタート";
+        naviResetBtn.innerText = tglChild.checked ? "さいしょから" : "リセット";
+        naviStartBtn.disabled = false;
 
+        // デモモード対応
+        naviDenomi.innerHTML = "/" + (tglDemoMode.checked ? demoModeLimit: 47);
     }
 
     /**
@@ -173,9 +178,9 @@ const prefecturesQuiz = () => {
     }
     
     /**
-     * 
-     * @param {*} elm 
-     * @returns 
+     * 出力用の要素を受け取りカウント値を出力する
+     * @param {object} elm - カウント出力先の要素
+     * @returns {object} accum - カウントする関数
      */
     const counter = (elm) => {
         let cnt = 0;
@@ -193,13 +198,13 @@ const prefecturesQuiz = () => {
         return accum;
     }
 
-    // クイズ出題
+    // 出題
     const execQuiz = () => {
-        nvRes.innerText = "";
+        naviResult.innerText = "";
         const obj = rndChoice(prefs.getData()); // script.jsの関数を使用
         prefs.choicedPref = obj;
         choicePrefId = Object.keys(obj)[0]; 
-        nvQuiz.innerText = Object.values(obj)[0];
+        naviQuiz.innerText = Object.values(obj)[0];
     }
 
     // ノーマルモード 回答チェック
@@ -207,76 +212,70 @@ const prefecturesQuiz = () => {
         let msg;
         let res;
         if (choicePrefId === elm.id) {
-            msg = ["正解", "すごい"][Number(prefs.isChildMode)];
+            msg = prefs.isChildMode ? "すごい" : "正解";
             res = `${msg}${rndChoice(["🎉", "🎊", "🎈", "👍", "😊"])}`;
         } else {
-            msg = ["不正解", "おしい"][Number(prefs.isChildMode)];
+            msg = prefs.isChildMode ? "おしい" : "不正解";
             res = `${msg}${rndChoice(["😱", "😣", "😵", "🙈", "👻"])}`;
         }
-        nvRes.innerHTML = res;
+        naviResult.innerHTML = res;
     }
 
     // タイムトライアル 回答チェック
     const chkTimeQuiz = (elm) => {
-        const maxPref = 47;
 
         // 結果表示
         let msg;
         if (choicePrefId === elm.id) {
-            nvQuiz.style.backgroundColor = "rgb(218, 255, 178)";
+            naviQuiz.style.backgroundColor = "rgb(218, 255, 178)";
             prefs.deletePref();
             quizCounter.up();
         } else {
-            nvQuiz.style.backgroundColor = "rgb(243, 174, 178)";
+            naviQuiz.style.backgroundColor = "rgb(243, 174, 178)";
             return;
         }
 
         // 進捗チェック
-        // if (quizCounter.value() < maxPref) {
-        if (quizCounter.value() < 5) {  //デモ用
+        if (quizCounter.value() < (tglDemoMode.checked ? demoModeLimit: 47)) {
             execQuiz();
             return;
         }
         
         quizTimer.stop();
         msg = `おめでとう${rndChoice(["🎉", "🎊", "🚀", "🤗", "💮"])}`;
-        nvRes.innerText = msg;
+        naviResult.innerText = msg;
       
         // 記録チェック
-        const rec = record();
-        rec(nvTime.innerText);
+        const rec = recordUpdate();
+        rec(naviTime.innerText);
 
-        // 6位以上ならreturn
         if (rec.getRank() > 5) {
             return;
         }
 
-        // 記録更新メッセージ
+        // 記録更新メッセージフェードイン
         msgIcon.innerText = ["🏆", "🥈", "🥉", "4位", "5位"][rec.getRank() - 1];
-        msgRec.innerText = nvTime.innerText;
-        const showMessage = (() => {
-            msgBox.style.display = "block";
-            setTimeout(() => {
-                msgBox.classList.add("show");
-            }, 100);
-        })();
+        msgRec.innerText = naviTime.innerText;
+        msgBox.style.display = "block";
+        setTimeout(() => {
+            msgBox.classList.add("show");
+        }, 100);
 
-        // 保存ボタン
-        msgSave.addEventListener("click", (e) => {
+        msgSaveBtn.addEventListener("click", (e) => {
             const userName = msgName.value ? msgName.value + "さん" : "ななしさん";
-            rec.writeRecord([userName, nvTime.innerText]);
+            rec.writeRecord([userName, naviTime.innerText]);
             msgBox.style.display = "none";
         });
     }
     
-    // 都道府県クリック検出
+    // 都道府県クリック
     document.querySelectorAll(".jp-pref").forEach(elm => {
         elm.addEventListener("click", (e) => {
 
-            // 非表示なら抜ける
-            if (nvArea.offsetParent === null) {
+            // アプリ非表示ならreturn
+            if (naviArea.offsetParent === null) {
                 return;
-            }            
+            }
             
             // 回答チェック
             if (document.querySelector("#radio_normal").checked) {
@@ -290,21 +289,19 @@ const prefecturesQuiz = () => {
         });
     });
 
-    const quizTimer = timer(nvTime);
-    const quizCounter = counter(nvCnt);
+    const quizTimer = timer(naviTime);
+    const quizCounter = counter(naviCnt);
 
-    // スタートボタン
-    nvStartBtn.addEventListener("click", (e) => {
+    naviStartBtn.addEventListener("click", (e) => {
         execQuiz();
         if (document.querySelector("#radio_time").checked) {
-            nvStartBtn.disabled = true;
+            naviStartBtn.disabled = true;
             quizCounter.reset();
             quizTimer.start();
         }
     });
     
-    // ＄リセットボタン
-    nvResetBtn.addEventListener("click", (e) => {
+    naviResetBtn.addEventListener("click", (e) => {
         quizTimer.reset();
         quizCounter.reset();
         initialize()

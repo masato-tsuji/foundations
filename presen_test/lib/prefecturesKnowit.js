@@ -3,9 +3,9 @@
 
 const prefecturesKnowit = () => {
 
-    const knArea = document.querySelector("#knowit_area");
-    const knSumm = document.querySelector("#knowit_summary");
-    const knPin = document.querySelector(".map-pin");
+    const knowitArea = document.querySelector("#knowit_area");
+    const knowitSummary = document.querySelector("#knowit_summary");
+    const mapPin = document.querySelector(".map-pin");
     const tglOkinawa = document.querySelector("#okinawa_move");
 
     // 初期化
@@ -18,59 +18,60 @@ const prefecturesKnowit = () => {
             setViewBox([-890, -30, 2380, 2010]);
         }
 
-        knSumm.innerText = "";
-        knArea.style.display = "block";
-        knPin.style.display = "none";
+        knowitSummary.innerText = "";
+        knowitArea.style.display = "block";
+        mapPin.style.display = "none";
 
     }
+    
+    // /**
+    //  * 引数で受け取った要素に受け取った文字をタイピング風に出力
+    //  * @param {object} element - 文字列の出力先の要素
+    //  * @returns {object} - タイピングを開始する関数
+    //  */
+    // const typing = (element) => {
+    //     const msDelay = 30; // 一文字追加する間隔（ミリ秒）
+    //     let index = 0;
+    //     let intervalId;
+    //     let summary;
+    //     const write = () => {
+    //         element.innerHTML += summary[index];
+    //         index++;
+    //         if (index > summary.length - 1) {
+    //             clearInterval(intervalId);
+    //         }
+    //     }
+    //     const execInterval = (argSumm) => {
+    //         execInterval.reset();
+    //         summary = argSumm;
+    //         intervalId = setInterval(write, msDelay);
+    //     }
+    //     execInterval.start = () => execInterval();
+    //     execInterval.stop = () => clearInterval(intervalId);
+    //     execInterval.reset = () => {
+    //         clearInterval(intervalId);
+    //         element.innerText = "";
+    //         index = 0;
+    //     }
+    //     return execInterval;
+    // }
 
-    const typing = () => {
-        const msDelay = 30; // 一文字追加する間隔（ミリ秒）75
-        let index = 0;
-        let intervalId;
-        let summary;
-        // console.log(msg.length);
-        const write = () => {
-            knSumm.innerHTML += summary[index];
-            index++;
-            if (index > summary.length - 1) {
-                clearInterval(intervalId);
-            }
-        }
-        const execInterval = (argSumm) => {
-            execInterval.reset();
-            summary = argSumm;
-            intervalId = setInterval(write, msDelay);
-        }
-        execInterval.start = () => execInterval();
-        execInterval.stop = () => clearInterval(intervalId);
-        execInterval.reset = () => {
-            clearInterval(intervalId);
-            knSumm.innerText = "";
-            index = 0;
-        }
-        return execInterval;
-    }
 
-    // 各県クリックイベント作成
-    const typingSumm = typing();
+    const typingSumm = typing(knowitSummary);
     document.querySelectorAll(".jp-pref").forEach( elm => {
         elm.addEventListener("click", (event) => {
             
             // 非表示なら抜ける
-            if (knArea.offsetParent === null) {
+            if (knowitArea.offsetParent === null) {
                 return;
             }
 
-            // console.log(elm.getBoundingClientRect());
-            //console.log(elm.top, elm.left, elm.height, elm.width);
-
+            // ピン表示（※適切な場所に表示できる方法模索中・・・）
             const svg = elm.getBoundingClientRect();
-            // ピン表示
-            knPin.style.top = svg.y - 20+ "px"//svg.top + svg.height / 2 + "px";
-            knPin.style.left = svg.x + "px"//svg.left + svg.width / 2 + "px";
-            knPin.style.display = "block";
-            console.log(knPin.style.top, knPin.style.left);
+            mapPin.style.top = svg.y - 20+ "px"
+            mapPin.style.left = svg.x + "px"
+            mapPin.style.display = "block";
+            console.log(mapPin.style.top, mapPin.style.left);
 
             let summary = "";
             switch (getPrefInfo(elm.id).prefName) {

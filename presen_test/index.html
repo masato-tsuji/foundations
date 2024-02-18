@@ -52,25 +52,30 @@
           <label for="disp_pref_highlite"></label>
           <span class="tgl-name">知名度UP</span>
         </div>
+        <div class="cnf-tgl">
+          <input type="checkbox" id="demo_mode">
+          <label for="demo_mode"></label>
+          <span class="tgl-name">Demo mode</span>
+        </div>
 
       </div>
     </div>
 
     <!-- 都道府県を知ろう コンテンツ-->
     <div class="map-app contents-box" id="knowit_area">
-      <p id="knowit_summary"></p>
+      <p class="typing-display" id="knowit_summary"></p>
     </div>
 
     <!-- 都道府県当てクイズ ナビ -->
     <div class="map-app contents-box" id="navi_area">
       <div id="navi_description"></div>
       <div id="navi_option"></div>
-      <div id="navi_message"></div>
+      <p id="navi_message"></p>
       <div id="navi_question"></div>
       <div id="navi_result"></div>
       <div class="navi-flow">
         <div id="navi_count"></div>
-        <div id="navi_denom">/</div>
+        <div id="navi_denominator">/</div>
         <div id="navi_time"></div>
       </div>
       <div id="navi_buttons">
@@ -87,11 +92,11 @@
          <tr><th>順位</th><th>名前</th><th>タイム</th></tr>
         </thead>
         <tbody>
-         <tr><th>🏆</th><td>TOYOTAさん</td><td>0:05</td></tr>
-         <tr><th>🥈</th><td>TOYOTAさん</td><td>6:11</td></tr>
-         <tr><th>🥉</th><td>TOYOTAさん</td><td>8:24</td></tr>
-         <tr><th>４</th><td>TOYOTAさん</td><td>8:25</td></tr>
-         <tr><th>５</th><td>TOYOTAさん</td><td>8:25</td></tr>
+         <tr><th>🏆</th><td>GR YARISさん</td><td>1:45</td></tr>
+         <tr><th>🥈</th><td>GR SUPRAさん</td><td>2:36</td></tr>
+         <tr><th>🥉</th><td>GR 86さん</td><td>3:07</td></tr>
+         <tr><th>４</th><td>CELICA GT-Fourさん</td><td>4:16</td></tr>
+         <tr><th>５</th><td>HARRIERさん</td><td>5:02</td></tr>
       </table>
     </div>
 
@@ -181,6 +186,24 @@
 	      </g>
       </svg>
     </div>
+
+    <!-- プレゼンオープニング -->
+    <div id="presen_opening">
+      <!-- <h1 id="presen_title">Japanese Map Study</h1> -->
+      <h1 class="typing-display" id="presen_title"></h1>
+      <h2 class="anime-fadein" id="prsen_description" onclick="showStudy()">大人も子供も楽しく学べるマップアプリ</h2>
+      <span class="presen-btn" id="opening_start" onclick="openingStart(this)">Start</span>
+      <p class="anime-fadein" id="presen-study" onclick="showStudyList()">*---* 基礎コースで得たこと *---*</p>
+
+      <ul class="anime-fadein"  id="presen-study-list">
+        <li class="presen-list">ES6改変点や新たな学習 ･･･ Const/Let, クロージャー</li>
+        <li class="presen-list">プログラミングの作法(手法) ･･･ TDD, JSDoc</li>
+        <li class="presen-list">仲間づくり ･･･ DIG, アクティビティ, ペアプロ</li>
+      </ul>
+      <span class="anime-fadein presen-btn" id="presen_enter" onclick="presenStart()">Enter</span>
+    </div>
+
+
   </body>
 </html>
 
