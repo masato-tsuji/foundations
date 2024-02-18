@@ -48,13 +48,11 @@ const setViewBox = viewParam => {
         okinawa.setAttribute("transform", "translate(540,-250)");
         okinawaLine.style.display = "block";
         svg.setAttribute("viewBox", "-500 -20 1935 1637");
-        
     } else {
         okinawa.setAttribute("transform", "translate(0,0)");
         okinawaLine.style.display = "none";
         svg.setAttribute("viewBox", "-755 -25 2380 2010");
     }
-    
 }
 
 /**
@@ -67,13 +65,13 @@ const hideAppElements = () => {
 }
 
 /**
- * マップ上に
- * @param {boolean} display - 表示を
+ * マップ上の都道府県名の表示/非表示を切り替える
+ * @param {boolean} display - 表示させる場合はtrueを受け取とる
  */
 const switchPrefName = display => {
     document.querySelectorAll(".jp-pref-name").forEach((elm) => {
         console.log(elm);
-        elm.style.display = ["none", "block"][Number(display)];
+        elm.style.display = display ? "block" : "none";
     });    
 }
 
@@ -119,7 +117,6 @@ const typing = (element) => {
 document.addEventListener('DOMContentLoaded', () => {
 
     // プレゼン発表用オープニング表示
-    //window.location.search
     if (window.location.search === "?presen") {
         const head = document.querySelector("head");
         const script = document.createElement("script");
@@ -145,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // TOP
             if (elm.id === "menu_top") {
                 hideAppElements();
-
                 if (tglOkinawa.checked) {
                     tglOkinawa.click();
                 }
@@ -169,8 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // おまけ
             if (elm.id === "menu_bonus") {
-                hideAppElements();
-
+                document.querySelector("knowit_area").classList.add(".anime-fadeout");
             }
 
         });

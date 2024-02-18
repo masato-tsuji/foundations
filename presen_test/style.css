@@ -24,8 +24,24 @@ body {
         opacity: 0;
         display: block;
     }
-    to {opacity: 1;}
+    to {
+        opacity: 1;
+        display: block;
+    }
 }
+
+.anime-fadeout {
+    opacity: 1;
+    animation: fadeout 1s;
+}
+@keyframes fadeout {
+    from { opacity: 1; }
+    to {
+        opacity: 0;
+        display: none;
+    }
+}
+
 
 /* --- メニューエリア --- */
 #menu_area {
@@ -399,8 +415,9 @@ body {
 }
 #prsen_description {
     display: none;
-    /* opacity: 0%; */
     margin-bottom: 50px;
+    font-size: 36px;
+    text-shadow:1px 1px 0 #fff, 2px 2px 0 #2a2a2a;
 }
 #presen_opening p {
     display: none;

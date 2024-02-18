@@ -253,7 +253,7 @@ const prefecturesQuiz = () => {
             return;
         }
 
-        // 記録更新メッセージフェードイン
+        // 記録更新
         msgIcon.innerText = ["🏆", "🥈", "🥉", "4位", "5位"][rec.getRank() - 1];
         msgRec.innerText = naviTime.innerText;
         msgBox.style.display = "block";
