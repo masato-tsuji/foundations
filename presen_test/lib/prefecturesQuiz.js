@@ -12,10 +12,11 @@ const prefecturesQuiz = () => {
     const nvCnt = document.querySelector("#navi_count");
     const nvDnm = document.querySelector("#navi_denom");
     const nvTime = document.querySelector("#navi_time");
-    const nvStart = document.querySelector("#navi_start");
-    const nvReset = document.querySelector("#navi_reset");
+    const nvStartBtn = document.querySelector("#navi_start");
+    const nvResetBtn = document.querySelector("#navi_reset");
     const tglOkinawa = document.querySelector("#okinawa_move");
     const tglMapLock = document.querySelector("#map_lock");
+    const tglChild = document.querySelector("#child_mode");
     const msgBox = document.querySelector("#msg_box");
     const msgIcon = document.querySelector("#msg_icon");
     const msgRec = document.querySelector("#msg_record");
@@ -25,10 +26,8 @@ const prefecturesQuiz = () => {
     const recTbl = document.querySelector("#record_tbl");
 
 
-    const defaultQuiz = "問題";
-
     // 出題用配列
-    const prefDatas = prefInfos.map(pref => ({[pref["id"]]: pref["prefName"]}));
+    const prefDatas = prefsInfo.map(pref => ({[pref["id"]]: pref["prefName"]}));
     let choicePrefId = "";
 
     //出題用の配列
@@ -39,15 +38,18 @@ const prefecturesQuiz = () => {
     const prefsData = () => {
         let prefsArray = [];
         let choicedPref;
-        prefsData.makePrefs = (childMode = false) => {
+        prefsData.makePrefsData = (childMode = false) => {
             if (!childMode) {
-                prefsArray = prefInfos.map(pref => ({[pref["id"]]: pref["prefName"]}));
+                prefsArray = prefsInfo.map(pref => ({[pref["id"]]: pref["prefName"]}));
+                prefsData.isChildMode = false;
             } else {
-                prefsArray = prefInfos.map(pref => ({[pref["id"]]: pref["prefHiragana"]}));
+                prefsArray = prefsInfo.map(pref => ({[pref["id"]]: pref["prefHiragana"]}));
+                prefsData.isChildMode = true;
             }
         }
         prefsData.getData = () => prefsArray;
         prefsData.choicedPref = "";
+        prefsData.isChildMode = false;
         prefsData.deletePref = () => {
             if (prefsArray.indexOf(prefsData.choicedPref) > -1) {
                 const index = prefsArray.indexOf(prefsData.choicedPref);
@@ -96,8 +98,7 @@ const prefecturesQuiz = () => {
 
     // 初期化
     const initialize = () => {
-        prefs.makePrefs(false);
-        // console.log(prefs.getData());
+        prefs.makePrefsData(tglChild.checked);  // クイズ用の都道府県データ作成
         !tglOkinawa.checked ? tglOkinawa.click(): setViewBox();
         !tglMapLock.checked ? tglMapLock.click(): null;
         recArea.style.display = "block";
@@ -132,9 +133,12 @@ const prefecturesQuiz = () => {
         }
 
         nvQuiz.style.backgroundColor = "";
-        nvQuiz.innerText = defaultQuiz;
+        nvQuiz.innerText = ["問題", "もんだい"][Number(tglChild.checked)];
         nvRes.innerText = "";
-        nvStart.disabled = false;
+        nvStartBtn.innerText = ["スタート", "はじめる"][Number(tglChild.checked)];
+        nvResetBtn.innerText = ["リセット", "さいしょから"][Number(tglChild.checked)];
+        nvStartBtn.disabled = false;
+
     }
 
     /**
@@ -192,7 +196,6 @@ const prefecturesQuiz = () => {
     // クイズ出題
     const execQuiz = () => {
         nvRes.innerText = "";
-        // const obj = rndChoice(prefDatas); // script.jsの関数を使用
         const obj = rndChoice(prefs.getData()); // script.jsの関数を使用
         prefs.choicedPref = obj;
         choicePrefId = Object.keys(obj)[0]; 
@@ -202,12 +205,15 @@ const prefecturesQuiz = () => {
     // ノーマルモード 回答チェック
     const chkNormalQuiz = (elm) => {
         let msg;
+        let res;
         if (choicePrefId === elm.id) {
-            msg = `正解${rndChoice(["🎉", "🎊", "🎈", "👍", "😊"])}`;
+            msg = ["正解", "すごい"][Number(prefs.isChildMode)];
+            res = `${msg}${rndChoice(["🎉", "🎊", "🎈", "👍", "😊"])}`;
         } else {
-            msg = `不正解${rndChoice(["😱", "😣", "😵", "🙈", "👻"])}`;
+            msg = ["不正解", "おしい"][Number(prefs.isChildMode)];
+            res = `${msg}${rndChoice(["😱", "😣", "😵", "🙈", "👻"])}`;
         }
-        nvRes.innerHTML = msg;
+        nvRes.innerHTML = res;
     }
 
     // タイムトライアル 回答チェック
@@ -288,17 +294,17 @@ const prefecturesQuiz = () => {
     const quizCounter = counter(nvCnt);
 
     // スタートボタン
-    nvStart.addEventListener("click", (e) => {
+    nvStartBtn.addEventListener("click", (e) => {
         execQuiz();
         if (document.querySelector("#radio_time").checked) {
-            nvStart.disabled = true;
+            nvStartBtn.disabled = true;
             quizCounter.reset();
             quizTimer.start();
         }
     });
     
     // ＄リセットボタン
-    nvReset.addEventListener("click", (e) => {
+    nvResetBtn.addEventListener("click", (e) => {
         quizTimer.reset();
         quizCounter.reset();
         initialize()
