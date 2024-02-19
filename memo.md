@@ -341,6 +341,9 @@ div.classList.remove(...cls);
 // "foo" クラスを "bar" クラスで置き換え
 div.classList.replace("foo", "bar");
 
+// ★スタイルを元に戻す場合は（空白を代入）
+div.style.backgroundColor = "";
+
 
 ### ▼vertical-alignが効かない
 

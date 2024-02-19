@@ -57,10 +57,14 @@ const setViewBox = viewParam => {
 
 /**
  * 各アプリで表示している要素をすべて非表示にする
+ * 都道府県の要素のstyle.fillを初期化する
  */
 const hideAppElements = () => {
     document.querySelectorAll(".map-app").forEach((elm) => {
         elm.style.display = "none";
+    });
+    document.querySelectorAll(".jp-pref").forEach((elm) => {
+        elm.style.fill = "";
     });
 }
 
@@ -136,6 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // メニュー
     const knowit = prefecturesKnowit(); // prefecturesKnowit.jsにて定義
     const quiz = prefecturesQuiz(); // prefecturesQuiz.jsにて定義
+    const heatMap = prefecturesHeatMap();   // prefecturesHeatMap.jsにて定義
     document.querySelectorAll(".menu-btn").forEach( elm => {
         elm.addEventListener("click", (e) => {
 
@@ -165,15 +170,12 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // おまけ
             if (elm.id === "menu_bonus") {
-                // document.querySelector("knowit_area").classList.add(".anime-fadeout");
-
-                //#94EB85
-
-
+                hideAppElements();
+                heatMap();
             }
 
         });
-    });   
+    });
     
     // オプション設定
     document.querySelectorAll(".cnf-tgl > input").forEach( elm => {
@@ -210,8 +212,11 @@ document.addEventListener('DOMContentLoaded', () => {
         elm.addEventListener("click", (e) => {
             // console.log(getPrefInfo(elm.id).prefName);
 
-            
+
             elm.style.fill = "#94EB85";
+            
+
+
 
         });
     });

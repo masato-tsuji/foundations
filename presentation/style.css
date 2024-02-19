@@ -333,6 +333,15 @@ body {
 }
 
 
+
+/* --- ヒートマップエリア --- */
+#heat_area {
+    /* display: block; */
+    height: 450px;
+}
+
+
+
 /* マップ用ピン */
 .map-pin {
     font-size: 35px;
@@ -390,21 +399,19 @@ body {
 
 
 /* プレゼンオープニング */
-
-
 #presen_opening {
     display: none;
     position: absolute;
     top: 25px;
     left: 20px;
-    height: 760px;
-    width: 1850px;
+    /* height: 760px; */
+    height: 85%;
+    width: 98%;
     padding-top: 5%;
     border-radius: 30px;
     background-color: white;
     text-align: center;
     opacity: 90%;
-
 }
 #opening_start {
     font-size: 30px;
