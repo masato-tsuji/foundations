@@ -61,17 +61,30 @@ const prefecturesKnowit = () => {
     document.querySelectorAll(".jp-pref").forEach( elm => {
         elm.addEventListener("click", (event) => {
             
-            // 非表示なら抜ける
+            // 非表示なら
             if (knowitArea.offsetParent === null) {
                 return;
             }
 
             // ピン表示（※適切な場所に表示できる方法模索中・・・）
             const svg = elm.getBoundingClientRect();
-            mapPin.style.top = svg.y - 20+ "px"
-            mapPin.style.left = svg.x + "px"
+            // mapPin.style.top = svg.y - 20+ "px"
+            // mapPin.style.left = svg.x + "px"
+
+            // mapPin.style.top = event.pageY;  //ok
+            // mapPin.style.left = event.pageX; //ng
+            
+            // mapPin.style.top = event.screenY + "px";
+            // mapPin.style.left = event.screenX + "px";
+            
+            mapPin.style.top = event.clientY + "px";
+            mapPin.style.left = event.clientX + "px";
+
+
             mapPin.style.display = "block";
-            console.log(mapPin.style.top, mapPin.style.left);
+
+            console.log("mapPin", mapPin.style.top, "mouse", event.clientY);
+            console.log("mapPin", mapPin.style.left, "mouse",event.clientX);
 
             let summary = "";
             switch (getPrefInfo(elm.id).prefName) {
