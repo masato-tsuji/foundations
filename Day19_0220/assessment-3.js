@@ -39,7 +39,7 @@ const putItemInRefrigerator = item => arrayItem.push(item);
 /**
  * １つの渡された引数を配列から削除（対象がない場合はそのまま返す）
  * @param {string} item - 配列から削除する文字列
- * @returns {Array} - 引数の文字列を削除した配列
+ * @returns {string} - 引数の文字列を削除した配列
  */
 const removeItemFromRefrigerator = item => {
     const removeIndex = arrayItem.indexOf(item);
