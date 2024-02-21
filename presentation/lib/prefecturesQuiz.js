@@ -27,7 +27,7 @@ const prefecturesQuiz = () => {
 
     // デモモード（タイムトライアル時に [demoModeLimit] 個正解でクリア）
     const tglDemoMode = document.querySelector("#demo_mode");
-    const demoModeLimit = 5;
+    const demoModeLimit = 3;
 
     // 出題用配列
     let choicePrefId = "";
