@@ -32,9 +32,18 @@ git config --global http.proxy http://proxy1000.adm.toyota.co.jp:15520
 ### ▼proxy削除する場合
 git config --global --unset http.proxy
 
+### ▼branchの確認
+```
+git branch
+git branch -a    // リモートブランチも含める
+```
 
-### 
+### ▼branch名の変更（Mは同名があっても強制 mもある）
+```
 git branch -M main  
+```
+
+### ▼branchへの移動
 
 
 ### ▼Githubへ転送
