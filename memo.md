@@ -11,6 +11,15 @@
 git remote add origin https://github.com/masato-tsuji/foundations.git
 ```
 
+### ▼設定状態の確認
+```
+// 全設定
+git config -l
+
+// 項目指定
+git coifig user.email
+```
+
 ### ▼ユーザー名とメールアドレスを登録しておく
 ```
 git config --global user.name "masato-tsuji"
