@@ -62,13 +62,68 @@ git push -f  origin main
 
 
 ## ---------------------------------------------
-## Firebase
+## Firebase + Node.js  ⇒　開発環境はWSL2 + Dockerにした
 ## --------------------------------------------
 
-### Node.jsのインストール
+
+### ①WSL2インストール
+windows11の場合
+```
+wsl --install
+```
+本コマンドによって、以下4つの作業が実行されます。
+・「Linux用Windowsサブシステム（WSL）」と「仮想マシン プラットフォーム」を有効化する
+・WSL2用Linuxカーネルをダウンロード・インストールする
+・WSL2を既定のバージョンとする
+・Ubuntuディストリビューションをダウンロード・インストールする
+さらにWindows11では、Windows Terminalがあらかじめインストール済となっています。
+
+### ②Docker Desktop for Windowsをインストール
+インストール途中でWSL2と連携するようなメッセージ無かったが
+起動して設定確認すると連携されていた
+Use the WSL 2 based engine (Windows Home can only run the WSL 2 backend)にチェックあり
+
+ubuntu起動して`docker --version`を実行するとインストールされている
+
+### ③VS Codeと連携
+①②をしてからVS Codeを起動すると自動で認識し拡張機能のインストールが促される
+WSLという拡張機能
+
+
+### パッケージ管理（バージョン切り替え）システム
+homebrewやnvmやn, nodistなど色々あるがvoltaを採用
+
+WSLにてインストールは
+curl https://get.volta.sh | bash
+
+
+
+### voltaでNode.jsのインストール
+バージョン管理システムでNode.jsをインストールした方が互換性の管理がしやすい。
+パッケージの依存関係も含めて管理してもらえるので変更した場合の作業が効率的。
+※インストール可能なNode.js一覧は表示できないみたい・・・
+```
+volta install node@latest
+volta install node  // でも可
+```
+// バージョン指定
+`volta install node@14.15.0`
+
+// インストールされているNodeの一覧
+`volta list node`
+
+// バージョンの切り替え（プロジェクトのカレントディレクトリで）
+`volta pin node@14.15.0`
+
+// グローバルに使用するバージョンの切り替え
+`volta default node@14.15.0`
+
+
 
 ### Firebaseのインストール
+// インストールするディレクトリはどこでも良さそう。。
 npm install -g firebase-tools
+
 
 ### PowerShellのセキュリティのエラーが出た場合
 // firebase : このシステムではスクリプトの実行が無効になっているため、...
@@ -80,6 +135,18 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
 ### npm install (オプションなし)
 
 オプションなしで`npm install`すると、カレントディレクトリにある package.json に記述されている情報を元に、そこに記述されている パッケージを node_modules （インストール先）にインストールします。
+
+※Google Driveの仮想ディレクトリ上でinstallするとmkdirが失敗するエラーが出る ENOTDIR -4052
+
+
+### package.jsonに"engines"が設定されている場合
+// 「このバージョンのNode.jsでしか動かない」を表明できる
+// 他のバージョンでインストールするとエラーが出る
+````js
+  "engines": {
+    "node": "18"
+  },
+````
 
 
 
