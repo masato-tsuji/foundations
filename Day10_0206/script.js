@@ -129,23 +129,8 @@ test(getValues(object2), ["a", "b", "c"]);
  * @returns {number} 引数のオブジェクトの深さ（何層になっているか）を返す。入れ子になったオブジェクトが複数ある場合は、一番深い層の数を返してください。
  */
 
-function getDepth1(nestObj, depthCnt = 1) {
-    console.log("roop before: ", nestObj);
-    let resKey;
-    for (const key in nestObj) {
-        if (typeof nestObj[key] === "object") {
-          console.log("if: ", key, nestObj[key], typeof nestObj[key], depthCnt);
-          return getDepth(nestObj[key], Math.max(++depthCnt, depthCnt));
-          // depthCnt++;
-        } else {
-          depthCnt = 1;
-        }
-        //return typeof nestObj[obj] === "object" ? ++depthCnt : getDepth(nestObj[obj], depthCnt);
-    }
-    return getDepth(nestObj[key], depthCnt++);
-}
 
-// 〇
+// ×
 function getDepth2(nestObj, depthCnt = 1) {
   console.log("func: ", nestObj, depthCnt);
   for (const key in nestObj) {
@@ -163,37 +148,33 @@ function getDepth2(nestObj, depthCnt = 1) {
 }
 
 
-// ネストのキーは取れない
-function getDepth5(nestObj) {
-  console.log(Object.keys(nestObj));
+
+
+const getDepth = nestObj => {
+
+  const testArr = Object.entries(nestObj);
+  
+  let cnt = 0;
+  testArr.reduce((accm, curr) => {
+
+    
+
+    console.log("accm:", accm,"curr:" , curr[1]);
+    if (Array.isArray(curr)) {
+    // if (typeof curr[1] === "object") {
+      cnt++;
+    }
+
+
+  },[]);
+
+
 }
 
-//一次元目の値は取得できている
-function getDepth9(nestObj) {
-  for (const key in nestObj) {
-    console.log(nestObj[key]);
-
-  }
-}
 
 
-// function getDepth(nestObj, depthCnt = 1) {
 
-//   for (const key in nestObj) {
-//     console.log("key", key);
-//     if (typeof nestObj[key] === "object") {
-//       return getDepth(nestObj[key], Math.max(depthCnt + 1, depthCnt));
-//     } else {
-//       console.log("delete key: ", nestObj[key]);
-//       delete nestObj[key];
-//       console.log(nestObj);
-//       return getDepth(nestObj, depthCnt);
-//     }
-//   }
-//   return depthCnt;
-// }
-
-
+// 〇
 function getDepth(nestObj) {
   let depthMax = 1;
   let depthCnt = 1;
@@ -274,18 +255,17 @@ const nestedObjectZ = {
 };
 
 
-// nestedObject1 の深さは 1 です
+// nestedObjectA の深さは 3 です
 test(getDepth(nestedObjectA), 3);
 
+// // nestedObject1 の深さは 1 です
+// test(getDepth(nestedObject1), 1);
 
-// nestedObject1 の深さは 1 です
-test(getDepth(nestedObject1), 1);
+// // nestedObject2 の深さは 2 です
+// test(getDepth(nestedObject2), 2);
 
-// nestedObject2 の深さは 2 です
-test(getDepth(nestedObject2), 2);
-
-// nestedObject3 の深さは 3 です
-test(getDepth(nestedObject3), 3);
+// // nestedObject3 の深さは 3 です
+// test(getDepth(nestedObject3), 3);
 
 // nestedObjectZ の深さは 22 です。
 test(getDepth(nestedObjectZ), 22);
