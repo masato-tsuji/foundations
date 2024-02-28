@@ -43,7 +43,7 @@ for (const obj of unicorns) {
       document.querySelector("img").style.cssText = "width: 30%; height: 30%;";
     });
 }
-  
+
 document.body.appendChild(document.createElement("div"));
   
 
