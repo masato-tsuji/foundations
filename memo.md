@@ -148,6 +148,22 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
   },
 ````
 
+### firebase deployで下記のエラーが出る場合
+```
+Oops! Something went wrong! :(
+
+ESLint: 7.19.0
+
+ESLint couldn't find the config "google" to extend from. Please check that the name of the config is correct.
+```
+
+// 下記をインストール
+`npm install eslint-config-google --save-dev`
+
+
+
+
+
 
 
 ## ---------------------------------------------
