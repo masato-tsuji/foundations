@@ -6,9 +6,32 @@
 ## Gitコマンド
 ## ---------------------------------------------
 
+### ▼クローン
+`git clone [URL]`
+
+### ▼ローカルリポジトリが無い場合の一連の流れ
+```
+mkdir [repository-name]          # ローカルリポジトリのディレクトリ作成
+cd [repository-name]
+git init                         # ローカルリポジトリの作成（初期化）
+git add README.md                # ローカルリポジトリにREADME.mdファイルの作成
+git commit -m "first commit"     # README.mdファイルを作成した時点でコミット
+git branch -M main               # ローカルに新規ブランチを作成
+git remote add origin [URL]      # ローカルリポジトリとリモートリポジトリの連携
+git push -u origin main          # ローカルコミットされた内容をリモートにpush
+```
+
+
 ### ▼リモートリポジトリと連携
+// リモート側にリポジトリがあってローカル側のリポジトリと接続
+// ローカルリポジトリのカレントディレクトリで実行
 ```
 git remote add origin https://github.com/masato-tsuji/foundations.git
+```
+
+### ▼リモートリポジトリの確認
+```
+git remote -v
 ```
 
 ### ▼設定状態の確認
@@ -166,6 +189,61 @@ ESLint couldn't find the config "google" to extend from. Please check that the n
 
 
 
+### ビルドするためのツール
+
+webpack
+bundleおよびminify処理をしてくれる
+
+babel
+transpile処理をしてくれる
+
+これらのツールは、Node.jsのパッケージとして提供されています。だから、フロントエンドの開発環境をNode.jsで構築することが多いのです。これらのパッケージをインストールして、設定ファイルに必要事項を記載しておくことで、コマンド1つで、一連のビルド処理を行ってくれます。
+
+
+## ---------------------------------------------
+## Node.js + React + GitHub Pages
+## --------------------------------------------
+
+### 前提条件
+Node.js
+npm
+GitHub repository
+
+### Reactのインストール
+`npx create-react-app my-app cd my-app`
+
+### GitHubと連携しpush
+```
+git remote add origin https://github.com/masato-tsuji/foundations.git
+git push
+```
+
+### Reactのビルド
+npm run build
+
+### GitHubのPegesにデプロイするモジュールインストール
+npm install --save gh-pages
+
+### package.jsonの追記
+`"homepage": "http://username.github.io/site",`
+
+```
+"scripts": { 
+  "start": "react-scripts start", 
+  "build": "react-scripts build", 
+  "test":"react-scripts test", 
+  "eject": "react-scripts eject", 
+  "predeploy": "npm run build",  // 追記
+  "deploy": "gh-pages -d build"  // 追記
+}
+```
+
+### デプロイ VSCodeのコンソールで実行したほうがいい
+`nmp run deploy`
+
+
+### gh-pagesのブランチは既にあるエラーが出たらキャッシュ消す
+`rm -rf node_modules/.cache`
 
 
 
