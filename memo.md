@@ -132,6 +132,10 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
 ```
 // セキュリティレベルが下がっているので注意が必要
 
+### firebaseでgoogleのモジュールがないと言われた場合
+npm install eslint-config-google --save-dev
+
+
 ### npm install (オプションなし)
 
 オプションなしで`npm install`すると、カレントディレクトリにある package.json に記述されている情報を元に、そこに記述されている パッケージを node_modules （インストール先）にインストールします。
