@@ -73,6 +73,24 @@ git branch -a    // リモートブランチも含める
 ### ▼branchの作成と切替を同時
 `git switch -c xxxx`
 
+
+### ▼基本的な流れ
+git add .                 # 変更をステージング（コミットの対象をINDEXに入れる）
+git commit -m"[Add]test"  # コメントをつけてコミット
+git push                  # リモートにpush
+
+
+### ▼modifiedを取り消す
+git checkout -- .
+git checkout ファイル名||ディレクトリ名
+
+### ▼ステージングを取り消す
+git reset [ファイル名]
+
+### ▼直前のcommitに戻る
+git restore .
+git restore ファイル名
+
 ### ▼リモートbranchを取り込む
 `git fetch origin xxxx`
 
