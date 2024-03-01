@@ -75,6 +75,17 @@ git commit -m"[Add]test"  # コメントをつけてコミット
 git push                  # リモートにpush
 
 
+### ▼modifiedを取り消す
+git checkout -- .
+git checkout ファイル名||ディレクトリ名
+
+### ▼ステージングを取り消す
+git reset [ファイル名]
+
+### ▼直前のcommitに戻る
+git restore .
+git restore ファイル名
+
 
 ### ▼Githubへ転送
 git push -u origin main
