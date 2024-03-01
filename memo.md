@@ -70,9 +70,10 @@ git branch -M main
 
 
 ### ▼基本的な流れ
-git add .                 # 変更をステージング
+git add .                 # 変更をステージング（コミットの対象をINDEXに入れる）
 git commit -m"[Add]test"  # コメントをつけてコミット
 git push                  # リモートにpush
+
 
 
 ### ▼Githubへ転送
