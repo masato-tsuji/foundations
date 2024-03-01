@@ -69,6 +69,12 @@ git branch -M main
 ### ▼branchへの移動
 
 
+### ▼基本的な流れ
+git add .                 # 変更をステージング
+git commit -m"[Add]test"  # コメントをつけてコミット
+git push                  # リモートにpush
+
+
 ### ▼Githubへ転送
 git push -u origin main
 
