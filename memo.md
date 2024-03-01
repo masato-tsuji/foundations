@@ -35,13 +35,13 @@ git remote -v
 ```
 
 ### ▼設定状態の確認
-```
+
 // 全設定
-git config -l
+`git config -l`
 
 // 項目指定
-git coifig user.email
-```
+`git coifig user.email`
+
 
 ### ▼ユーザー名とメールアドレスを登録しておく
 ```
@@ -50,10 +50,10 @@ git config --global user.email "masato_tsuji@mail.toyota.co.jp"
 ```
 
 ### ▼会社PCでPULL、PUSHするならProxy設定が必要
-git config --global http.proxy http://proxy1000.adm.toyota.co.jp:15520
+`git config --global http.proxy http://proxy1000.adm.toyota.co.jp:15520`
 
 ### ▼proxy削除する場合
-git config --global --unset http.proxy
+`git config --global --unset http.proxy`
 
 ### ▼branchの確認
 ```
@@ -62,26 +62,47 @@ git branch -a    // リモートブランチも含める
 ```
 
 ### ▼branch名の変更（Mは同名があっても強制 mもある）
-```
-git branch -M main  
-```
+`git branch -M main`
 
-### ▼branchへの移動
+### ▼branchの作成
+`git branch xxxx`
+
+### ▼branchへの移動 強制時は -f
+`git switch xxxx`
+
+### ▼branchの作成と切替を同時
+`git switch -c xxxx`
+
+### ▼リモートbranchを取り込む
+`git fetch origin xxxx`
+
+### ▼これも切り替えるコマンドだがswitchが後からできたのでそちらを
+// checkoutは変更の取り消しなどに使う
+`git checkout xxxx`
 
 
-### ▼Githubへ転送
-git push -u origin main
+### ▼branchの削除
+// カレントのbranchは削除できないので移動しておく
+// pushかmerge済みでないと削除できない 強制削除は -D
+`git branch -d xxxx`
+
+
+### ▼Githubへ転送 branchを指定できる
+`git push -u origin main`
 
 ### ▼Githubからブランチの定義を新しく定義（合流）してPull（競合時にもOK）
-git pull --rebase
+`git pull --rebase`
 
 
 ### ▼Githubから強制Pull（github上に最新があるのならこれをする）
-git pull --allow-unrelated-histories  origin main
+`git pull --allow-unrelated-histories  origin main`
 
 
 ### ▼Githubへ強制Push
-git push -f  origin main
+`git push -f  origin main`
+
+
+
 
 
 ## ---------------------------------------------
@@ -203,6 +224,17 @@ transpile処理をしてくれる
 ## ---------------------------------------------
 ## Node.js + React + GitHub Pages
 ## --------------------------------------------
+
+### Reactの基本構成
+srcディレクトリの中に
+index.js  // メインファイル HTMLテンプレートとJSのコンポーネントをレンダリング実際の表示
+App.js  // コンポーネントを定義したファイル。実際に画面に表示される内容はここで定義
+publicディレクトリの中に
+index.html  // メインのindex.jsの対になるHTMLのテンプレートファイル index.jsに読み込まれる
+
+バックエンドでNode.jsが動くようなサーバならよいがそうでない場合はindex.jsは読み込まれないので
+npm run buildでビルドしてindex.htmlが生成されindex.jsの相当するスクリプトが実行される。
+
 
 ### 前提条件
 Node.js
