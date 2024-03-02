@@ -140,6 +140,23 @@ wsl --install
 ・Ubuntuディストリビューションをダウンロード・インストールする
 さらにWindows11では、Windows Terminalがあらかじめインストール済となっています。
 
+
+### WSLからindex.htmlを開く
+// windows上のブラウザにD&Dしても開かない
+// 方法1. 既定のブラウザで開く
+`explorer.exe index.html`
+
+// 方法2. chromeで開く
+.bashrcに
+
+function chrome(){
+    /mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe $(wslpath -w $(realpath $1))
+}
+alias chrome='chrome'
+としておいて、chrome temp.html
+
+
+
 ### ②Docker Desktop for Windowsをインストール
 インストール途中でWSL2と連携するようなメッセージ無かったが
 起動して設定確認すると連携されていた
@@ -184,8 +201,51 @@ volta install node  // でも可
 
 ### Firebaseのインストール
 // インストールするディレクトリはどこでも良さそう。。
-npm install -g firebase-tools
+`npm install -g firebase-tools`
 
+
+### Firebaseにログイン
+// ログイン済みの場合は現在のログインアカウントが表示される
+`firebase login`
+
+### google cloudのプロジェクトの一覧を表示
+`firebase projects:list`
+
+### プロジェクトの選択
+`firebase use [project id]`
+
+
+### ローカル環境でエミュレートする
+Firebase Local Emulator Suite を使用すると、Firebase プロジェクトにデプロイする代わりにローカルマシンでアプリをビルドしてテストできます。開発中にローカルテストを行うことを強くおすすめします。その理由の 1 つとしては、本番環境でコストを発生させる可能性があるコーディング エラーのリスク（無限ループなど）が低下するためです。
+
+関数をエミュレートするには:
+
+`firebase emulators:start`
+
+実行し、Emulator Suite UI の URL の出力を確認します。デフォルトは localhost:4000 ですが、お使いのマシンによっては別のポートでホストされている場合があります。その URL をブラウザに入力して、Emulator Suite UI を開きます。
+
+firebase emulators:start コマンドの出力で、HTTP 関数の URL を確認します。この URL は http://localhost:5001/MY_PROJECT/us-central1/addMessage のような形式です。ただし、次の点に注意してください。
+
+MY_PROJECT はプロジェクト ID に置き換えられます。
+お使いのローカルマシンによってはポートが異なる場合があります。
+
+終了する場合は
+Ctrl + c
+
+### サンプルコードのuppercase-firestoreをemulatorした場合
+// URLのクエリストリングにメッセージ（文字）を送るとfirestoreのコレクションに追加される
+
+// コンソールに出力されているメッセージ送信用のURLを開く
+http://127.0.0.1:5001/webapi-415111/us-central1/addmessage
+
+// URLにクエリストリングを追記する
+http://127.0.0.1:5001/webapi-415111/us-central1/addmessage?text=test message
+
+// エミュレートされたFirebaseサイトでFirestoreに追加されていることを確認する
+http://127.0.0.1:4000/firestore 
+
+※これをdeployする時はFunctionsのみにする
+`firebase deploy --only functions`
 
 ### PowerShellのセキュリティのエラーが出た場合
 // firebase : このシステムではスクリプトの実行が無効になっているため、...
@@ -225,6 +285,8 @@ ESLint couldn't find the config "google" to extend from. Please check that the n
 
 // 下記をインストール
 `npm install eslint-config-google --save-dev`
+
+
 
 
 
