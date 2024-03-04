@@ -26,6 +26,10 @@ const unicorns = [
     name: 'DreamBox',
     img: 'imgs/05_dreambox.jpg',
     desc: 'She is full of dreams.'
+  },{
+    name: 'CyberTiger',
+    img: 'https://seijirokosakitmc.github.io/myfriendlyunicorns/imgs/06_cybertiger.jpg',
+    desc: 'Happy Hacking.'
   },
 ];
 
@@ -37,17 +41,12 @@ for (const obj of unicorns) {
   document.body.appendChild(p)
     .addEventListener("click", (e) => {
       document.querySelector("div").innerHTML = 
-      `<img src=${obj.img}>\
+      `<img class="unicorn-img" src=${obj.img}>\
       <h2>${obj.name}</h2>\
       <p>${obj.desc}</P>`;
-      document.querySelector("img").style.cssText = "width: 30%; height: 30%;";
+      document.querySelector(".unicorn-img").style.cssText = "width: 30%; height: 30%;";
     });
 }
-
 document.body.appendChild(document.createElement("div"));
   
-
-
-
-
 
