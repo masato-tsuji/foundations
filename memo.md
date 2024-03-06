@@ -105,15 +105,26 @@ git restore ファイル名
 `git branch -d xxxx`
 
 
-### ▼Githubへ転送 branchを指定できる
-`git push -u origin main`
+
+// ------------------------------------------------
+### ▼git pullとは
+// 下記２つを実行したものと同じ
+`git fetch`   // リモートブランチの状態を取得（のみ）
+`git marge origin/main`
+
 
 ### ▼Githubからブランチの定義を新しく定義（合流）してPull（競合時にもOK）
+// 現在のブランチで新しいコミットが作成される
 `git pull --rebase`
 
 
 ### ▼Githubから強制Pull（github上に最新があるのならこれをする）
 `git pull --allow-unrelated-histories  origin main`
+
+
+// ------------------------------------------------
+### ▼Githubへ転送 branchを指定できる
+`git push -u origin main`
 
 
 ### ▼Githubへ強制Push
