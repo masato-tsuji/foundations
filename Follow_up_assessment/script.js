@@ -127,18 +127,10 @@ line("7.");// ---------------------------------------------
 // コレクション内の各要素に対してコールバック関数を実行した結果を要素に持つ新しい配列を返します。コールバック関数は、
 // コレクション内のすべての要素に適用されます。 ⚠️ 注意：ビルトインメソッド (.forEach(), .map()) は使用しないでください。
 
-const map = (collection, funcAddOne) => {
+const map = (collection, addOneFunc) => {
   const resArray = [];
-  let workArray = [];
-
-  if (Array.isArray(collection)) {
-    workArray = collection.slice();
-  } else if (typeof collection === "object") {
-    workArray = (Object.values(collection));
-  }
-
-  for (const elm of workArray) {
-    resArray.push(funcAddOne(elm));
+  for (const [key, val] of Object.entries(collection)) {
+    resArray.push(addOneFunc(val));
   }
   return resArray;
 }
@@ -147,8 +139,8 @@ function addOne(num) {
   return num + 1;
 }
 
-test(map([1, 2, 3], addOne),  [2, 3, 4]); // [2, 3, 4]
-test(map({ a: 1, b: 2, c: 3 }, addOne), [2, 3, 4]); // [2, 3, 4]
+test(map([1, 2, 3], addOne),  [2, 3, 4]);
+test(map({ a: 1, b: 2, c: 3 }, addOne), [2, 3, 4]);
 
 
 
@@ -175,17 +167,19 @@ line("9.");// ---------------------------------------------
 // ※ x はその型の要素がが何回出現したかを表す。
 
 const countSomething = mixArray => {
-  const typeNameObject = {boolean: "BOOL", string: "STRING", number: "NUMBER"}
+  const typeNameObj = {boolean: "BOOL", string: "STRING", number: "NUMBER"}
   const typeMapArray = mixArray.map(elm => typeof elm);
   const typeCntArray = [];
 
-  Object.entries(typeNameObject).forEach( ([key, val]) => {
+  // 型の種類別でカウントしたオブジェクトを作成
+  Object.entries(typeNameObj).forEach( ([key, val]) => {
     const obj = {};
     obj.type = val;
     obj.count = typeMapArray.filter(elm => elm === key).length;
     typeCntArray.push(obj);
   });
 
+  // 最大値を持つオブジェクトを取得
   const maxTypeObj = typeCntArray.reduce((accum, current) =>
     accum.count > current.count ? accum : current
   );
@@ -205,7 +199,12 @@ line("10.");// ---------------------------------------------
 // 関数 each を宣言してください。この関数は引数としてコレクション(オブジェクトまたは配列)とコールバック関数を受け取り、
 // コレクション内の各要素に対してコールバック関数を一度だけ実行してください。この関数は何もリターンしません。 
 // ⚠️ 注意：ビルトインメソッド (.forEach(), .map()) は使用しないでください。
-// ここにコードを書きましょう
+
+const each = (collection, callBackFunc) => {
+  for (const [key, val] of Object.entries(collection)) {
+    callBackFunc(val);
+  }
+}
 
 each({ a: 1, b: 2, c: 3 }, console.log);
 each([4, 5, 6], console.log);
@@ -223,7 +222,8 @@ line("11.");// ---------------------------------------------
 // 関数 compose を宣言してください。この関数は引数として funcA と funcB という 2 つの関数を受け取り、
 // 新しい関数を返します。返された関数は引数 x を受け取り、funcA に x を引数として渡して得られた戻り値を 
 // funcB に引数として渡し、得られた結果を返します。
-// ここにコードを書きましょう
+
+const compose = (funcA, funcB) => (x) => funcB(funcA(x));
 
 function multiplyTwo(x) {
   return x * 2;
@@ -234,7 +234,7 @@ function addTen(x) {
 }
 
 const baz = compose(multiplyTwo, addTen);
-baz(5); // 20
-baz(100); // 210
+test(baz(5), 20);
+test(baz(100), 210);
 
 
