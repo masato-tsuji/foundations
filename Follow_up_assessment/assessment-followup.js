@@ -15,6 +15,15 @@ line("1.");// ---------------------------------------------
 // 1.evenOrOdd という名前の関数を宣言してください。この関数は引数として数値型の要素を持つ配列と、
 // boolean を受け取ります。boolean が true の場合は、偶数のみの配列を返し、 false の場合は、奇数のみの配列を返します。
 
+
+/**
+ * 課題 1
+ * 引数で受け取った配列を引数で指定された偶数又は奇数の配列にして返す
+ * @function
+ * @param {array} array - 数値型の要素を持つ配列
+ * @param {boolean} onEven - 偶数を指定する場合はtrue 奇数を指定する場合はfalseを受け取る
+ * @returns {array} - 偶数又は奇数を要素に持つ配列
+ */
 const evenOrOdd = (array, onEven) => array.filter( elm => elm % 2 ^ onEven);
 
 test(evenOrOdd([1, 2, 3, 4, 5], true), [2, 4]);
@@ -27,6 +36,15 @@ line("2.");// ---------------------------------------------
 // 2.findKeys という名前の関数を宣言してください。この関数は引数としてオブジェクトと 
 // "target" (文字列または数値) を受け取り、オブジェクト中、ターゲットにマッチする値を持つ全てのキーを含む新しい配列を返します。
 
+/**
+ * 課題 2
+ * オブジェクトと"target" (文字列または数値) を受け取り、オブジェクト中、
+ * ターゲットにマッチする値を持つ全てのキーを含む新しい配列を返す
+ * @function
+ * @param {object} obj - 文字列又は数値の値を持つオブジェクト
+ * @param {string | number} target - オブジェクトの値とマッチさせる文字列又は数値
+ * @returns {array} - マッチしたキーを要素に持つ配列
+ */
 const findKeys = (obj, target) => {
   const keys = Object.keys(obj);
   const vals = Object.values(obj);
@@ -45,6 +63,15 @@ line("3.");// ---------------------------------------------
 // リターンするオブジェクトは、第一引数の配列の要素をオブジェクトのキーとして設定し、
 // 第二引数の配列の要素をオブジェクトの値として設定します。
 
+
+/**
+ * 課題 3
+ * 第1引数の各要素をキーとし第2引数の各要素を値としたオブジェクトを返す
+ * @function
+ * @param {array} arrayKeys - 新しいオブジェクトのキーとなる文字列を要素に持つ配列
+ * @param {array} arrayVals - 新しいオブジェクトの値を要素に持つ配列
+ * @returns {object} - 2つの引数から生成された新しいオブジェクト
+ */
 const buildObject = (arrayKeys, arrayVals) => {
   const resObj = {};
   for (let i =0; i < arrayKeys.length; i++) {
@@ -64,6 +91,14 @@ line("4.");// ---------------------------------------------
 // 4.add という名前の関数を宣言してください。この関数は引数として 1 つの数値 x を受け取り、関数を返します。
 // 返された関数は引数として 1 つの数値 y を受けとり、'x' と 'y' の和を返します。
 
+/**
+ * 課題 4
+ * 1つの数値 x を受け取り、関数を返し返された関数は引数として 1つの数値 y を受けとり、'x' と 'y' の和を返す
+ * @function
+ * @param {number} x - 1つめの関数で受け取る数値
+ * @param {number} y - 2つめの関数で受け取る数値
+ * @returns {number} - 引数xとyの和
+ */
 const add = x => y => x + y;
 
 const addTwo = add(2);
@@ -78,6 +113,9 @@ test(addOneHundred(3), 103);
 line("5.");// ---------------------------------------------
 // 以下のコードを実行すると、どの順番で何が表示されるでしょうか？もちろん、コードを実行する前に答えてください。
 // なぜそうなるのか、わからない場合はわかるまで調べましょう！
+
+// 課題 5
+// 以下のコードを実行すると、どの順番で何が表示されるでしょうか？
 function sayHello() {
   console.log("Hello");
 }
@@ -134,6 +172,13 @@ line("7.");// ---------------------------------------------
 // コレクション内の各要素に対してコールバック関数を実行した結果を要素に持つ新しい配列を返します。コールバック関数は、
 // コレクション内のすべての要素に適用されます。 ⚠️ 注意：ビルトインメソッド (.forEach(), .map()) は使用しないでください。
 
+/**
+ * 課題 7
+ * 引数として受け取ったオブジェクト又は配列の値の各要素に1を加えた新しい配列を返す
+ * @param {object | array} collection - 数値の値を持つオブジェクト又は配列
+ * @param {function} addOneFunc - 引数として渡した値に1を加えて返す関数
+ * @returns {array} - 計算結果の要素を持つ新しい配列
+ */
 const map = (collection, addOneFunc) => {
   const resArray = [];
   for (const [ , val] of Object.entries(collection)) {
@@ -155,6 +200,14 @@ line("8.");// ---------------------------------------------
 // 関数 changeMiddle を宣言してください。この関数は引数として「奇数個の単語からなる文字列(スペースで区切られる)」と
 // 「1 つの単語」を受け取り、第 1 引数の真ん中の単語を第 2 引数の単語で置き換えた新しい文字列を返します。
 
+/**
+ * 課題 8
+ * 第1引数で受け取った奇数個の単語の文字列の真ん中を第2引数で受け取った単語に置き換えて返す
+ * @function
+ * @param {string} oddString - 奇数個の単語からなるスペースで区切られた文字列
+ * @param {string} newWord - 置き換える単語
+ * @returns {string} - 単語を置き換えた新しい文字列
+ */
 const changeMiddle = (oddString, newWord) => {
   const splitArray = oddString.split(" ");
   splitArray.splice(Math.floor(splitArray.length / 2), 1, newWord);
@@ -176,7 +229,7 @@ line("9.");// ---------------------------------------------
 
 /**
  * 課題 9
- * 受け取った配列の要素の最も多い型をカウントし文字列で返す
+ * 受け取った配列の要素の最も多い型と個数を文字列で返す
  * @function
  * @param {array} mixArray - 数値・文字列・ブーリアンを要素にもつ配列
  * @returns {string} - 型の種類とカウント数を記した文字列
@@ -215,15 +268,9 @@ line("10.");// ---------------------------------------------
 
 
 
-// const each = (collection, callBackFunc) => {
-//   for (const [ , val] of Object.entries(collection)) {
-//     callBackFunc(val);
-//   }
-// }
-
 /**
  * 課題 10
- * 引数としてオブジェクト又は配列とコールバック関数を受け取り各要素を引数に関数を実行
+ * 引数としてオブジェクト又は配列とコールバック関数を受け取り各要素を引数にした関数を実行
  * @function
  * @param {object | array} collection - オブジェクト又は配列
  * @param {function} callBackFunc - 引数として受け取る関数
@@ -243,13 +290,6 @@ const each = ((collection, callBackFunc) => {
 each({ a: 1, b: 2, c: 3 }, console.log);
 each([4, 5, 6], console.log);
 
-// 上記を実行すると下記を表示するはずです
-// 1
-// 2
-// 3
-// 4
-// 5
-// 6
 
 
 line("11.");// ---------------------------------------------
@@ -264,7 +304,7 @@ line("11.");// ---------------------------------------------
  * @function
  * @param {function} funcA - 引数として渡した値を2倍にする関数
  * @param {function} funcB - 引数として渡した値に10を加える関数
- * @returns {number} - 計算結果を返す
+ * @returns {number} - 関数で行った計算結果を返す
  */
 const compose = (funcA, funcB) => x => funcB(funcA(x));
 
@@ -281,4 +321,4 @@ test(baz(5), 20);
 test(baz(100), 210);
 test(baz(-5), 0);
 test(baz(0), 10);
-test(baz("a"), NaN);
+
