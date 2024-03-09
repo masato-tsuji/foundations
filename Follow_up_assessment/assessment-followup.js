@@ -27,17 +27,10 @@ line("2.");// ---------------------------------------------
 // 2.findKeys という名前の関数を宣言してください。この関数は引数としてオブジェクトと 
 // "target" (文字列または数値) を受け取り、オブジェクト中、ターゲットにマッチする値を持つ全てのキーを含む新しい配列を返します。
 
-// const findKeys = (obj, target) => {
-//   const keys = Object.keys(obj);
-//   const vals = Object.values(obj);
-//   return Object.entries(obj).filter(([key, val]) => val === target);
-// }
-
-
 const findKeys = (obj, target) => {
   const keys = Object.keys(obj);
   const vals = Object.values(obj);
-  return keys.filter( (elm, i) => vals[i] === target);
+  return keys.filter( (elm, index) => vals[index] === target);
 }
 
 
@@ -71,7 +64,7 @@ line("4.");// ---------------------------------------------
 // 4.add という名前の関数を宣言してください。この関数は引数として 1 つの数値 x を受け取り、関数を返します。
 // 返された関数は引数として 1 つの数値 y を受けとり、'x' と 'y' の和を返します。
 
-const add = x => (y) => x + y;
+const add = x => y => x + y;
 
 const addTwo = add(2);
 test(addTwo(3), 5);
@@ -100,17 +93,20 @@ console.log(foo);
 console.log(bar);
 
 // あなたの回答と、なぜそうなるのかの説明をここに記載してください
-// Hello
-// undefined
-// Hello, JavaScript
+
+/* 出力値
+Hello
+undefined
+Hello, JavaScript
+*/
 
 /* 動作の説明
-変数fooにsayHelloが代入される際に呼び出し演算子で関数が実行されているので
+変数fooにsayHelloが代入される前に呼び出し演算子で関数が実行されているので
 最初にコンソールにHelloと出力される。また、sayHelloにはreturn文がないため
-変数fooにはundefinedが代入される。
-次に変数barに実引数"JavaScript"を持つsayLelloAndName関数の実行結果である
-"Hello, JavaScript"が代入される。
-その後コンソールにfooの値であるundefinedが出力され最後にbaiの値がコンソールに
+定義された返り値がなく変数fooにはundefinedが代入される。
+次に変数barにはsayLelloAndName関数が代入される前に実行されreturn文で返された
+"Hello, JavaScript"の文字列が代入される。
+その後コンソールにfooの値であるundefinedが出力され最後にbarの値がコンソールに
 出力される。
 */
 
@@ -177,12 +173,20 @@ line("9.");// ---------------------------------------------
 // "BOOL COUNT: x" (ブーリアンが最も多い場合) "STRING COUNT: x" (文字列が最も多い場合) "NUMBER COUNT: x" （数値が最も多い場合） 
 // ※ x はその型の要素がが何回出現したかを表す。
 
+
+/**
+ * 課題 9
+ * 受け取った配列の要素の最も多い型をカウントし文字列で返す
+ * @function
+ * @param {array} mixArray - 数値・文字列・ブーリアンを要素にもつ配列
+ * @returns {string} - 型の種類とカウント数を記した文字列
+ */
 const countSomething = mixArray => {
   const typeNameObj = {boolean: "BOOL", string: "STRING", number: "NUMBER"}
   const typeMapArray = mixArray.map(elm => typeof elm);
   const typeCntArray = [];
 
-  // 型の種類別でカウントしたオブジェクトを作成
+  // 型の種類別のカウント値を持つオブジェクトを作成
   Object.entries(typeNameObj).forEach( ([key, val]) => {
     const obj = {};
     obj.type = val;
@@ -198,9 +202,10 @@ const countSomething = mixArray => {
 }
 
 
-test(countSomething(["a", "b", "c", true, false, 2]), "STRING COUNT: 3"); // "STRING COUNT: 3"
-test(countSomething([true, true, false, true]), "BOOL COUNT: 4"); // "BOOL COUNT: 4"
-test(countSomething([true, true, 1, 0, 1, false, 1]), "NUMBER COUNT: 4"); // "NUMBER COUNT: 4"
+test(countSomething(["a", "b", "c", true, false, 2]), "STRING COUNT: 3");
+test(countSomething([true, true, false, true]), "BOOL COUNT: 4");
+test(countSomething([true, true, 1, 0, 1, false, 1]), "NUMBER COUNT: 4");
+test(countSomething(["true", true, "1", "0", 1, "false", 1]), "STRING COUNT: 4");
 
 
 line("10.");// ---------------------------------------------
@@ -208,11 +213,32 @@ line("10.");// ---------------------------------------------
 // コレクション内の各要素に対してコールバック関数を一度だけ実行してください。この関数は何もリターンしません。 
 // ⚠️ 注意：ビルトインメソッド (.forEach(), .map()) は使用しないでください。
 
-const each = (collection, callBackFunc) => {
-  for (const [ , val] of Object.entries(collection)) {
+
+
+// const each = (collection, callBackFunc) => {
+//   for (const [ , val] of Object.entries(collection)) {
+//     callBackFunc(val);
+//   }
+// }
+
+/**
+ * 課題 10
+ * 引数としてオブジェクト又は配列とコールバック関数を受け取り各要素を引数に関数を実行
+ * @function
+ * @param {object | array} collection - オブジェクト又は配列
+ * @param {function} callBackFunc - 引数として受け取る関数
+ */
+const each = ((collection, callBackFunc) => {
+  const collectArray = Object.entries(collection);
+  const iterationFunc = () => {
+    const [ , val] = collectArray.shift();
     callBackFunc(val);
+    if (collectArray.length > 0) {
+      iterationFunc();
+    }
   }
-}
+  iterationFunc();
+});
 
 each({ a: 1, b: 2, c: 3 }, console.log);
 each([4, 5, 6], console.log);
@@ -231,6 +257,15 @@ line("11.");// ---------------------------------------------
 // 新しい関数を返します。返された関数は引数 x を受け取り、funcA に x を引数として渡して得られた戻り値を 
 // funcB に引数として渡し、得られた結果を返します。
 
+
+/**
+ * 課題 11
+ * 2つの関数を受け取り新たな関数を定義し受け取った数値の引数に対し各関数で演算した結果を返す
+ * @function
+ * @param {function} funcA - 引数として渡した値を2倍にする関数
+ * @param {function} funcB - 引数として渡した値に10を加える関数
+ * @returns {number} - 計算結果を返す
+ */
 const compose = (funcA, funcB) => x => funcB(funcA(x));
 
 function multiplyTwo(x) {
