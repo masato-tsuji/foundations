@@ -22,11 +22,11 @@ document.body.appendChild(divContainer);
 
 
 // カラーコード表示
-const elmColorName = document.createElement("p");
-elmColorName.style.height = "25px";
-elmColorName.style.fontSize = "20px";
-elmColorName.style.fontWeight = "bold";
-divContainer.appendChild(elmColorName);
+const elmColorCode = document.createElement("p");
+elmColorCode.style.height = "25px";
+elmColorCode.style.fontSize = "20px";
+elmColorCode.style.fontWeight = "bold";
+divContainer.appendChild(elmColorCode);
 
 
 // スライダーオブジェクト定義
@@ -86,7 +86,7 @@ function changeBodyBgColor() {
   const rgbCode = `RGB(${redSlider.getVal()}, ${greenSlider.getVal()}, ${blueSlider.getVal()})`;
   document.body.style.backgroundColor = rgbCode;
   // RGB値とHEX値を表示
-  elmColorName.innerHTML = 
+  elmColorCode.innerHTML = 
     rgbCode + "<br>HEX:" +
     "#" + rgbCode.match(/\d+/g).map( val => {return ("0" + parseInt(val).toString(16)).slice(-2)}).join("");
 }
