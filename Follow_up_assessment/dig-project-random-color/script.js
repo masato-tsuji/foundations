@@ -6,56 +6,89 @@ const colorBtn = document.getElementById('color-button');
 colorBtn.addEventListener('click', changeColor);
 
 
-// コンテナ
+// スライダー用コンテナ
 const divContainer = document.createElement("div");
 divContainer.style.cssText = 
   "display: grid;\
    width: 200px;\
    margin-left: 50px;\
    padding: 20px;\
+   gap: 12px 0px;\
    background-color: #FFFFFF;\
    opacity: 60%;\
+   border: solid 1px #636363;\
    border-radius: 8px;";
 document.body.appendChild(divContainer);
 
 
 // カラーコード表示
 const elmColorName = document.createElement("p");
-elmColorName.style.flexDirection = "column";
-elmColorName.style.color = "red";
+elmColorName.style.height = "25px";
+elmColorName.style.fontSize = "20px";
+elmColorName.style.fontWeight = "bold";
 divContainer.appendChild(elmColorName);
-// document.body.appendChild(elmColorName);
 
-// スライダー
-const makeSlider = insertElm => {
 
+// スライダーオブジェクト定義
+const makeSlider = (targetElm, colorChangeFunc) => {
   const createElm = colorName => {
+    // 色名
+    const name = document.createElement("span");
+    name.innerText = colorName.toUpperCase();
+    name.style.fontSize = "16px";
+    targetElm.appendChild(name);
+    // スライダー
     const elm = document.createElement("input");
     elm.type = "range";
     elm.min = 0;
     elm.max = 255;
+    elm.value = 0;
     elm.name = colorName;
     elm.innerText = colorName;
-    insertElm.appendChild(elm);
+    elm.disabled = true;
+    targetElm.appendChild(elm);
+    elm.addEventListener("input", changeBodyBgColor);
+    return {
+      setVal(val) {
+        elm.value = val;
+      },
+      getVal() {
+        return elm.value;
+      },
+      setDisabled(bool) {
+        elm.disabled = bool;
+      }
+    }
   }
-
   return createElm;
 }
 
-const slider = makeSlider(divContainer);
+// スライダーレンダリング
+const slider = makeSlider(divContainer, changeBodyBgColor);
+const redSlider = slider("red");
+const greenSlider = slider("green");
+const blueSlider = slider("blue");
+const sliders = [redSlider, greenSlider, blueSlider];
 
-slider("red");
-slider("green");
-slider("blue");
 
-
+// 背景色をランダムに変える
 function changeColor() {
-  const colorHexCode = "#" + (Math.floor(Math.random() * parseInt("FFFFFF", 16))).toString(16).padStart(6, "0");
-  document.body.style.backgroundColor =  colorHexCode;
-  // document.body.style.backgroundColor =  "RGB(125, 147, 36)";
+  // ランダム値をスライダーにセット
+  sliders.map( elm => elm.setVal(Math.floor(Math.random() * 255)));
+  // 背景色変更
+  changeBodyBgColor();
+  // スライダー有効化
+  sliders.map( elm => elm.setDisabled(false));
+}
 
-
-  elmColorName.innerHTML = colorHexCode;
+// 背景色を各スライドバーで設定されている色に変更
+function changeBodyBgColor() {
+  const rgbCode = `RGB(${redSlider.getVal()}, ${greenSlider.getVal()}, ${blueSlider.getVal()})`;
+  document.body.style.backgroundColor = rgbCode;
+  // RGB値とHEX値を表示
+  elmColorName.innerHTML = 
+    rgbCode + "<br>HEX:" +
+    "#" + rgbCode.match(/\d+/g).map( val => {return ("0" + parseInt(val).toString(16)).slice(-2)}).join("");
 }
 
 
