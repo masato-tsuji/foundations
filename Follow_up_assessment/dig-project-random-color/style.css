@@ -18,4 +18,42 @@ button {
   font-size: 20pt;
   height: 50px;
   width: 200px;
+  box-shadow: 0px 5px 2px #000000;
 }
+
+button:hover {
+  cursor: pointer;
+}
+
+button:active {
+  transform: translateY(5px);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.slider-container {
+  display: grid;
+  width: 200px;
+  margin-left: 50px;
+  padding: 20px;
+  gap: 15px 0px;
+  background-color: #FFFFFF;
+  opacity: 60%;
+  border: solid 1px #636363;
+  border-radius: 8px;
+}
+
+.color-code-disp {
+  height: 55px;
+  line-height: 1.5em;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.color-name {
+  font-size: 16px;
+  margin-bottom: -10px;
+}
+
+
+
