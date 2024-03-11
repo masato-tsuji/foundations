@@ -234,7 +234,7 @@ line("9.");// ---------------------------------------------
  * @returns {string} - 型の種類とカウント数を記した文字列
  */
 const countSomething = mixArray => {
-  const typeNameObj = {boolean: "BOOL", string: "STRING", number: "NUMBER"}
+  const typeNameObj = { boolean: "BOOL", string: "STRING", number: "NUMBER" }
   const typeMapArray = mixArray.map((elm) => typeof elm);
   const typeCntArray = [];
 
