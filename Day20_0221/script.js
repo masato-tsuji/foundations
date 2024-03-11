@@ -1,7 +1,3 @@
-
-// フォローアップアセスメントの課題確認用
-
-
 'use strict'
 
 function test(actual, expected) {
@@ -24,7 +20,7 @@ function test(actual, expected) {
  * @param {boolean} onEven - 偶数を指定する場合はtrue 奇数を指定する場合はfalseを受け取る
  * @returns {array} - 偶数又は奇数を要素に持つ配列
  */
-const evenOrOdd = (array, onEven) => array.filter( elm => elm % 2 ^ onEven);
+const evenOrOdd = (array, onEven) => array.filter((elm) => elm % 2 ^ onEven);
 
 test(evenOrOdd([1, 2, 3, 4, 5], true), [2, 4]);
 test(evenOrOdd([0, 4, 36], false), []);
@@ -43,7 +39,7 @@ test(evenOrOdd([-1, -2, 4, -5, -7], false), [-1, -5, -7]);
 const findKeys = (obj, target) => {
   const keys = Object.keys(obj);
   const vals = Object.values(obj);
-  return keys.filter( (elm, index) => vals[index] === target);
+  return keys.filter((elm, index) => vals[index] === target);
 }
 
 test(findKeys({ a: 1, b: 2, c: 6, d: 4, e: 2 }, 2), ["b", "e"]); 
@@ -77,10 +73,9 @@ test(buildObject(["abc", "def", "ghi"], [[0, 1, 2], [3, 4, 5], [6, 7, 8]]), {"ab
  * 1つの数値 x を受け取り、関数を返し返された関数は引数として 1つの数値 y を受けとり、'x' と 'y' の和を返す
  * @function
  * @param {number} x - 1つめの関数で受け取る数値
- * @param {number} y - 2つめの関数で受け取る数値
  * @returns {number} - 引数xとyの和
  */
-const add = x => y => x + y;
+const add = x => (y) => x + y;
 
 const addTwo = add(2);
 test(addTwo(3), 5);
@@ -141,14 +136,14 @@ test(changeMiddle("YAY NO MUSIC NO LINE", "DIG"), "YAY NO DIG NO LINE");
  */
 const countSomething = mixArray => {
   const typeNameObj = {boolean: "BOOL", string: "STRING", number: "NUMBER"}
-  const typeMapArray = mixArray.map(elm => typeof elm);
+  const typeMapArray = mixArray.map((elm) => typeof elm);
   const typeCntArray = [];
 
   // 型の種類別のカウント値を持つオブジェクトを作成
-  Object.entries(typeNameObj).forEach( ([key, val]) => {
+  Object.entries(typeNameObj).forEach(([key, val]) => {
     const obj = {};
     obj.type = val;
-    obj.count = typeMapArray.filter(elm => elm === key).length;
+    obj.count = typeMapArray.filter((elm) => elm === key).length;
     typeCntArray.push(obj);
   });
 
@@ -196,7 +191,7 @@ each([4, 5, 6], console.log);
  * @param {function} funcB - 引数として渡した値に10を加える関数
  * @returns {number} - 関数で行った計算結果を返す
  */
-const compose = (funcA, funcB) => x => funcB(funcA(x));
+const compose = (funcA, funcB) => (x) => funcB(funcA(x));
 
 function multiplyTwo(x) {
   return x * 2;
