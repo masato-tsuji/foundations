@@ -51,7 +51,6 @@ const findKeys = (obj, target) => {
   return keys.filter((elm, index) => vals[index] === target);
 }
 
-
 test(findKeys({ a: 1, b: 2, c: 6, d: 4, e: 2 }, 2), ["b", "e"]); 
 test(findKeys({ 1: "h", b: "el", c: "hello", d: "hello", e: "o" }, "hello"), ["c", "d"]); 
 
