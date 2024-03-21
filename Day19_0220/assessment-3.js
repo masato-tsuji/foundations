@@ -32,14 +32,13 @@ const arrayItem = (() => {
       return resArray;
     },
     append(item) {
-      return resArray.push(item);
+      resArray.push(item);
     },
     remove(item) {
       const removeIndex = resArray.indexOf(item);
       if (removeIndex > -1) {
         resArray.splice(removeIndex, 1);
       }
-      return resArray;
     }
   };
 })();
