@@ -95,109 +95,198 @@ line("3/21");   //------------------------------------------------
 // (今回の問題ではグローバル変数を定義しないでください）
 
 
-const arrayItem = (() => {
-    const resArray = [];
-    return {
-        value() {
-            return resArray;
-        },
-        append(item) {
-            resArray.push(item);
-        },
-        remove(item) {
-        const removeIndex = resArray.indexOf(item);
-            if (removeIndex > -1) {
-                resArray.splice(removeIndex, 1);
-            }
-        }
-    }
-})();
+// const arrayItem = (() => {
+//     const resArray = [];
+//     return {
+//         value() {
+//             return resArray;
+//         },
+//         append(item) {
+//             resArray.push(item);
+//         },
+//         remove(item) {
+//         const removeIndex = resArray.indexOf(item);
+//             if (removeIndex > -1) {
+//                 resArray.splice(removeIndex, 1);
+//             }
+//         }
+//     }
+// })();
 
 
 
 
-// ここにコードを書きましょう
+// // ここにコードを書きましょう
 
-test(getItemsInRefrigerator(), {});
+// test(getItemsInRefrigerator(), {});
 
-putItemInRefrigerator("milk");
-test(getItemsInRefrigerator(), {milk: 1});
+// putItemInRefrigerator("milk");
+// test(getItemsInRefrigerator(), {milk: 1});
 
-putItemInRefrigerator("juice");
-test(getItemsInRefrigerator(), {milk: 1, juice: 1});
+// putItemInRefrigerator("juice");
+// test(getItemsInRefrigerator(), {milk: 1, juice: 1});
 
-putItemInRefrigerator("banana");
-test(getItemsInRefrigerator(), {milk: 1, juice: 1, banana: 1});
+// putItemInRefrigerator("banana");
+// test(getItemsInRefrigerator(), {milk: 1, juice: 1, banana: 1});
 
-putItemInRefrigerator("juice");
-test(getItemsInRefrigerator(), {milk: 1, juice: 2, banana: 1});
+// putItemInRefrigerator("juice");
+// test(getItemsInRefrigerator(), {milk: 1, juice: 2, banana: 1});
 
-removeItemFromRefrigerator("milk");
-test(getItemsInRefrigerator(), {juice: 2, banana: 1});
+// removeItemFromRefrigerator("milk");
+// test(getItemsInRefrigerator(), {juice: 2, banana: 1});
 
-removeItemFromRefrigerator("milk");
-test(getItemsInRefrigerator(), {juice: 2, banana: 1});
+// removeItemFromRefrigerator("milk");
+// test(getItemsInRefrigerator(), {juice: 2, banana: 1});
 
-removeItemFromRefrigerator("juice");
-test(getItemsInRefrigerator(), {juice: 1, banana: 1});
-
-
-
-line ("2024/3/12"); // ---------------------------------------------
-
-
-const obj = { a: 3, b: 5, c: 6, d: 5, e: 2 };
-
-
-// 特定の値を持つキーを抽出
-const findKeys = (obj, target) => {
-  const keys = Object.keys(obj);
-  const vals = Object.values(obj);
-  return keys.filter((elm, index) => vals[index] === target);
-}
+// removeItemFromRefrigerator("juice");
+// test(getItemsInRefrigerator(), {juice: 1, banana: 1});
 
 
 
-const findKeysA = (obj, target) => {
-  const keys = Object.keys(obj);
-  const vals = Object.values(obj);
-  return keys.filter((...args) => vals[args[1]] === target);
-}
+// line ("2024/3/12"); // ---------------------------------------------
 
 
-const findKeysB = (obj, target) => {
-  return  Object.entries(obj)
-                .filter((elm) => elm[1] === target)
-                .map((elm) => elm[0]);
-}
+// const obj = { a: 3, b: 5, c: 6, d: 5, e: 2 };
 
 
-console.log(findKeysA(obj, 5));  // ["b", "d"]
-console.log(findKeysB(obj, 5));  // ["b", "d"]
+// // 特定の値を持つキーを抽出
+// const findKeys = (obj, target) => {
+//   const keys = Object.keys(obj);
+//   const vals = Object.values(obj);
+//   return keys.filter((elm, index) => vals[index] === target);
+// }
 
 
 
-// MDNのxは一度しか評価されないという意味
-
-let i = 0;
-
-function inc() {
-  return ++i;
-}
-
-const list = [1, 2, 3];
-
-list[inc()] = list[inc()] + 1;  // [1, 4, 3]
-list[inc()] += 1; // [1, 3, 3]
-console.log(list);
+// const findKeysA = (obj, target) => {
+//   const keys = Object.keys(obj);
+//   const vals = Object.values(obj);
+//   return keys.filter((...args) => vals[args[1]] === target);
+// }
 
 
-const isDring = age => {
-  console.log(age < 20 ? "飲酒不可" : "飲酒可能");
-}
+// const findKeysB = (obj, target) => {
+//   return  Object.entries(obj)
+//                 .filter((elm) => elm[1] === target)
+//                 .map((elm) => elm[0]);
+// }
 
-isDring(20);
-isDring(19);
+
+// console.log(findKeysA(obj, 5));  // ["b", "d"]
+// console.log(findKeysB(obj, 5));  // ["b", "d"]
+
+
+
+// // MDNのxは一度しか評価されないという意味
+
+// let i = 0;
+
+// function inc() {
+//   return ++i;
+// }
+
+// const list = [1, 2, 3];
+
+// list[inc()] = list[inc()] + 1;  // [1, 4, 3]
+// list[inc()] += 1; // [1, 3, 3]
+// console.log(list);
+
+
+// const isDring = age => {
+//   console.log(age < 20 ? "飲酒不可" : "飲酒可能");
+// }
+
+// isDring(20);
+// isDring(19);
+
+
+
+
+
+
+line ("3/21"); // ---------------------------------------------
+
+
+// const arrayItem = (() => {
+//   const resArray = [];
+//   return {
+//     value() {
+//       return resArray;
+//     },
+//     append(item) {
+//       let cnt = 5;
+//       resArray.push(item);
+//     },
+//     remove(item) {
+//       const removeIndex = resArray.indexOf(item);
+//       if (removeIndex > -1) {
+//         resArray.splice(removeIndex, 1);
+//       }
+//     }
+//   };
+// })();
+
+
+// // 配列の値取得
+// const getItemsInRefrigerator = () => arrayItem.value();
+
+
+// /**
+//  * １つの渡された引数を配列に追加して返す
+//  * @param {string} item - 配列に追加する文字列
+//  * @returns {Array} - 引数を追加した配列
+//  */
+// const putItemInRefrigerator = item => arrayItem.append(item);
+
+
+// /**
+//  * １つの渡された引数を配列から削除（対象がない場合はそのまま返す）
+//  * @param {string} item - 配列から削除する文字列
+//  * @returns {Array} - 引数の文字列を削除した配列
+//  */
+// const removeItemFromRefrigerator = item => arrayItem.remove(item);
+
+
+
+// test(getItemsInRefrigerator(), []);
+
+// putItemInRefrigerator("milk");
+// test(getItemsInRefrigerator(), ["milk"]);
+
+// putItemInRefrigerator("juice");
+// test(getItemsInRefrigerator(), ["milk", "juice"]);
+
+// removeItemFromRefrigerator("milk");
+// test(getItemsInRefrigerator(), ["juice"]);
+
+// removeItemFromRefrigerator("milk");
+// test(getItemsInRefrigerator(), ["juice"]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+line ("3/25"); // ---------------------------------------------
+
+
+
+
+
+
+
+
+
+
 
 
 
