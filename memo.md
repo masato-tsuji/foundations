@@ -13,6 +13,7 @@
 ```
 mkdir [repository-name]          # ローカルリポジトリのディレクトリ作成
 cd [repository-name]
+echo "# [repository-name]" >> README.md
 git init                         # ローカルリポジトリの作成（初期化）
 git add README.md                # ローカルリポジトリにREADME.mdファイルの作成
 git commit -m "first commit"     # README.mdファイルを作成した時点でコミット
