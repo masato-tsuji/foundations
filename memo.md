@@ -14,8 +14,10 @@
 mkdir [repository-name]          # ローカルリポジトリのディレクトリ作成
 cd [repository-name]
 echo "# [repository-name]" >> README.md
-git init                         # ローカルリポジトリの作成（初期化）
+git init                         # ローカルリポジトリの作成（初期化） ⇒ .gitディレクトリが作られる
+（同期対象から外したいものがある場合は .gitignore ファイルを作成して登録しておく）
 git add README.md                # ローカルリポジトリにREADME.mdファイルの作成
+（既にpushしたいものがある場合は git add .で全体をgitに追加）
 git commit -m "first commit"     # README.mdファイルを作成した時点でコミット
 git branch -M main               # ローカルに新規ブランチを作成
 git remote add origin [URL]      # ローカルリポジトリとリモートリポジトリの連携
@@ -95,10 +97,16 @@ git branch -a    // リモートブランチも含める
 `git switch -c xxxx`
 
 
-### ▼基本的な流れ
+### ▼基本的な流れ（ローカルで編集したコードをリモートにpush）
 git add .                 # 変更をステージング（コミットの対象をINDEXに入れる）
-git commit -m"[Add]test"  # コメントをつけてコミット
+git commit -m "[Add]test"  # コメントをつけてコミット
 git push                  # リモートにpush
+
+### ▼管理対象外にする
+ディレクトリ直下に .gitignore のファイルを作り
+*.exe
+log/
+などを記入し対象外にする
 
 
 ### ▼modifiedを取り消す
