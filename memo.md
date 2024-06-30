@@ -28,7 +28,27 @@ git push -u origin main          # ローカルコミットされた内容をリ
 // ローカルリポジトリのカレントディレクトリで実行
 ```
 git remote add origin https://github.com/masato-tsuji/foundations.git
+
+// 解除する場合は
+git remote remove origin
 ```
+
+### ▼リモートリポジトリと連携(SSH)
+// クライアント側でssh-keygenしてキーを生成
+`ssh-keygen -t Ed25519 -b 4096 -C ""  -f raspi-github`
+// 公開鍵（pub）の内容をGitHubのSSHを作成したところに登録
+// クライアント側でSSHのポート番号を変更している場合はconfigファイルで登録
+Host github.com
+    Hostname ssh.github.com
+    User git
+    Identityfile ~/.ssh/raspi-github
+    Port 22
+// 接続テスト
+`ssh -T git@github.com`
+// 基本的な流れはhttpと同じでremote add のURLは下記になる
+`git@github.com:gentarou7735/slackbot.git`
+
+
 
 ### ▼リモートリポジトリの確認
 ```
