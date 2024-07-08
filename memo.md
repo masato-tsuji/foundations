@@ -9,6 +9,10 @@
 ### ▼クローン
 `git clone [URL]`
 
+### ▼リモートリポジトリ接続時のパスワードについて
+パスワードはpersonal access tokenを入力する必要がある
+Settings ⇒ Developer settings ⇒ personal access tokenで生成したTokenを貼り付ける
+
 ### ▼ローカルリポジトリが無い場合の一連の流れ
 ```
 mkdir [repository-name]          # ローカルリポジトリのディレクトリ作成
@@ -29,10 +33,19 @@ git push -u origin main          # ローカルコミットされた内容をリ
 // リモート側にリポジトリがあってローカル側のリポジトリと接続
 // ローカルリポジトリのカレントディレクトリで実行
 ```
+// リモートリポジトリセット
 git remote add origin https://github.com/masato-tsuji/foundations.git
+
+// リモートリポジトリ確認
+git remote -v
 
 // 解除する場合は
 git remote remove origin
+
+// 同期する場合はpullじゃない方がいい？
+git fetch
+git merge origin/main
+
 ```
 
 ### ▼リモートリポジトリと連携(SSH)
