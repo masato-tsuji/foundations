@@ -174,9 +174,9 @@ git restore ファイル名
 
 
 // ---------------------------------------------
-### 強制的にリモートの内容で上書き
+## 強制的にリモートの内容で上書き
 
-# ローカルブランチがリモートブランチを追跡しているか確認
+### ローカルブランチがリモートブランチを追跡しているか確認
 `git branch -vv`
 ```
 gen@LAPTOP-LLO8K2DD:~/repositories/tecsdb-conv$ git branch -vv
@@ -185,7 +185,7 @@ gen@LAPTOP-LLO8K2DD:~/repositories/tecsdb-conv$ git branch -vv
 # [oring/main]があればリモートのブランチを追跡できている
 ```
 
-# 差分を確認（なければプロンプトが返る）
+### 差分を確認（なければプロンプトが返る）
 `git diff origin/main`
 
 `git fetch origin`
