@@ -173,7 +173,23 @@ git restore ファイル名
 `git push -f  origin main`
 
 
+// ---------------------------------------------
+### 強制的にリモートの内容で上書き
 
+# ローカルブランチがリモートブランチを追跡しているか確認
+`git branch -vv`
+```
+gen@LAPTOP-LLO8K2DD:~/repositories/tecsdb-conv$ git branch -vv
+  a    368f955 test
+* main 801854e [origin/main] edit
+# [oring/main]があればリモートのブランチを追跡できている
+```
+
+# 差分を確認（なければプロンプトが返る）
+`git diff origin/main`
+
+`git fetch origin`
+`git reset --hard origin/main`
 
 
 ## ---------------------------------------------
